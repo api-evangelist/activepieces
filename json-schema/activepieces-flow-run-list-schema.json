@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-schema/activepieces-flow-run-list-schema.json",
+  "title": "FlowRunList",
+  "description": "Paginated list of flow runs",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FlowRun"
+      }
+    },
+    "next": {
+      "type": "string",
+      "nullable": true
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true
+    }
+  }
+}

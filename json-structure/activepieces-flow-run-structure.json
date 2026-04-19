@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-flow-run-structure.json",
+  "name": "FlowRun",
+  "description": "A flow execution run",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Flow run ID",
+      "example": "run-abc123"
+    },
+    "created": {
+      "type": "datetime",
+      "description": "Run creation timestamp"
+    },
+    "updated": {
+      "type": "datetime",
+      "description": "Last update timestamp"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "Project ID"
+    },
+    "flowId": {
+      "type": "string",
+      "description": "Flow ID"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED",
+        "TIMEOUT",
+        "STOPPED"
+      ],
+      "description": "Run status",
+      "example": "SUCCEEDED"
+    },
+    "startTime": {
+      "type": "datetime",
+      "description": "Run start time"
+    },
+    "finishTime": {
+      "type": "datetime",
+      "description": "Run finish time"
+    },
+    "duration": {
+      "type": "int32",
+      "description": "Execution duration in milliseconds",
+      "example": 1234
+    }
+  }
+}

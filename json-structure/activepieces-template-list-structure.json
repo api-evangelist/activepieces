@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-template-list-structure.json",
+  "name": "TemplateList",
+  "description": "TemplateList schema from Activepieces API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Template"
+      }
+    },
+    "next": {
+      "type": "string",
+      "nullable": true
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true
+    }
+  }
+}

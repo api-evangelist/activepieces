@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-flow-list-structure.json",
+  "name": "FlowList",
+  "description": "Paginated list of flows",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Flow"
+      },
+      "description": "Array of flows"
+    },
+    "next": {
+      "type": "string",
+      "nullable": true,
+      "description": "Cursor to next page"
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true,
+      "description": "Cursor to previous page"
+    }
+  }
+}

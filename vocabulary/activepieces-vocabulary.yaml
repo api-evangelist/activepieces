@@ -1,0 +1,210 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Activepieces"
+  description: "Unified taxonomy mapping operational (OpenAPI) and capability (Naftiko) dimensions for Activepieces, the open-source no-code automation platform."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: Activepieces API
+      namespace: activepieces
+      version: "1.0.0"
+      baseUrl: "https://cloud.activepieces.com/api/v1"
+      status: active
+
+  resources:
+    - name: flows
+      api: activepieces
+      description: "Automation workflows composed of triggers and actions"
+      actions: [list, create, get, update, delete]
+    - name: flow-runs
+      api: activepieces
+      description: "Execution records for automation flows"
+      actions: [list, get]
+    - name: connections
+      api: activepieces
+      description: "Third-party app credentials and OAuth connections"
+      actions: [list, upsert, delete]
+    - name: projects
+      api: activepieces
+      description: "Organizational units grouping flows and connections"
+      actions: [list, create, get, update, delete]
+    - name: users
+      api: activepieces
+      description: "Platform user accounts"
+      actions: [list, update, delete]
+    - name: folders
+      api: activepieces
+      description: "Folder containers for organizing flows"
+      actions: [list, create, get, update, delete]
+    - name: pieces
+      api: activepieces
+      description: "Integration pieces connecting external apps"
+      actions: [list]
+    - name: templates
+      api: activepieces
+      description: "Reusable flow templates"
+      actions: [list, create, get, delete]
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+      description: "Retrieve a paginated collection using cursor-based pagination"
+    - name: create
+      httpMethod: POST
+      pattern: write
+      description: "Create a new resource"
+    - name: get
+      httpMethod: GET
+      pattern: read
+      description: "Retrieve a single resource by ID"
+    - name: update
+      httpMethod: POST
+      pattern: write
+      description: "Update an existing resource"
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+      description: "Delete a resource"
+    - name: upsert
+      httpMethod: POST
+      pattern: write
+      description: "Create or update a resource (idempotent)"
+
+  schemas:
+    core:
+      - name: Flow
+        properties: [id, displayName, status, projectId, folderId, publishedVersionId, created, updated]
+        description: "Automation workflow definition"
+      - name: FlowRun
+        properties: [id, flowId, projectId, status, startTime, finishTime, duration, created]
+        description: "Execution record of a flow run"
+      - name: Connection
+        properties: [id, name, pieceName, projectId, status, type, created, updated]
+        description: "Third-party app authentication credentials"
+      - name: Project
+        properties: [id, displayName, ownerId, platformId, created, updated]
+        description: "Organizational project container"
+      - name: Piece
+        properties: [name, displayName, description, version, iconUrl, categories]
+        description: "Integration piece for connecting external apps"
+
+  parameters:
+    pagination:
+      - name: limit
+        type: integer
+        description: "Number of results per page (seek pagination)"
+      - name: cursor
+        type: string
+        description: "Opaque cursor for seek-based pagination"
+    identifiers:
+      - name: projectId
+        type: string
+        description: "Project identifier (required for most endpoints)"
+      - name: id
+        type: string
+        description: "Resource unique identifier"
+    filters:
+      - name: status
+        type: string
+        description: "Filter by resource status"
+      - name: pieceName
+        type: string
+        description: "Filter connections by integration piece name"
+
+  enums:
+    flow-status:
+      - ENABLED
+      - DISABLED
+    flow-run-status:
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - TIMEOUT
+      - STOPPED
+    connection-type:
+      - OAUTH2
+      - API_KEY
+      - BASIC_AUTH
+      - CUSTOM_AUTH
+
+  authentication:
+    schemes:
+      - name: BearerAuth
+        type: bearer
+        description: "API key from Activepieces admin console passed as Bearer token"
+        apis: [activepieces]
+
+capability:
+  workflows:
+    - name: Workflow Automation
+      file: capabilities/workflow-automation.yaml
+      description: "Build and monitor automation flows, manage connections, debug executions"
+      apis: [activepieces]
+      tools: 8
+      personas: [Developer, No-Code Builder, Operations Engineer]
+      domains: [Automation, Integration]
+
+  personas:
+    - id: developer
+      name: Developer
+      description: "Builds custom integrations using the API and TypeScript pieces"
+      workflows: [Workflow Automation]
+    - id: no-code-builder
+      name: No-Code Builder
+      description: "Creates automation workflows using the visual builder"
+      workflows: [Workflow Automation]
+    - id: operations-engineer
+      name: Operations Engineer
+      description: "Monitors flow execution, manages connections, troubleshoots failures"
+      workflows: [Workflow Automation]
+
+  domains:
+    - name: Automation
+      description: "Workflow automation and flow orchestration"
+      resources: [flows, flow-runs, templates]
+    - name: Integration
+      description: "Third-party app connections and piece management"
+      resources: [connections, pieces]
+    - name: Platform Management
+      description: "Project, user, and organization administration"
+      resources: [projects, users, folders]
+
+  namespaces:
+    - name: activepieces
+      type: consumed
+    - name: workflow-automation-api
+      type: rest-exposed
+      port: 8080
+    - name: workflow-automation-mcp
+      type: mcp-exposed
+      port: 9090
+
+  binds:
+    - name: ACTIVEPIECES_API_KEY
+      description: "API key from Activepieces admin console"
+      workflows: [Workflow Automation]
+    - name: ACTIVEPIECES_PROJECT_ID
+      description: "Default project ID for operations"
+      workflows: [Workflow Automation]
+
+crossReference:
+  - resource: flows
+    operations: [list-flows, create-flow, get-flow, delete-flow]
+    workflows: [Workflow Automation]
+    personas: [Developer, No-Code Builder]
+  - resource: flow-runs
+    operations: [list-flow-runs, get-flow-run]
+    workflows: [Workflow Automation]
+    personas: [Operations Engineer, Developer]
+  - resource: connections
+    operations: [list-connections, upsert-connection]
+    workflows: [Workflow Automation]
+    personas: [Developer, Operations Engineer]
+  - resource: projects
+    operations: [list-projects, get-project]
+    workflows: [Workflow Automation]
+    personas: [Developer, Operations Engineer]

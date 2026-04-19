@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-update-project-request-structure.json",
+  "name": "UpdateProjectRequest",
+  "description": "UpdateProjectRequest schema from Activepieces API",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "New project name"
+    },
+    "notifyStatus": {
+      "type": "string",
+      "enum": [
+        "ALWAYS",
+        "NEVER",
+        "NEW_ISSUE"
+      ],
+      "description": "Notification settings"
+    }
+  }
+}

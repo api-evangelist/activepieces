@@ -1,0 +1,267 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Activepieces API"
+  description: "REST API for Activepieces automation platform covering flows, connections, projects, users, and execution runs."
+  tags:
+    - Activepieces
+    - Automation
+    - No-Code
+    - Workflow
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      ACTIVEPIECES_API_KEY: ACTIVEPIECES_API_KEY
+      ACTIVEPIECES_PROJECT_ID: ACTIVEPIECES_PROJECT_ID
+
+capability:
+  consumes:
+    - type: http
+      namespace: activepieces
+      baseUri: "https://cloud.activepieces.com/api/v1"
+      description: "Activepieces REST API"
+      authentication:
+        type: bearer
+        token: "{{ACTIVEPIECES_API_KEY}}"
+      resources:
+        - name: flows
+          path: /flows
+          description: "Manage automation flows"
+          operations:
+            - name: list-flows
+              method: GET
+              description: "List all flows in a project"
+              inputParameters:
+                - name: projectId
+                  in: query
+                  type: string
+                  required: true
+                  description: "Project ID"
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by status"
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of results"
+                - name: cursor
+                  in: query
+                  type: string
+                  required: false
+                  description: "Pagination cursor"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-flow
+              method: POST
+              description: "Create a new automation flow"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  displayName: "{{tools.displayName}}"
+                  projectId: "{{ACTIVEPIECES_PROJECT_ID}}"
+            - name: get-flow
+              method: GET
+              description: "Retrieve a flow by ID"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Flow ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-flow
+              method: DELETE
+              description: "Delete a flow"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Flow ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: flow-runs
+          path: /flow-runs
+          description: "Access execution history"
+          operations:
+            - name: list-flow-runs
+              method: GET
+              description: "List flow execution runs"
+              inputParameters:
+                - name: projectId
+                  in: query
+                  type: string
+                  required: true
+                  description: "Project ID"
+                - name: flowId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by flow ID"
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by status"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-flow-run
+              method: GET
+              description: "Get a specific flow run"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Flow run ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: connections
+          path: /connections
+          description: "Manage app connections"
+          operations:
+            - name: list-connections
+              method: GET
+              description: "List all connections"
+              inputParameters:
+                - name: projectId
+                  in: query
+                  type: string
+                  required: true
+                  description: "Project ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: upsert-connection
+              method: POST
+              description: "Create or update a connection"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: projects
+          path: /projects
+          description: "Manage projects"
+          operations:
+            - name: list-projects
+              method: GET
+              description: "List all projects"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-project
+              method: GET
+              description: "Get a specific project"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Project ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: activepieces-rest
+      resources:
+        - path: /v1/flows
+          name: flows
+          description: "Flow management"
+          operations:
+            - method: GET
+              name: list-flows
+              description: "List flows"
+              call: "activepieces.list-flows"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/flow-runs
+          name: flow-runs
+          description: "Flow run history"
+          operations:
+            - method: GET
+              name: list-flow-runs
+              description: "List flow runs"
+              call: "activepieces.list-flow-runs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: activepieces-mcp
+      transport: http
+      tools:
+        - name: list-flows
+          description: "List automation flows in Activepieces"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "activepieces.list-flows"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-flow
+          description: "Create a new automation flow in Activepieces"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "activepieces.create-flow"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-flow-runs
+          description: "List execution history for Activepieces flows"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "activepieces.list-flow-runs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-connections
+          description: "List app connections in Activepieces"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "activepieces.list-connections"
+          outputParameters:
+            - type: object
+              mapping: "$."

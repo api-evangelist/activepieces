@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-update-folder-request-structure.json",
+  "name": "UpdateFolderRequest",
+  "description": "UpdateFolderRequest schema from Activepieces API",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "New folder name"
+    }
+  }
+}

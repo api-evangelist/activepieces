@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-queue-metrics-structure.json",
+  "name": "QueueMetrics",
+  "description": "Worker queue metrics",
+  "type": "object",
+  "properties": {
+    "queues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Queue name",
+            "example": "one-time"
+          },
+          "waiting": {
+            "type": "int32",
+            "description": "Jobs waiting",
+            "example": 5
+          },
+          "active": {
+            "type": "int32",
+            "description": "Jobs active",
+            "example": 2
+          },
+          "completed": {
+            "type": "int32",
+            "description": "Jobs completed",
+            "example": 1000
+          },
+          "failed": {
+            "type": "int32",
+            "description": "Jobs failed",
+            "example": 3
+          }
+        }
+      }
+    }
+  }
+}

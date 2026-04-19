@@ -1,0 +1,10 @@
+{
+  "id": "user-abc123",
+  "created": "2025-03-15T14:30:00Z",
+  "updated": "2025-03-15T14:30:00Z",
+  "email": "user@example.com",
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "status": "ACTIVE",
+  "platformRole": "ADMIN"
+}

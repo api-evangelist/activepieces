@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-schema/activepieces-flow-list-schema.json",
+  "title": "FlowList",
+  "description": "Paginated list of flows",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Flow"
+      },
+      "description": "Array of flows"
+    },
+    "next": {
+      "type": "string",
+      "nullable": true,
+      "description": "Cursor to next page"
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true,
+      "description": "Cursor to previous page"
+    }
+  }
+}

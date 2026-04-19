@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-folder-structure.json",
+  "name": "Folder",
+  "description": "A folder for organizing flows",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Folder ID",
+      "example": "folder-abc123"
+    },
+    "created": {
+      "type": "datetime"
+    },
+    "updated": {
+      "type": "datetime"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Folder display name",
+      "example": "Production Flows"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "Project ID"
+    }
+  }
+}

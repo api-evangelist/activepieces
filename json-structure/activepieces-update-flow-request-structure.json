@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-update-flow-request-structure.json",
+  "name": "UpdateFlowRequest",
+  "description": "Request body for updating a flow",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "New flow name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "description": "Flow status"
+    },
+    "folderId": {
+      "type": "string",
+      "description": "Move to this folder"
+    }
+  }
+}

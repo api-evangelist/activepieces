@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-update-user-request-structure.json",
+  "name": "UpdateUserRequest",
+  "description": "UpdateUserRequest schema from Activepieces API",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "platformRole": {
+      "type": "string",
+      "enum": [
+        "ADMIN",
+        "MEMBER"
+      ]
+    }
+  }
+}

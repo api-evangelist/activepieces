@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-schema/activepieces-template-schema.json",
+  "title": "Template",
+  "description": "A flow template for reuse",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Template ID",
+      "example": "template-abc123"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "type": "string",
+      "description": "Template name",
+      "example": "Lead Notification Template"
+    },
+    "description": {
+      "type": "string",
+      "description": "Template description"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Template tags"
+    }
+  }
+}

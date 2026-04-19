@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-user-list-structure.json",
+  "name": "UserList",
+  "description": "UserList schema from Activepieces API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/User"
+      }
+    },
+    "next": {
+      "type": "string",
+      "nullable": true
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true
+    }
+  }
+}

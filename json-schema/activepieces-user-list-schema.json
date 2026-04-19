@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-schema/activepieces-user-list-schema.json",
+  "title": "UserList",
+  "description": "UserList schema from Activepieces API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/User"
+      }
+    },
+    "next": {
+      "type": "string",
+      "nullable": true
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true
+    }
+  }
+}

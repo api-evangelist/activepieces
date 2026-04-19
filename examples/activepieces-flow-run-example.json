@@ -1,0 +1,11 @@
+{
+  "id": "run-abc123",
+  "created": "2025-03-15T14:30:00Z",
+  "updated": "2025-03-15T14:30:00Z",
+  "projectId": "abc123",
+  "flowId": "abc123",
+  "status": "RUNNING",
+  "startTime": "2025-03-15T14:30:00Z",
+  "finishTime": "2025-03-15T14:30:00Z",
+  "duration": 1234
+}

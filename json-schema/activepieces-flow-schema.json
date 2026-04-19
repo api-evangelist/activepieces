@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-schema/activepieces-flow-schema.json",
+  "title": "Flow",
+  "description": "An Activepieces automation flow",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique flow identifier",
+      "example": "flow-abc123"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp",
+      "example": "2025-03-15T14:30:00Z"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last updated timestamp",
+      "example": "2025-03-15T14:30:00Z"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "Associated project ID",
+      "example": "project-xyz789"
+    },
+    "externalId": {
+      "type": "string",
+      "description": "External ID for the flow"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable flow name",
+      "example": "Send Welcome Email"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "description": "Flow status",
+      "example": "ENABLED"
+    },
+    "folderId": {
+      "type": "string",
+      "description": "Folder ID if organized in a folder"
+    },
+    "publishedVersionId": {
+      "type": "string",
+      "description": "ID of the published version"
+    }
+  }
+}

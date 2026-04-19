@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-connection-structure.json",
+  "name": "Connection",
+  "description": "An app connection (credentials for a third-party service)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Connection ID",
+      "example": "conn-abc123"
+    },
+    "created": {
+      "type": "datetime"
+    },
+    "updated": {
+      "type": "datetime"
+    },
+    "name": {
+      "type": "string",
+      "description": "Connection name",
+      "example": "My Gmail Account"
+    },
+    "pieceName": {
+      "type": "string",
+      "description": "Integration piece name",
+      "example": "@activepieces/piece-gmail"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "Project ID"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "ERROR",
+        "EXPIRED"
+      ],
+      "description": "Connection status",
+      "example": "ACTIVE"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "OAUTH2",
+        "API_KEY",
+        "BASIC_AUTH",
+        "CUSTOM_AUTH"
+      ],
+      "description": "Authentication type"
+    }
+  }
+}

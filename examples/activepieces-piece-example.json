@@ -1,0 +1,10 @@
+{
+  "name": "@activepieces/piece-github",
+  "displayName": "GitHub",
+  "description": "example-value",
+  "version": "0.5.0",
+  "iconUrl": "https://example.com",
+  "categories": [
+    "example-value"
+  ]
+}

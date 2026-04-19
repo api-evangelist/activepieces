@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-create-project-request-structure.json",
+  "name": "CreateProjectRequest",
+  "description": "CreateProjectRequest schema from Activepieces API",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "Project name",
+      "example": "New Project"
+    }
+  },
+  "required": [
+    "displayName"
+  ]
+}

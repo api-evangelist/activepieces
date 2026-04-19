@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-user-structure.json",
+  "name": "User",
+  "description": "An Activepieces platform user",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "User ID",
+      "example": "user-abc123"
+    },
+    "created": {
+      "type": "datetime"
+    },
+    "updated": {
+      "type": "datetime"
+    },
+    "email": {
+      "type": "string",
+      "description": "User email",
+      "example": "user@example.com"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name",
+      "example": "Jane"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name",
+      "example": "Smith"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE",
+        "SHADOW"
+      ],
+      "description": "User status"
+    },
+    "platformRole": {
+      "type": "string",
+      "enum": [
+        "ADMIN",
+        "MEMBER"
+      ],
+      "description": "Platform role"
+    }
+  }
+}

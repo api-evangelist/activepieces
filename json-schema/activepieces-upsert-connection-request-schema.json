@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-schema/activepieces-upsert-connection-request-schema.json",
+  "title": "UpsertConnectionRequest",
+  "description": "Request body for creating or updating a connection",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Connection name",
+      "example": "My GitHub Connection"
+    },
+    "pieceName": {
+      "type": "string",
+      "description": "Piece package name",
+      "example": "@activepieces/piece-github"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "Project ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "OAUTH2",
+        "API_KEY",
+        "BASIC_AUTH",
+        "CUSTOM_AUTH"
+      ]
+    },
+    "value": {
+      "type": "object",
+      "description": "Authentication credentials"
+    }
+  },
+  "required": [
+    "name",
+    "pieceName",
+    "projectId",
+    "type",
+    "value"
+  ]
+}

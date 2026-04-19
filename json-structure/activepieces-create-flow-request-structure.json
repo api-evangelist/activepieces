@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-create-flow-request-structure.json",
+  "name": "CreateFlowRequest",
+  "description": "Request body for creating a flow",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "Flow display name",
+      "example": "My New Flow"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "Project ID to create flow in",
+      "example": "project-xyz789"
+    },
+    "folderId": {
+      "type": "string",
+      "description": "Optional folder ID"
+    },
+    "templateId": {
+      "type": "string",
+      "description": "Optional template to base the flow on"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Custom metadata"
+    }
+  },
+  "required": [
+    "displayName",
+    "projectId"
+  ]
+}

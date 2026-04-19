@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-schema/activepieces-create-folder-request-schema.json",
+  "title": "CreateFolderRequest",
+  "description": "CreateFolderRequest schema from Activepieces API",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "Folder name",
+      "example": "My Folder"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "Project ID"
+    }
+  },
+  "required": [
+    "displayName",
+    "projectId"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "flow-abc123",
+  "created": "2025-03-15T14:30:00Z",
+  "updated": "2025-03-15T14:30:00Z",
+  "projectId": "project-xyz789",
+  "externalId": "abc123",
+  "displayName": "Send Welcome Email",
+  "status": "ENABLED",
+  "folderId": "abc123",
+  "publishedVersionId": "abc123"
+}

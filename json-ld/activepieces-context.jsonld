@@ -1,0 +1,178 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "activepieces": "https://www.activepieces.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "User": "activepieces:User",
+    "UpdateUserRequest": "activepieces:UpdateUserRequest",
+    "UpdateFolderRequest": "activepieces:UpdateFolderRequest",
+    "ConnectionList": "activepieces:ConnectionList",
+    "Piece": "activepieces:Piece",
+    "CreateProjectRequest": "activepieces:CreateProjectRequest",
+    "QueueMetrics": "activepieces:QueueMetrics",
+    "Connection": "activepieces:Connection",
+    "FlowRunList": "activepieces:FlowRunList",
+    "FolderList": "activepieces:FolderList",
+    "UpsertConnectionRequest": "activepieces:UpsertConnectionRequest",
+    "Folder": "activepieces:Folder",
+    "UserList": "activepieces:UserList",
+    "Template": "activepieces:Template",
+    "FlowRun": "activepieces:FlowRun",
+    "UpdateProjectRequest": "activepieces:UpdateProjectRequest",
+    "CreateTemplateRequest": "activepieces:CreateTemplateRequest",
+    "TemplateList": "activepieces:TemplateList",
+    "ProjectList": "activepieces:ProjectList",
+    "Flow": "activepieces:Flow",
+    "Project": "activepieces:Project",
+    "CreateFlowRequest": "activepieces:CreateFlowRequest",
+    "CreateFolderRequest": "activepieces:CreateFolderRequest",
+    "FlowList": "activepieces:FlowList",
+    "UpdateFlowRequest": "activepieces:UpdateFlowRequest",
+    "id": {
+      "@id": "activepieces:id",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "activepieces:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "activepieces:lastName",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "activepieces:status",
+      "@type": "xsd:string"
+    },
+    "platformRole": {
+      "@id": "activepieces:platformRole",
+      "@type": "xsd:string"
+    },
+    "displayName": {
+      "@id": "activepieces:displayName",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "activepieces:data",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "next": {
+      "@id": "activepieces:next",
+      "@type": "xsd:string"
+    },
+    "previous": {
+      "@id": "activepieces:previous",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "activepieces:version",
+      "@type": "xsd:string"
+    },
+    "iconUrl": {
+      "@id": "activepieces:iconUrl",
+      "@type": "@id"
+    },
+    "categories": {
+      "@id": "activepieces:categories",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "queues": {
+      "@id": "activepieces:queues",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "pieceName": {
+      "@id": "activepieces:pieceName",
+      "@type": "xsd:string"
+    },
+    "projectId": {
+      "@id": "activepieces:projectId",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "activepieces:type",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "activepieces:value",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "activepieces:tags",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "flowId": {
+      "@id": "activepieces:flowId",
+      "@type": "xsd:string"
+    },
+    "startTime": {
+      "@id": "activepieces:startTime",
+      "@type": "xsd:dateTime"
+    },
+    "finishTime": {
+      "@id": "activepieces:finishTime",
+      "@type": "xsd:dateTime"
+    },
+    "duration": {
+      "@id": "activepieces:duration",
+      "@type": "xsd:integer"
+    },
+    "notifyStatus": {
+      "@id": "activepieces:notifyStatus",
+      "@type": "xsd:string"
+    },
+    "externalId": {
+      "@id": "activepieces:externalId",
+      "@type": "xsd:string"
+    },
+    "folderId": {
+      "@id": "activepieces:folderId",
+      "@type": "xsd:string"
+    },
+    "publishedVersionId": {
+      "@id": "activepieces:publishedVersionId",
+      "@type": "xsd:string"
+    },
+    "ownerId": {
+      "@id": "activepieces:ownerId",
+      "@type": "xsd:string"
+    },
+    "platformId": {
+      "@id": "activepieces:platformId",
+      "@type": "xsd:string"
+    },
+    "templateId": {
+      "@id": "activepieces:templateId",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "activepieces:metadata",
+      "@type": "xsd:string"
+    }
+  }
+}

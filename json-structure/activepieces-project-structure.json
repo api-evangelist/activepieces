@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/json-structure/activepieces-project-structure.json",
+  "name": "Project",
+  "description": "An Activepieces project",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Project ID",
+      "example": "project-abc123"
+    },
+    "created": {
+      "type": "datetime"
+    },
+    "updated": {
+      "type": "datetime"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Project display name",
+      "example": "My Project"
+    },
+    "ownerId": {
+      "type": "string",
+      "description": "Owner user ID"
+    },
+    "platformId": {
+      "type": "string",
+      "description": "Platform ID"
+    }
+  }
+}

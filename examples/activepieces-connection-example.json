@@ -1,0 +1,10 @@
+{
+  "id": "conn-abc123",
+  "created": "2025-03-15T14:30:00Z",
+  "updated": "2025-03-15T14:30:00Z",
+  "name": "My Gmail Account",
+  "pieceName": "@activepieces/piece-gmail",
+  "projectId": "abc123",
+  "status": "ACTIVE",
+  "type": "OAUTH2"
+}

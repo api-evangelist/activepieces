@@ -1,0 +1,7 @@
+{
+  "name": "My GitHub Connection",
+  "pieceName": "@activepieces/piece-github",
+  "projectId": "abc123",
+  "type": "OAUTH2",
+  "value": {}
+}
