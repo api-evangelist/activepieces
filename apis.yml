@@ -91,7 +91,7 @@ common:
   - type: NaftikoCapability
     url: capabilities/workflow-automation.yaml
     title: Workflow Automation Capability
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/activepieces-context.jsonld
     title: Activepieces Context
   - type: Features
