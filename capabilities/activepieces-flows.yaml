@@ -1,0 +1,264 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Activepieces API — Flows
+  description: 'Activepieces API — Flows. 5 operations. Lead operation: Activepieces List Flows. Self-contained Naftiko capability
+    covering one Activepieces business surface.'
+  tags:
+  - Activepieces
+  - Flows
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ACTIVEPIECES_API_KEY: ACTIVEPIECES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: activepieces-flows
+    baseUri: https://cloud.activepieces.com/api/v1
+    description: Activepieces API — Flows business capability. Self-contained, no shared references.
+    resources:
+    - name: flows
+      path: /flows
+      operations:
+      - name: listflows
+        method: GET
+        description: Activepieces List Flows
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: query
+          type: string
+          description: Project ID to filter flows
+          required: true
+        - name: folderId
+          in: query
+          type: string
+          description: Folder ID to filter flows
+        - name: status
+          in: query
+          type: string
+          description: Filter by flow status
+        - name: name
+          in: query
+          type: string
+          description: Filter by flow name
+        - name: limit
+          in: query
+          type: integer
+          description: Number of results to return
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor
+      - name: createflow
+        method: POST
+        description: Activepieces Create Flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: flows-id
+      path: /flows/{id}
+      operations:
+      - name: getflow
+        method: GET
+        description: Activepieces Get Flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Flow ID
+          required: true
+      - name: updateflow
+        method: POST
+        description: Activepieces Update Flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Flow ID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteflow
+        method: DELETE
+        description: Activepieces Delete Flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Flow ID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ACTIVEPIECES_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: activepieces-flows-rest
+    port: 8080
+    description: REST adapter for Activepieces API — Flows. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/flows
+      name: flows
+      description: REST surface for flows.
+      operations:
+      - method: GET
+        name: listflows
+        description: Activepieces List Flows
+        call: activepieces-flows.listflows
+        with:
+          projectId: rest.projectId
+          folderId: rest.folderId
+          status: rest.status
+          name: rest.name
+          limit: rest.limit
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createflow
+        description: Activepieces Create Flow
+        call: activepieces-flows.createflow
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flows/{id}
+      name: flows-id
+      description: REST surface for flows-id.
+      operations:
+      - method: GET
+        name: getflow
+        description: Activepieces Get Flow
+        call: activepieces-flows.getflow
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateflow
+        description: Activepieces Update Flow
+        call: activepieces-flows.updateflow
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteflow
+        description: Activepieces Delete Flow
+        call: activepieces-flows.deleteflow
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: activepieces-flows-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Activepieces API — Flows. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: activepieces-list-flows
+      description: Activepieces List Flows
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: activepieces-flows.listflows
+      with:
+        projectId: tools.projectId
+        folderId: tools.folderId
+        status: tools.status
+        name: tools.name
+        limit: tools.limit
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activepieces-create-flow
+      description: Activepieces Create Flow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: activepieces-flows.createflow
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activepieces-get-flow
+      description: Activepieces Get Flow
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: activepieces-flows.getflow
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activepieces-update-flow
+      description: Activepieces Update Flow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: activepieces-flows.updateflow
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activepieces-delete-flow
+      description: Activepieces Delete Flow
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: activepieces-flows.deleteflow
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Activepieces API — Flow Runs
+  description: 'Activepieces API — Flow Runs. 2 operations. Lead operation: Activepieces List Flow Runs. Self-contained Naftiko
+    capability covering one Activepieces business surface.'
+  tags:
+  - Activepieces
+  - Flow Runs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ACTIVEPIECES_API_KEY: ACTIVEPIECES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: activepieces-flow-runs
+    baseUri: https://cloud.activepieces.com/api/v1
+    description: Activepieces API — Flow Runs business capability. Self-contained, no shared references.
+    resources:
+    - name: flow-runs
+      path: /flow-runs
+      operations:
+      - name: listflowruns
+        method: GET
+        description: Activepieces List Flow Runs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: query
+          type: string
+          description: Project ID
+          required: true
+        - name: flowId
+          in: query
+          type: string
+          description: Filter by flow ID
+        - name: status
+          in: query
+          type: string
+          description: Filter by run status
+        - name: limit
+          in: query
+          type: integer
+          description: Number of results
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor
+    - name: flow-runs-id
+      path: /flow-runs/{id}
+      operations:
+      - name: getflowrun
+        method: GET
+        description: Activepieces Get Flow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Flow run ID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ACTIVEPIECES_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: activepieces-flow-runs-rest
+    port: 8080
+    description: REST adapter for Activepieces API — Flow Runs. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/flow-runs
+      name: flow-runs
+      description: REST surface for flow-runs.
+      operations:
+      - method: GET
+        name: listflowruns
+        description: Activepieces List Flow Runs
+        call: activepieces-flow-runs.listflowruns
+        with:
+          projectId: rest.projectId
+          flowId: rest.flowId
+          status: rest.status
+          limit: rest.limit
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flow-runs/{id}
+      name: flow-runs-id
+      description: REST surface for flow-runs-id.
+      operations:
+      - method: GET
+        name: getflowrun
+        description: Activepieces Get Flow Run
+        call: activepieces-flow-runs.getflowrun
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: activepieces-flow-runs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Activepieces API — Flow Runs. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: activepieces-list-flow-runs
+      description: Activepieces List Flow Runs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: activepieces-flow-runs.listflowruns
+      with:
+        projectId: tools.projectId
+        flowId: tools.flowId
+        status: tools.status
+        limit: tools.limit
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activepieces-get-flow-run
+      description: Activepieces Get Flow Run
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: activepieces-flow-runs.getflowrun
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
