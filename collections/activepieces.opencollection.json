@@ -1,0 +1,697 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activepieces API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Flows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/flows",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID to filter flows"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "query",
+                "description": "Folder ID to filter flows"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by flow status"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by flow name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List automation flows with optional filtering"
+        },
+        {
+          "info": {
+            "name": "Activepieces Create Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/flows",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new automation flow"
+        },
+        {
+          "info": {
+            "name": "Activepieces Get Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/flows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Flow ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific flow by ID"
+        },
+        {
+          "info": {
+            "name": "Activepieces Update Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/flows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Flow ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a flow's configuration"
+        },
+        {
+          "info": {
+            "name": "Activepieces Delete Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.activepieces.com/api/v1/flows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Flow ID"
+              }
+            ]
+          },
+          "docs": "Delete a flow permanently"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Flow Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Flow Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/flow-runs",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID"
+              },
+              {
+                "name": "flowId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by flow ID"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by run status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List execution history for flows"
+        },
+        {
+          "info": {
+            "name": "Activepieces Get Flow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/flow-runs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Flow run ID"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific flow execution run"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/connections",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID"
+              },
+              {
+                "name": "pieceName",
+                "value": "",
+                "type": "query",
+                "description": "Filter by piece name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List all app connections in a project"
+        },
+        {
+          "info": {
+            "name": "Activepieces Upsert Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update an app connection"
+        },
+        {
+          "info": {
+            "name": "Activepieces Delete Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.activepieces.com/api/v1/connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Connection ID"
+              }
+            ]
+          },
+          "docs": "Delete an app connection"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/projects",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List all projects accessible to the current user"
+        },
+        {
+          "info": {
+            "name": "Activepieces Create Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new project"
+        },
+        {
+          "info": {
+            "name": "Activepieces Get Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a project by ID"
+        },
+        {
+          "info": {
+            "name": "Activepieces Update Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a project's settings"
+        },
+        {
+          "info": {
+            "name": "Activepieces Delete Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.activepieces.com/api/v1/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ]
+          },
+          "docs": "Delete a project"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/users",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List all users in the platform"
+        },
+        {
+          "info": {
+            "name": "Activepieces Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a user's information"
+        },
+        {
+          "info": {
+            "name": "Activepieces Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.activepieces.com/api/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "Delete a user from the platform"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Folders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/folders",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List folders for organizing flows"
+        },
+        {
+          "info": {
+            "name": "Activepieces Create Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/folders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new folder for organizing flows"
+        },
+        {
+          "info": {
+            "name": "Activepieces Get Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Folder ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a folder by ID"
+        },
+        {
+          "info": {
+            "name": "Activepieces Update Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Folder ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a folder's name"
+        },
+        {
+          "info": {
+            "name": "Activepieces Delete Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.activepieces.com/api/v1/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Folder ID"
+              }
+            ]
+          },
+          "docs": "Delete a folder"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pieces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Pieces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/pieces",
+            "params": [
+              {
+                "name": "edition",
+                "value": "",
+                "type": "query",
+                "description": "Filter by edition"
+              },
+              {
+                "name": "includeHidden",
+                "value": "",
+                "type": "query",
+                "description": "Include hidden pieces"
+              }
+            ]
+          },
+          "docs": "List available integration pieces"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/templates",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List flow templates"
+        },
+        {
+          "info": {
+            "name": "Activepieces Create Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a flow template"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Worker Machines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces Get Worker Queue Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/worker/queues"
+          },
+          "docs": "Retrieve queue metrics for worker machines"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
