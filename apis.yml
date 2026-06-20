@@ -6,7 +6,7 @@ description: >-
   build custom TypeScript-based pieces. The platform offers AI agents, MCPs, and workflow automation capabilities with
   both cloud and self-hosted deployment options.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Automation
   - No-Code
