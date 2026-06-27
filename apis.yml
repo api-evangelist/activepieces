@@ -53,10 +53,10 @@ apis:
         type: JSONStructure
         title: Flow Run
       - url: examples/activepieces-flow-example.json
-        type: Example
+        type: Examples
         title: Flow Example
       - url: examples/activepieces-flow-run-example.json
-        type: Example
+        type: Examples
         title: Flow Run Example
     description: >-
       The Activepieces API provides programmatic access to the automation platform, enabling management of flows,
