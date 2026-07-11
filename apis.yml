@@ -63,6 +63,10 @@ apis:
       connections, projects, users, folders, pieces, templates, and execution monitoring. Uses Bearer token
       authentication.
 common:
+  - type: DomainSecurity
+    url: security/activepieces-domain-security.yml
+  - type: Authentication
+    url: authentication/activepieces-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/activepieces
   - type: Portal
@@ -158,6 +162,8 @@ common:
         description: Cloud plan at $150/mo with 50 active flows, team collaboration, and 1,000 AI credits.
       - name: Enterprise
         description: Custom pricing with unlimited flows, SSO, audit logs, and custom AI model support.
+  - type: Blog
+    url: https://www.activepieces.com/rss.xml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
