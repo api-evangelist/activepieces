@@ -1,6 +1,23 @@
+# activepieces — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on activepieces.com
+#   - path-params-casing: snake @ 100% (n=13)
+#   - query-params-casing: snake @ 69% (n=26)
+#   - operationid-casing: camel @ 100% (n=27)
+#   - schema-names-casing: pascal @ 100% (n=25)
+#   - schema-properties-casing: snake @ 63% (n=103)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - pagination params observed: ['cursor', 'limit']
+#   - merge: kept 25 existing, added 6 measured, upgraded 0
+#   - added: servers-expected-domain, path-params-casing, query-params-casing, schema-names-casing, schema-properties-casing, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
-
-  # INFO / METADATA
   info-title-format:
     description: API title should start with "Activepieces"
     severity: warn
@@ -8,8 +25,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^Activepieces"
-
+        match: ^Activepieces
   info-description-required:
     description: Info object must have a description
     severity: error
@@ -17,7 +33,6 @@ rules:
     then:
       field: description
       function: truthy
-
   info-version-required:
     description: Info object must include a version
     severity: error
@@ -25,8 +40,6 @@ rules:
     then:
       field: version
       function: truthy
-
-  # OPENAPI VERSION
   openapi-version:
     description: Should use OpenAPI 3.x
     severity: warn
@@ -34,9 +47,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^3\\."
-
-  # SERVERS
+        match: ^3\.
   servers-defined:
     description: At least one server must be defined
     severity: error
@@ -44,7 +55,6 @@ rules:
     then:
       field: servers
       function: truthy
-
   servers-https:
     description: All servers should use HTTPS
     severity: warn
@@ -52,9 +62,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^https://"
-
-  # PATHS
+        match: ^https://
   paths-no-trailing-slash:
     description: Paths must not have trailing slashes
     severity: error
@@ -62,8 +70,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        notMatch: "/$"
-
+        notMatch: /$
   paths-kebab-case:
     description: Path segments should use kebab-case
     severity: info
@@ -71,9 +78,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        notMatch: "_[a-z]"
-
-  # OPERATIONS
+        notMatch: _[a-z]
   operation-summary-required:
     description: Every operation must have a summary
     severity: error
@@ -81,7 +86,6 @@ rules:
     then:
       field: summary
       function: truthy
-
   operation-summary-prefix:
     description: Operation summary should start with "Activepieces"
     severity: warn
@@ -89,8 +93,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^Activepieces "
-
+        match: '^Activepieces '
   operation-description-required:
     description: Every operation should have a description
     severity: warn
@@ -98,7 +101,6 @@ rules:
     then:
       field: description
       function: truthy
-
   operation-operationId-required:
     description: Every operation must have an operationId
     severity: error
@@ -106,7 +108,6 @@ rules:
     then:
       field: operationId
       function: truthy
-
   operation-operationId-camelCase:
     description: OperationId should use camelCase
     severity: warn
@@ -115,7 +116,6 @@ rules:
       function: casing
       functionOptions:
         type: camel
-
   operation-tags-required:
     description: Every operation must have at least one tag
     severity: warn
@@ -123,8 +123,6 @@ rules:
     then:
       field: tags
       function: truthy
-
-  # PARAMETERS
   parameter-description-required:
     description: Every parameter must have a description
     severity: warn
@@ -132,8 +130,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # PAGINATION
   pagination-limit-param:
     description: List endpoints should support limit parameter
     severity: info
@@ -145,8 +141,6 @@ rules:
           properties:
             name:
               type: string
-
-  # RESPONSES
   response-success-required:
     description: Every operation must have at least one 2xx response
     severity: error
@@ -156,10 +150,12 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: ['200']
-            - required: ['201']
-            - required: ['204']
-
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
   response-description-required:
     description: Every response must have a description
     severity: error
@@ -167,7 +163,6 @@ rules:
     then:
       field: description
       function: truthy
-
   response-401-defined:
     description: Operations should document 401 Unauthorized response
     severity: info
@@ -175,8 +170,6 @@ rules:
     then:
       field: '401'
       function: truthy
-
-  # SECURITY
   security-schemes-defined:
     description: Security schemes must be defined
     severity: error
@@ -184,7 +177,6 @@ rules:
     then:
       field: securitySchemes
       function: truthy
-
   security-bearer-auth:
     description: API should use Bearer authentication
     severity: warn
@@ -195,9 +187,8 @@ rules:
         schema:
           properties:
             scheme:
-              enum: ['bearer']
-
-  # HTTP METHOD CONVENTIONS
+              enum:
+              - bearer
   http-get-no-request-body:
     description: GET operations should not have a request body
     severity: error
@@ -205,7 +196,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
   http-delete-returns-204:
     description: DELETE operations should return 204
     severity: info
@@ -213,8 +203,6 @@ rules:
     then:
       field: '204'
       function: truthy
-
-  # SCHEMAS
   schema-description-required:
     description: Component schemas should have descriptions
     severity: warn
@@ -222,11 +210,59 @@ rules:
     then:
       field: description
       function: truthy
-
   schema-properties-have-types:
     description: Schema properties should define types
     severity: warn
     given: $.components.schemas[*].properties[*]
     then:
       field: type
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the activepieces.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: activepieces\.com
+  path-params-casing:
+    description: Path parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
