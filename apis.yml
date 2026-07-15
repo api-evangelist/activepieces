@@ -63,6 +63,8 @@ apis:
       connections, projects, users, folders, pieces, templates, and execution monitoring. Uses Bearer token
       authentication.
 common:
+  - type: AgenticAccess
+    url: agentic-access/activepieces-agentic-access.yml
   - type: DomainSecurity
     url: security/activepieces-domain-security.yml
   - type: Authentication
