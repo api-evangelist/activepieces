@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  title: Activepieces Connections Templates API
+  version: 1.0.0
+  description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
+  contact:
+    name: Activepieces Support
+    url: https://www.activepieces.com/docs/
+  x-generated-from: documentation
+servers:
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+security:
+- BearerAuth: []
+tags:
+- name: Templates
+  description: Flow templates
+paths:
+  /templates:
+    get:
+      operationId: listTemplates
+      summary: Activepieces List Templates
+      description: List flow templates
+      tags:
+      - Templates
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of results
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: List of templates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateList'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTemplate
+      summary: Activepieces Create Template
+      description: Create a flow template
+      tags:
+      - Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTemplateRequest'
+      responses:
+        '201':
+          description: Template created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Template:
+      type: object
+      description: A flow template for reuse
+      properties:
+        id:
+          type: string
+          description: Template ID
+          example: template-abc123
+        created:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Template name
+          example: Lead Notification Template
+        description:
+          type: string
+          description: Template description
+        tags:
+          type: array
+          items:
+            type: string
+          description: Template tags
+    CreateTemplateRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Template name
+        description:
+          type: string
+          description: Template description
+        tags:
+          type: array
+          items:
+            type: string
+    TemplateList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token

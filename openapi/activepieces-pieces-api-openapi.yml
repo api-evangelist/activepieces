@@ -1,0 +1,92 @@
+openapi: 3.1.0
+info:
+  title: Activepieces Connections Pieces API
+  version: 1.0.0
+  description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
+  contact:
+    name: Activepieces Support
+    url: https://www.activepieces.com/docs/
+  x-generated-from: documentation
+servers:
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+security:
+- BearerAuth: []
+tags:
+- name: Pieces
+  description: Manage integration pieces
+paths:
+  /pieces:
+    get:
+      operationId: listPieces
+      summary: Activepieces List Pieces
+      description: List available integration pieces
+      tags:
+      - Pieces
+      parameters:
+      - name: edition
+        in: query
+        schema:
+          type: string
+          enum:
+          - ce
+          - ee
+          - cloud
+        description: Filter by edition
+      - name: includeHidden
+        in: query
+        schema:
+          type: boolean
+        description: Include hidden pieces
+      responses:
+        '200':
+          description: List of pieces
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Piece'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Piece:
+      type: object
+      description: An Activepieces integration piece
+      properties:
+        name:
+          type: string
+          description: Piece package name
+          example: '@activepieces/piece-github'
+        displayName:
+          type: string
+          description: Human-readable name
+          example: GitHub
+        description:
+          type: string
+          description: Piece description
+        version:
+          type: string
+          description: Piece version
+          example: 0.5.0
+        iconUrl:
+          type: string
+          format: uri
+          description: Piece icon URL
+        categories:
+          type: array
+          items:
+            type: string
+          description: Piece categories
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token

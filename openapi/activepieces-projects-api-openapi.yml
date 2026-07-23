@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Activepieces Connections Projects API
+  version: 1.0.0
+  description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
+  contact:
+    name: Activepieces Support
+    url: https://www.activepieces.com/docs/
+  x-generated-from: documentation
+servers:
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+security:
+- BearerAuth: []
+tags:
+- name: Projects
+  description: Project management
+paths:
+  /projects:
+    get:
+      operationId: listProjects
+      summary: Activepieces List Projects
+      description: List all projects accessible to the current user
+      tags:
+      - Projects
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of results
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createProject
+      summary: Activepieces Create Project
+      description: Create a new project
+      tags:
+      - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+      responses:
+        '201':
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /projects/{id}:
+    get:
+      operationId: getProject
+      summary: Activepieces Get Project
+      description: Retrieve a project by ID
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      responses:
+        '200':
+          description: Project details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateProject
+      summary: Activepieces Update Project
+      description: Update a project's settings
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+      responses:
+        '200':
+          description: Project updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteProject
+      summary: Activepieces Delete Project
+      description: Delete a project
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      responses:
+        '204':
+          description: Project deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateProjectRequest:
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          type: string
+          description: Project name
+          example: New Project
+    Project:
+      type: object
+      description: An Activepieces project
+      properties:
+        id:
+          type: string
+          description: Project ID
+          example: project-abc123
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        displayName:
+          type: string
+          description: Project display name
+          example: My Project
+        ownerId:
+          type: string
+          description: Owner user ID
+        platformId:
+          type: string
+          description: Platform ID
+    ProjectList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+    UpdateProjectRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New project name
+        notifyStatus:
+          type: string
+          enum:
+          - ALWAYS
+          - NEVER
+          - NEW_ISSUE
+          description: Notification settings
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token

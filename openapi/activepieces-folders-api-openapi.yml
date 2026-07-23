@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Activepieces Connections Folders API
+  version: 1.0.0
+  description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
+  contact:
+    name: Activepieces Support
+    url: https://www.activepieces.com/docs/
+  x-generated-from: documentation
+servers:
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+security:
+- BearerAuth: []
+tags:
+- name: Folders
+  description: Organize flows with folders
+paths:
+  /folders:
+    get:
+      operationId: listFolders
+      summary: Activepieces List Folders
+      description: List folders for organizing flows
+      tags:
+      - Folders
+      parameters:
+      - name: projectId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of results
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: List of folders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderList'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createFolder
+      summary: Activepieces Create Folder
+      description: Create a new folder for organizing flows
+      tags:
+      - Folders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+      responses:
+        '201':
+          description: Folder created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /folders/{id}:
+    get:
+      operationId: getFolder
+      summary: Activepieces Get Folder
+      description: Retrieve a folder by ID
+      tags:
+      - Folders
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Folder ID
+      responses:
+        '200':
+          description: Folder details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateFolder
+      summary: Activepieces Update Folder
+      description: Update a folder's name
+      tags:
+      - Folders
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Folder ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFolderRequest'
+      responses:
+        '200':
+          description: Folder updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteFolder
+      summary: Activepieces Delete Folder
+      description: Delete a folder
+      tags:
+      - Folders
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Folder ID
+      responses:
+        '204':
+          description: Folder deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateFolderRequest:
+      type: object
+      required:
+      - displayName
+      - projectId
+      properties:
+        displayName:
+          type: string
+          description: Folder name
+          example: My Folder
+        projectId:
+          type: string
+          description: Project ID
+    Folder:
+      type: object
+      description: A folder for organizing flows
+      properties:
+        id:
+          type: string
+          description: Folder ID
+          example: folder-abc123
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        displayName:
+          type: string
+          description: Folder display name
+          example: Production Flows
+        projectId:
+          type: string
+          description: Project ID
+    UpdateFolderRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New folder name
+    FolderList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token

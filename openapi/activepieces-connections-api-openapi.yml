@@ -1,0 +1,196 @@
+openapi: 3.1.0
+info:
+  title: Activepieces Connections API
+  version: 1.0.0
+  description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
+  contact:
+    name: Activepieces Support
+    url: https://www.activepieces.com/docs/
+  x-generated-from: documentation
+servers:
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+security:
+- BearerAuth: []
+tags:
+- name: Connections
+  description: Manage third-party app connections
+paths:
+  /connections:
+    get:
+      operationId: listConnections
+      summary: Activepieces List Connections
+      description: List all app connections in a project
+      tags:
+      - Connections
+      parameters:
+      - name: projectId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      - name: pieceName
+        in: query
+        schema:
+          type: string
+        description: Filter by piece name
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of results
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: Paginated list of connections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionList'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: upsertConnection
+      summary: Activepieces Upsert Connection
+      description: Create or update an app connection
+      tags:
+      - Connections
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertConnectionRequest'
+      responses:
+        '201':
+          description: Connection created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /connections/{id}:
+    delete:
+      operationId: deleteConnection
+      summary: Activepieces Delete Connection
+      description: Delete an app connection
+      tags:
+      - Connections
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Connection ID
+      responses:
+        '204':
+          description: Connection deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Connection:
+      type: object
+      description: An app connection (credentials for a third-party service)
+      properties:
+        id:
+          type: string
+          description: Connection ID
+          example: conn-abc123
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Connection name
+          example: My Gmail Account
+        pieceName:
+          type: string
+          description: Integration piece name
+          example: '@activepieces/piece-gmail'
+        projectId:
+          type: string
+          description: Project ID
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - ERROR
+          - EXPIRED
+          description: Connection status
+          example: ACTIVE
+        type:
+          type: string
+          enum:
+          - OAUTH2
+          - API_KEY
+          - BASIC_AUTH
+          - CUSTOM_AUTH
+          description: Authentication type
+    UpsertConnectionRequest:
+      type: object
+      required:
+      - name
+      - pieceName
+      - projectId
+      - type
+      - value
+      description: Request body for creating or updating a connection
+      properties:
+        name:
+          type: string
+          description: Connection name
+          example: My GitHub Connection
+        pieceName:
+          type: string
+          description: Piece package name
+          example: '@activepieces/piece-github'
+        projectId:
+          type: string
+          description: Project ID
+        type:
+          type: string
+          enum:
+          - OAUTH2
+          - API_KEY
+          - BASIC_AUTH
+          - CUSTOM_AUTH
+        value:
+          type: object
+          description: Authentication credentials
+    ConnectionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token

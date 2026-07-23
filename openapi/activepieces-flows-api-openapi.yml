@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: Activepieces Connections Flows API
+  version: 1.0.0
+  description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
+  contact:
+    name: Activepieces Support
+    url: https://www.activepieces.com/docs/
+  x-generated-from: documentation
+servers:
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+security:
+- BearerAuth: []
+tags:
+- name: Flows
+  description: Manage automation workflows
+paths:
+  /flows:
+    get:
+      operationId: listFlows
+      summary: Activepieces List Flows
+      description: List automation flows with optional filtering
+      tags:
+      - Flows
+      parameters:
+      - name: projectId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Project ID to filter flows
+      - name: folderId
+        in: query
+        schema:
+          type: string
+        description: Folder ID to filter flows
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+        description: Filter by flow status
+      - name: name
+        in: query
+        schema:
+          type: string
+        description: Filter by flow name
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+        description: Number of results to return
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: Paginated list of flows
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowList'
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createFlow
+      summary: Activepieces Create Flow
+      description: Create a new automation flow
+      tags:
+      - Flows
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFlowRequest'
+      responses:
+        '201':
+          description: Flow created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flow'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flows/{id}:
+    get:
+      operationId: getFlow
+      summary: Activepieces Get Flow
+      description: Retrieve a specific flow by ID
+      tags:
+      - Flows
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Flow ID
+      responses:
+        '200':
+          description: Flow details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flow'
+        '404':
+          description: Flow not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateFlow
+      summary: Activepieces Update Flow
+      description: Update a flow's configuration
+      tags:
+      - Flows
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Flow ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFlowRequest'
+      responses:
+        '200':
+          description: Flow updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flow'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteFlow
+      summary: Activepieces Delete Flow
+      description: Delete a flow permanently
+      tags:
+      - Flows
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Flow ID
+      responses:
+        '204':
+          description: Flow deleted
+        '404':
+          description: Flow not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    UpdateFlowRequest:
+      type: object
+      description: Request body for updating a flow
+      properties:
+        displayName:
+          type: string
+          description: New flow name
+        status:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+          description: Flow status
+        folderId:
+          type: string
+          description: Move to this folder
+    FlowList:
+      type: object
+      description: Paginated list of flows
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+          description: Array of flows
+        next:
+          type: string
+          nullable: true
+          description: Cursor to next page
+        previous:
+          type: string
+          nullable: true
+          description: Cursor to previous page
+    CreateFlowRequest:
+      type: object
+      required:
+      - displayName
+      - projectId
+      description: Request body for creating a flow
+      properties:
+        displayName:
+          type: string
+          description: Flow display name
+          example: My New Flow
+        projectId:
+          type: string
+          description: Project ID to create flow in
+          example: project-xyz789
+        folderId:
+          type: string
+          description: Optional folder ID
+        templateId:
+          type: string
+          description: Optional template to base the flow on
+        metadata:
+          type: object
+          description: Custom metadata
+    Flow:
+      type: object
+      description: An Activepieces automation flow
+      properties:
+        id:
+          type: string
+          description: Unique flow identifier
+          example: flow-abc123
+        created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+          example: '2025-03-15T14:30:00Z'
+        updated:
+          type: string
+          format: date-time
+          description: Last updated timestamp
+          example: '2025-03-15T14:30:00Z'
+        projectId:
+          type: string
+          description: Associated project ID
+          example: project-xyz789
+        externalId:
+          type: string
+          description: External ID for the flow
+        displayName:
+          type: string
+          description: Human-readable flow name
+          example: Send Welcome Email
+        status:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+          description: Flow status
+          example: ENABLED
+        folderId:
+          type: string
+          description: Folder ID if organized in a folder
+        publishedVersionId:
+          type: string
+          description: ID of the published version
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token
