@@ -6,7 +6,20 @@ description: >-
   build custom TypeScript-based pieces. The platform offers AI agents, MCPs, and workflow automation capabilities with
   both cloud and self-hosted deployment options.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/activepieces.png
 tags:
   - Automation
   - No-Code
@@ -19,50 +32,279 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: activepieces:activepieces-api
-    name: Activepieces API
-    tags:
-      - Automation
-      - Workflow
-      - No-Code
-    humanURL: https://www.activepieces.com/docs/endpoints/overview
-    baseURL: https://cloud.activepieces.com/api/v1
-    properties:
-      - url: https://www.activepieces.com/docs/endpoints/overview
-        type: Documentation
-      - url: https://www.activepieces.com/docs/endpoints/overview
-        type: APIReference
-      - url: openapi/activepieces.json
-        type: OpenAPI
-      - url: json-schema/activepieces-flow-schema.json
-        type: JSONSchema
-        title: Flow
-      - url: json-schema/activepieces-flow-run-schema.json
-        type: JSONSchema
-        title: Flow Run
-      - url: json-schema/activepieces-connection-schema.json
-        type: JSONSchema
-        title: Connection
-      - url: json-schema/activepieces-project-schema.json
-        type: JSONSchema
-        title: Project
-      - url: json-structure/activepieces-flow-structure.json
-        type: JSONStructure
-        title: Flow
-      - url: json-structure/activepieces-flow-run-structure.json
-        type: JSONStructure
-        title: Flow Run
-      - url: examples/activepieces-flow-example.json
-        type: Examples
-        title: Flow Example
-      - url: examples/activepieces-flow-run-example.json
-        type: Examples
-        title: Flow Run Example
-    description: >-
-      The Activepieces API provides programmatic access to the automation platform, enabling management of flows,
-      connections, projects, users, folders, pieces, templates, and execution monitoring. Uses Bearer token
-      authentication.
+- aid: activepieces:activepieces-connections-api
+  name: Activepieces Connections API
+  description: Manage third-party app connections
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-connections-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
+- aid: activepieces:activepieces-flow-runs-api
+  name: Activepieces Flow Runs API
+  description: Access execution history and run details
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Flow Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-flow-runs-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
+- aid: activepieces:activepieces-flows-api
+  name: Activepieces Flows API
+  description: Manage automation workflows
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Flows
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-flows-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
+- aid: activepieces:activepieces-folders-api
+  name: Activepieces Folders API
+  description: Organize flows with folders
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-folders-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
+- aid: activepieces:activepieces-pieces-api
+  name: Activepieces Pieces API
+  description: Manage integration pieces
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Pieces
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-pieces-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
+- aid: activepieces:activepieces-projects-api
+  name: Activepieces Projects API
+  description: Project management
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-projects-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
+- aid: activepieces:activepieces-templates-api
+  name: Activepieces Templates API
+  description: Flow templates
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-templates-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
+- aid: activepieces:activepieces-users-api
+  name: Activepieces Users API
+  description: User management
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-users-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
+- aid: activepieces:activepieces-worker-machines-api
+  name: Activepieces Worker Machines API
+  description: Worker queue metrics
+  humanURL: https://www.activepieces.com/docs/endpoints/overview
+  baseURL: https://cloud.activepieces.com/api/v1
+  tags:
+  - Worker Machines
+  properties:
+  - type: OpenAPI
+    url: openapi/activepieces-worker-machines-api-openapi.yml
+  - type: Documentation
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: APIReference
+    url: https://www.activepieces.com/docs/endpoints/overview
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-flow-run-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/activepieces-project-schema.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-structure.json
+  - type: JSONStructure
+    url: json-structure/activepieces-flow-run-structure.json
+  - type: Examples
+    url: examples/activepieces-flow-example.json
+  - type: Examples
+    url: examples/activepieces-flow-run-example.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/activepieces/overview
   - type: AgenticAccess
     url: agentic-access/activepieces-agentic-access.yml
   - type: DomainSecurity
