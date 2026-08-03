@@ -1,0 +1,30 @@
+{
+  "provider": "activepieces",
+  "sources": [
+    "activepieces-connections-api-openapi.yml",
+    "activepieces-flow-runs-api-openapi.yml",
+    "activepieces-flows-api-openapi.yml",
+    "activepieces-folders-api-openapi.yml",
+    "activepieces-pieces-api-openapi.yml",
+    "activepieces-projects-api-openapi.yml",
+    "activepieces-templates-api-openapi.yml",
+    "activepieces-users-api-openapi.yml",
+    "activepieces-worker-machines-api-openapi.yml"
+  ],
+  "outputs": [
+    "activepieces-connections-api-openapi.yml",
+    "activepieces-flow-runs-api-openapi.yml",
+    "activepieces-flows-api-openapi.yml",
+    "activepieces-folders-api-openapi.yml",
+    "activepieces-pieces-api-openapi.yml",
+    "activepieces-projects-api-openapi.yml",
+    "activepieces-templates-api-openapi.yml",
+    "activepieces-users-api-openapi.yml",
+    "activepieces-worker-machines-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

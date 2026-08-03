@@ -1,0 +1,123 @@
+{
+  "info": {
+    "_postman_id": "616ea1fb-3c54-455d-97d3-074c6ba7afe1",
+    "name": "Activepieces Connections Worker Machines API",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:07.000Z",
+    "updatedAt": "2026-07-28T00:28:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-616ea1fb-3c54-455d-97d3-074c6ba7afe1"
+  },
+  "item": [
+    {
+      "name": "worker",
+      "item": [
+        {
+          "name": "queues",
+          "item": [
+            {
+              "name": "Activepieces Get Worker Queue Metrics",
+              "id": "71c67618-48ad-4032-9a62-e4596c90693d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/worker/queues",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "worker",
+                    "queues"
+                  ]
+                },
+                "description": "Retrieve queue metrics for worker machines"
+              },
+              "response": [
+                {
+                  "id": "73127a2f-e53b-4ed0-941a-041dcaa444f4",
+                  "name": "Queue metrics",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/worker/queues",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "worker",
+                        "queues"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"queues\": [\n    {\n      \"name\": \"<string>\",\n      \"waiting\": \"<integer>\",\n      \"active\": \"<integer>\",\n      \"completed\": \"<integer>\",\n      \"failed\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"waiting\": \"<integer>\",\n      \"active\": \"<integer>\",\n      \"completed\": \"<integer>\",\n      \"failed\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T00:28:08.000Z",
+                  "updatedAt": "2026-07-28T00:28:08.000Z",
+                  "uid": "35240-73127a2f-e53b-4ed0-941a-041dcaa444f4"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:08.000Z",
+              "updatedAt": "2026-07-28T00:28:08.000Z",
+              "uid": "35240-71c67618-48ad-4032-9a62-e4596c90693d"
+            }
+          ],
+          "id": "e7a9be3f-6c04-4ac7-a130-686e76e43478",
+          "createdAt": "2026-07-28T00:28:08.000Z",
+          "updatedAt": "2026-07-28T00:28:08.000Z",
+          "uid": "35240-e7a9be3f-6c04-4ac7-a130-686e76e43478"
+        }
+      ],
+      "id": "cf67c98c-dbc3-4c9e-9e25-0297ea73a5c6",
+      "createdAt": "2026-07-28T00:28:08.000Z",
+      "updatedAt": "2026-07-28T00:28:08.000Z",
+      "uid": "35240-cf67c98c-dbc3-4c9e-9e25-0297ea73a5c6"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.activepieces.com/api/v1"
+    }
+  ]
+}

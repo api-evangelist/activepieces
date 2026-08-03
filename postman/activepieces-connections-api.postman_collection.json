@@ -1,0 +1,340 @@
+{
+  "info": {
+    "_postman_id": "7d012128-49cc-45e1-a488-b72eb9afe1fd",
+    "name": "Activepieces Connections API",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:27:59.000Z",
+    "updatedAt": "2026-07-28T00:28:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7d012128-49cc-45e1-a488-b72eb9afe1fd"
+  },
+  "item": [
+    {
+      "name": "connections",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Activepieces Delete Connection",
+              "id": "ee4d3dbb-d65f-488f-bc43-431135b73649",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/connections/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connections",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "bfde6fad-4660-4658-9689-017239ee7ee4",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Connection ID"
+                    }
+                  ]
+                },
+                "description": "Delete an app connection"
+              },
+              "response": [
+                {
+                  "id": "93e5a1fb-3f95-4f6e-b812-fec89076c0fd",
+                  "name": "Connection deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connections/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connections",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:28:00.000Z",
+                  "updatedAt": "2026-07-28T00:28:00.000Z",
+                  "uid": "35240-93e5a1fb-3f95-4f6e-b812-fec89076c0fd"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:00.000Z",
+              "updatedAt": "2026-07-28T00:28:00.000Z",
+              "uid": "35240-ee4d3dbb-d65f-488f-bc43-431135b73649"
+            }
+          ],
+          "id": "48bb07a3-2b73-43b6-87de-4fd8a9bdcc28",
+          "createdAt": "2026-07-28T00:28:00.000Z",
+          "updatedAt": "2026-07-28T00:28:00.000Z",
+          "uid": "35240-48bb07a3-2b73-43b6-87de-4fd8a9bdcc28"
+        },
+        {
+          "name": "Activepieces List Connections",
+          "id": "cadbff95-b7f3-46ed-a4a6-1184487bd2dc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/connections?projectId=<string>&pieceName=<string>&limit=<integer>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "connections"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Project ID",
+                  "key": "projectId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by piece name",
+                  "key": "pieceName",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of results",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination cursor",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List all app connections in a project"
+          },
+          "response": [
+            {
+              "id": "c28c9ae6-c588-4b9e-9f78-c9fceee0fb0c",
+              "name": "Paginated list of connections",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connections?projectId=<string>&pieceName=<string>&limit=<integer>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connections"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID",
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by piece name",
+                      "key": "pieceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination cursor",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"pieceName\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"status\": \"ERROR\",\n      \"type\": \"CUSTOM_AUTH\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"pieceName\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"status\": \"EXPIRED\",\n      \"type\": \"OAUTH2\"\n    }\n  ],\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:00.000Z",
+              "updatedAt": "2026-07-28T00:28:00.000Z",
+              "uid": "35240-c28c9ae6-c588-4b9e-9f78-c9fceee0fb0c"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:00.000Z",
+          "updatedAt": "2026-07-28T00:28:00.000Z",
+          "uid": "35240-cadbff95-b7f3-46ed-a4a6-1184487bd2dc"
+        },
+        {
+          "name": "Activepieces Upsert Connection",
+          "id": "1a2c9e73-0bea-4d5e-a90d-17fc011af55f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"pieceName\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"type\": \"CUSTOM_AUTH\",\n  \"value\": {}\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/connections",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "connections"
+              ]
+            },
+            "description": "Create or update an app connection"
+          },
+          "response": [
+            {
+              "id": "1cb4966f-fb19-4ac6-8785-dfaa6321675e",
+              "name": "Connection created or updated",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pieceName\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"type\": \"CUSTOM_AUTH\",\n  \"value\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/connections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connections"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"pieceName\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"status\": \"EXPIRED\",\n  \"type\": \"API_KEY\"\n}",
+              "createdAt": "2026-07-28T00:28:00.000Z",
+              "updatedAt": "2026-07-28T00:28:00.000Z",
+              "uid": "35240-1cb4966f-fb19-4ac6-8785-dfaa6321675e"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:00.000Z",
+          "updatedAt": "2026-07-28T00:28:00.000Z",
+          "uid": "35240-1a2c9e73-0bea-4d5e-a90d-17fc011af55f"
+        }
+      ],
+      "id": "4be1d8a1-a27d-4f58-afd3-030ebfa966ce",
+      "createdAt": "2026-07-28T00:28:00.000Z",
+      "updatedAt": "2026-07-28T00:28:00.000Z",
+      "uid": "35240-4be1d8a1-a27d-4f58-afd3-030ebfa966ce"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.activepieces.com/api/v1"
+    }
+  ]
+}

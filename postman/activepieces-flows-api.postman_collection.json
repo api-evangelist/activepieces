@@ -1,0 +1,801 @@
+{
+  "info": {
+    "_postman_id": "02510f88-0d39-47c9-b9ea-5d1d9fd8484f",
+    "name": "Activepieces Connections Flows API",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:01.000Z",
+    "updatedAt": "2026-07-28T00:28:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-02510f88-0d39-47c9-b9ea-5d1d9fd8484f"
+  },
+  "item": [
+    {
+      "name": "flows",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Activepieces Get Flow",
+              "id": "6c927a05-7578-4999-818b-da8553110455",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/flows/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "flows",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1965f137-b326-4792-9d84-2b0d7a09ebf7",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Flow ID"
+                    }
+                  ]
+                },
+                "description": "Retrieve a specific flow by ID"
+              },
+              "response": [
+                {
+                  "id": "a849e29a-3e4c-4f14-bb80-74bab6bdbdd3",
+                  "name": "Flow details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/flows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "flows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"projectId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"status\": \"ENABLED\",\n  \"folderId\": \"<string>\",\n  \"publishedVersionId\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:02.000Z",
+                  "updatedAt": "2026-07-28T00:28:02.000Z",
+                  "uid": "35240-a849e29a-3e4c-4f14-bb80-74bab6bdbdd3"
+                },
+                {
+                  "id": "0e15a8a6-f8aa-4718-af41-88f8c0517300",
+                  "name": "Flow not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/flows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "flows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:28:02.000Z",
+                  "updatedAt": "2026-07-28T00:28:02.000Z",
+                  "uid": "35240-0e15a8a6-f8aa-4718-af41-88f8c0517300"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:02.000Z",
+              "updatedAt": "2026-07-28T00:28:02.000Z",
+              "uid": "35240-6c927a05-7578-4999-818b-da8553110455"
+            },
+            {
+              "name": "Activepieces Update Flow",
+              "id": "f7c2462d-4533-462a-8db7-fc6b699d6a37",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"status\": \"DISABLED\",\n  \"folderId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/flows/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "flows",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "700aa370-d5fc-43cf-9272-59b797c6a70b",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Flow ID"
+                    }
+                  ]
+                },
+                "description": "Update a flow's configuration"
+              },
+              "response": [
+                {
+                  "id": "92d1593b-24aa-443b-8be1-c0dbb14a4b11",
+                  "name": "Flow updated",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"status\": \"DISABLED\",\n  \"folderId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/flows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "flows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"projectId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"status\": \"ENABLED\",\n  \"folderId\": \"<string>\",\n  \"publishedVersionId\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:02.000Z",
+                  "updatedAt": "2026-07-28T00:28:02.000Z",
+                  "uid": "35240-92d1593b-24aa-443b-8be1-c0dbb14a4b11"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:02.000Z",
+              "updatedAt": "2026-07-28T00:28:02.000Z",
+              "uid": "35240-f7c2462d-4533-462a-8db7-fc6b699d6a37"
+            },
+            {
+              "name": "Activepieces Delete Flow",
+              "id": "8482b26f-ae76-4305-bb8b-8eedaf877a61",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/flows/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "flows",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f2cc8474-e443-424f-b2bc-46a491a4ca3f",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Flow ID"
+                    }
+                  ]
+                },
+                "description": "Delete a flow permanently"
+              },
+              "response": [
+                {
+                  "id": "52b5c9b5-7660-4981-a232-fcf6570b5bfa",
+                  "name": "Flow deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/flows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "flows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:28:02.000Z",
+                  "updatedAt": "2026-07-28T00:28:02.000Z",
+                  "uid": "35240-52b5c9b5-7660-4981-a232-fcf6570b5bfa"
+                },
+                {
+                  "id": "e199ae7a-e88d-445a-b243-6a6506891735",
+                  "name": "Flow not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/flows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "flows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:28:02.000Z",
+                  "updatedAt": "2026-07-28T00:28:02.000Z",
+                  "uid": "35240-e199ae7a-e88d-445a-b243-6a6506891735"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:02.000Z",
+              "updatedAt": "2026-07-28T00:28:02.000Z",
+              "uid": "35240-8482b26f-ae76-4305-bb8b-8eedaf877a61"
+            }
+          ],
+          "id": "35e9961d-8af2-4d3c-ae9c-fd2bf1511e7a",
+          "createdAt": "2026-07-28T00:28:02.000Z",
+          "updatedAt": "2026-07-28T00:28:02.000Z",
+          "uid": "35240-35e9961d-8af2-4d3c-ae9c-fd2bf1511e7a"
+        },
+        {
+          "name": "Activepieces List Flows",
+          "id": "8c996b77-b1a6-4c99-b284-637868978b7b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/flows?projectId=<string>&folderId=<string>&status=ENABLED&name=<string>&limit=10&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "flows"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Project ID to filter flows",
+                  "key": "projectId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Folder ID to filter flows",
+                  "key": "folderId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by flow status",
+                  "key": "status",
+                  "value": "ENABLED"
+                },
+                {
+                  "description": "Filter by flow name",
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of results to return",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Pagination cursor",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List automation flows with optional filtering"
+          },
+          "response": [
+            {
+              "id": "f23b0e7b-9a3a-4bb5-a27c-621575310356",
+              "name": "Paginated list of flows",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/flows?projectId=<string>&folderId=<string>&status=ENABLED&name=<string>&limit=10&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "flows"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID to filter flows",
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Folder ID to filter flows",
+                      "key": "folderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by flow status",
+                      "key": "status",
+                      "value": "ENABLED"
+                    },
+                    {
+                      "description": "Filter by flow name",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results to return",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Pagination cursor",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"projectId\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"status\": \"ENABLED\",\n      \"folderId\": \"<string>\",\n      \"publishedVersionId\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"projectId\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"status\": \"DISABLED\",\n      \"folderId\": \"<string>\",\n      \"publishedVersionId\": \"<string>\"\n    }\n  ],\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:02.000Z",
+              "updatedAt": "2026-07-28T00:28:02.000Z",
+              "uid": "35240-f23b0e7b-9a3a-4bb5-a27c-621575310356"
+            },
+            {
+              "id": "842a53c6-ca78-408a-8cfa-80fa9e00fa84",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/flows?projectId=<string>&folderId=<string>&status=ENABLED&name=<string>&limit=10&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "flows"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID to filter flows",
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Folder ID to filter flows",
+                      "key": "folderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by flow status",
+                      "key": "status",
+                      "value": "ENABLED"
+                    },
+                    {
+                      "description": "Filter by flow name",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results to return",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Pagination cursor",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T00:28:02.000Z",
+              "updatedAt": "2026-07-28T00:28:02.000Z",
+              "uid": "35240-842a53c6-ca78-408a-8cfa-80fa9e00fa84"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:02.000Z",
+          "updatedAt": "2026-07-28T00:28:02.000Z",
+          "uid": "35240-8c996b77-b1a6-4c99-b284-637868978b7b"
+        },
+        {
+          "name": "Activepieces Create Flow",
+          "id": "ab184e88-80b4-49fd-8853-330a136e52f7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"folderId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"metadata\": {}\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/flows",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "flows"
+              ]
+            },
+            "description": "Create a new automation flow"
+          },
+          "response": [
+            {
+              "id": "1479fa3f-9c98-42d0-9eeb-ebe568cef73b",
+              "name": "Flow created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"folderId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/flows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "flows"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"projectId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"status\": \"ENABLED\",\n  \"folderId\": \"<string>\",\n  \"publishedVersionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:02.000Z",
+              "updatedAt": "2026-07-28T00:28:02.000Z",
+              "uid": "35240-1479fa3f-9c98-42d0-9eeb-ebe568cef73b"
+            },
+            {
+              "id": "fbba405c-12c3-467f-a3d8-2b51959764a6",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"folderId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/flows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "flows"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T00:28:02.000Z",
+              "updatedAt": "2026-07-28T00:28:02.000Z",
+              "uid": "35240-fbba405c-12c3-467f-a3d8-2b51959764a6"
+            },
+            {
+              "id": "0882cab8-bb35-4434-866e-3c992ea908c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"folderId\": \"<string>\",\n  \"templateId\": \"<string>\",\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/flows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "flows"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T00:28:02.000Z",
+              "updatedAt": "2026-07-28T00:28:02.000Z",
+              "uid": "35240-0882cab8-bb35-4434-866e-3c992ea908c7"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:02.000Z",
+          "updatedAt": "2026-07-28T00:28:02.000Z",
+          "uid": "35240-ab184e88-80b4-49fd-8853-330a136e52f7"
+        }
+      ],
+      "id": "d6d6de52-4a2e-41d1-b04b-d272479e7839",
+      "createdAt": "2026-07-28T00:28:02.000Z",
+      "updatedAt": "2026-07-28T00:28:02.000Z",
+      "uid": "35240-d6d6de52-4a2e-41d1-b04b-d272479e7839"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.activepieces.com/api/v1"
+    }
+  ]
+}

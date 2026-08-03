@@ -1,0 +1,237 @@
+{
+  "info": {
+    "_postman_id": "7d98bd66-5fae-48ad-aeab-f1781f50e64e",
+    "name": "Activepieces Connections Templates API",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:05.000Z",
+    "updatedAt": "2026-07-28T00:28:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7d98bd66-5fae-48ad-aeab-f1781f50e64e"
+  },
+  "item": [
+    {
+      "name": "templates",
+      "item": [
+        {
+          "name": "Activepieces List Templates",
+          "id": "0ffa6612-d868-481a-8d36-3298417ca51b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/templates?limit=<integer>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "templates"
+              ],
+              "query": [
+                {
+                  "description": "Number of results",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination cursor",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List flow templates"
+          },
+          "response": [
+            {
+              "id": "5cc69db4-1182-4d0c-badf-63ef9ed4002c",
+              "name": "List of templates",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/templates?limit=<integer>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "templates"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of results",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination cursor",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:06.000Z",
+              "updatedAt": "2026-07-28T00:28:06.000Z",
+              "uid": "35240-5cc69db4-1182-4d0c-badf-63ef9ed4002c"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:06.000Z",
+          "updatedAt": "2026-07-28T00:28:06.000Z",
+          "uid": "35240-0ffa6612-d868-481a-8d36-3298417ca51b"
+        },
+        {
+          "name": "Activepieces Create Template",
+          "id": "19fd0e16-06cb-4850-8136-9ce4fb3aaaeb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/templates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "templates"
+              ]
+            },
+            "description": "Create a flow template"
+          },
+          "response": [
+            {
+              "id": "42da0061-b696-4f57-a0b5-0d33904eb9c7",
+              "name": "Template created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "templates"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T00:28:06.000Z",
+              "updatedAt": "2026-07-28T00:28:06.000Z",
+              "uid": "35240-42da0061-b696-4f57-a0b5-0d33904eb9c7"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:06.000Z",
+          "updatedAt": "2026-07-28T00:28:06.000Z",
+          "uid": "35240-19fd0e16-06cb-4850-8136-9ce4fb3aaaeb"
+        }
+      ],
+      "id": "546934b9-20d0-472f-8c21-442ff18420fa",
+      "createdAt": "2026-07-28T00:28:06.000Z",
+      "updatedAt": "2026-07-28T00:28:06.000Z",
+      "uid": "35240-546934b9-20d0-472f-8c21-442ff18420fa"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.activepieces.com/api/v1"
+    }
+  ]
+}

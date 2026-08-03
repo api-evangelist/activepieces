@@ -1,0 +1,136 @@
+{
+  "info": {
+    "_postman_id": "56f4e307-5cd4-4710-a6ae-fb8894bf48cf",
+    "name": "Activepieces Connections Pieces API",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:03.000Z",
+    "updatedAt": "2026-07-28T00:28:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-56f4e307-5cd4-4710-a6ae-fb8894bf48cf"
+  },
+  "item": [
+    {
+      "name": "pieces",
+      "item": [
+        {
+          "name": "Activepieces List Pieces",
+          "id": "e292180a-fa83-4dc3-9413-ae68e8131557",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pieces?edition=ee&includeHidden=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pieces"
+              ],
+              "query": [
+                {
+                  "description": "Filter by edition",
+                  "key": "edition",
+                  "value": "ee"
+                },
+                {
+                  "description": "Include hidden pieces",
+                  "key": "includeHidden",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "List available integration pieces"
+          },
+          "response": [
+            {
+              "id": "fb6d60f2-95d4-4d66-894f-911f52dc3d1a",
+              "name": "List of pieces",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pieces?edition=ee&includeHidden=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pieces"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by edition",
+                      "key": "edition",
+                      "value": "ee"
+                    },
+                    {
+                      "description": "Include hidden pieces",
+                      "key": "includeHidden",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"version\": \"<string>\",\n    \"iconUrl\": \"<uri>\",\n    \"categories\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"name\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"version\": \"<string>\",\n    \"iconUrl\": \"<uri>\",\n    \"categories\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T00:28:04.000Z",
+              "updatedAt": "2026-07-28T00:28:04.000Z",
+              "uid": "35240-fb6d60f2-95d4-4d66-894f-911f52dc3d1a"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:04.000Z",
+          "updatedAt": "2026-07-28T00:28:04.000Z",
+          "uid": "35240-e292180a-fa83-4dc3-9413-ae68e8131557"
+        }
+      ],
+      "id": "c8ac015b-a9ac-4fe5-8fcb-b59feb40e310",
+      "createdAt": "2026-07-28T00:28:04.000Z",
+      "updatedAt": "2026-07-28T00:28:04.000Z",
+      "uid": "35240-c8ac015b-a9ac-4fe5-8fcb-b59feb40e310"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.activepieces.com/api/v1"
+    }
+  ]
+}

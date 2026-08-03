@@ -1,0 +1,335 @@
+{
+  "info": {
+    "_postman_id": "e59cc766-2c9f-49c5-925d-b1a6367d1664",
+    "name": "Activepieces Connections Users API",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:06.000Z",
+    "updatedAt": "2026-07-28T00:28:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e59cc766-2c9f-49c5-925d-b1a6367d1664"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Activepieces Update User",
+              "id": "e861fdf4-14cd-4e08-832e-6b8af98c42d0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"platformRole\": \"ADMIN\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "02de8701-b463-4d3a-9c20-30bb5059415a",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) User ID"
+                    }
+                  ]
+                },
+                "description": "Update a user's information"
+              },
+              "response": [
+                {
+                  "id": "ac12f499-1b23-43a5-bf27-b032e5aad41a",
+                  "name": "User updated",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"platformRole\": \"ADMIN\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"status\": \"ACTIVE\",\n  \"platformRole\": \"ADMIN\"\n}",
+                  "createdAt": "2026-07-28T00:28:07.000Z",
+                  "updatedAt": "2026-07-28T00:28:07.000Z",
+                  "uid": "35240-ac12f499-1b23-43a5-bf27-b032e5aad41a"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:07.000Z",
+              "updatedAt": "2026-07-28T00:28:07.000Z",
+              "uid": "35240-e861fdf4-14cd-4e08-832e-6b8af98c42d0"
+            },
+            {
+              "name": "Activepieces Delete User",
+              "id": "2a5022ae-0d32-478d-a061-abee774db8b4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a7ad79cf-2785-4a9b-8d7e-a4c95b9cfacd",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) User ID"
+                    }
+                  ]
+                },
+                "description": "Delete a user from the platform"
+              },
+              "response": [
+                {
+                  "id": "3a1a3294-e7e5-4e16-8530-c004aeeb5d9f",
+                  "name": "User deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:28:07.000Z",
+                  "updatedAt": "2026-07-28T00:28:07.000Z",
+                  "uid": "35240-3a1a3294-e7e5-4e16-8530-c004aeeb5d9f"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:07.000Z",
+              "updatedAt": "2026-07-28T00:28:07.000Z",
+              "uid": "35240-2a5022ae-0d32-478d-a061-abee774db8b4"
+            }
+          ],
+          "id": "e59e8b24-5d4c-4197-8fe7-a412a5d64d1b",
+          "createdAt": "2026-07-28T00:28:07.000Z",
+          "updatedAt": "2026-07-28T00:28:07.000Z",
+          "uid": "35240-e59e8b24-5d4c-4197-8fe7-a412a5d64d1b"
+        },
+        {
+          "name": "Activepieces List Users",
+          "id": "e3b2e38f-3340-4318-82bd-ee89bd7727ef",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?limit=<integer>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "description": "Number of results",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination cursor",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List all users in the platform"
+          },
+          "response": [
+            {
+              "id": "7a7f5e3c-0169-439c-8a8c-ed2f84918878",
+              "name": "List of users",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?limit=<integer>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of results",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination cursor",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"status\": \"ACTIVE\",\n      \"platformRole\": \"MEMBER\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"status\": \"SHADOW\",\n      \"platformRole\": \"MEMBER\"\n    }\n  ],\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:07.000Z",
+              "updatedAt": "2026-07-28T00:28:07.000Z",
+              "uid": "35240-7a7f5e3c-0169-439c-8a8c-ed2f84918878"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:07.000Z",
+          "updatedAt": "2026-07-28T00:28:07.000Z",
+          "uid": "35240-e3b2e38f-3340-4318-82bd-ee89bd7727ef"
+        }
+      ],
+      "id": "ad8d33d9-e164-4d7d-8973-6656bfadfc9c",
+      "createdAt": "2026-07-28T00:28:07.000Z",
+      "updatedAt": "2026-07-28T00:28:07.000Z",
+      "uid": "35240-ad8d33d9-e164-4d7d-8973-6656bfadfc9c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.activepieces.com/api/v1"
+    }
+  ]
+}

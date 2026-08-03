@@ -1,0 +1,524 @@
+{
+  "info": {
+    "_postman_id": "cf105288-48e1-484b-9f6a-89248b68c02b",
+    "name": "Activepieces Connections Projects API",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:04.000Z",
+    "updatedAt": "2026-07-28T00:28:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cf105288-48e1-484b-9f6a-89248b68c02b"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Activepieces Get Project",
+              "id": "ae0bfbec-805a-49dc-8c35-aa36e35fb16e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9b486054-9942-4088-a7c5-6f2b8dc3093e",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "description": "Retrieve a project by ID"
+              },
+              "response": [
+                {
+                  "id": "05f35bfd-9052-4ae8-8ac1-0092b2df980f",
+                  "name": "Project details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"displayName\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"platformId\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:05.000Z",
+                  "updatedAt": "2026-07-28T00:28:05.000Z",
+                  "uid": "35240-05f35bfd-9052-4ae8-8ac1-0092b2df980f"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:05.000Z",
+              "updatedAt": "2026-07-28T00:28:05.000Z",
+              "uid": "35240-ae0bfbec-805a-49dc-8c35-aa36e35fb16e"
+            },
+            {
+              "name": "Activepieces Update Project",
+              "id": "aab9906e-fae4-4985-9e94-259748f82e12",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"notifyStatus\": \"ALWAYS\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2147cbe0-60b7-4d57-b6c4-e607187aa254",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "description": "Update a project's settings"
+              },
+              "response": [
+                {
+                  "id": "b95699b3-54d6-4cb1-be39-cdd6c1df2e73",
+                  "name": "Project updated",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"notifyStatus\": \"ALWAYS\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"displayName\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"platformId\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:05.000Z",
+                  "updatedAt": "2026-07-28T00:28:05.000Z",
+                  "uid": "35240-b95699b3-54d6-4cb1-be39-cdd6c1df2e73"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:05.000Z",
+              "updatedAt": "2026-07-28T00:28:05.000Z",
+              "uid": "35240-aab9906e-fae4-4985-9e94-259748f82e12"
+            },
+            {
+              "name": "Activepieces Delete Project",
+              "id": "a3db2d56-0fbd-4b98-8bcc-71ee315fe7db",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e299976c-0eb6-44f4-9772-61003db7e478",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "description": "Delete a project"
+              },
+              "response": [
+                {
+                  "id": "cf82cc30-303d-4c30-95a6-be2acf4a4a32",
+                  "name": "Project deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:28:05.000Z",
+                  "updatedAt": "2026-07-28T00:28:05.000Z",
+                  "uid": "35240-cf82cc30-303d-4c30-95a6-be2acf4a4a32"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:05.000Z",
+              "updatedAt": "2026-07-28T00:28:05.000Z",
+              "uid": "35240-a3db2d56-0fbd-4b98-8bcc-71ee315fe7db"
+            }
+          ],
+          "id": "6b144f40-df22-4e1f-b690-f150798dc835",
+          "createdAt": "2026-07-28T00:28:05.000Z",
+          "updatedAt": "2026-07-28T00:28:05.000Z",
+          "uid": "35240-6b144f40-df22-4e1f-b690-f150798dc835"
+        },
+        {
+          "name": "Activepieces List Projects",
+          "id": "ffdf4f4a-ea8f-41f6-80d0-bdf7e39abd84",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/projects?limit=<integer>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects"
+              ],
+              "query": [
+                {
+                  "description": "Number of results",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination cursor",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List all projects accessible to the current user"
+          },
+          "response": [
+            {
+              "id": "1757e32c-4ea7-415e-bb63-2c8dd887786a",
+              "name": "List of projects",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects?limit=<integer>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of results",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination cursor",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"displayName\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"platformId\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"displayName\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"platformId\": \"<string>\"\n    }\n  ],\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:05.000Z",
+              "updatedAt": "2026-07-28T00:28:05.000Z",
+              "uid": "35240-1757e32c-4ea7-415e-bb63-2c8dd887786a"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:05.000Z",
+          "updatedAt": "2026-07-28T00:28:05.000Z",
+          "uid": "35240-ffdf4f4a-ea8f-41f6-80d0-bdf7e39abd84"
+        },
+        {
+          "name": "Activepieces Create Project",
+          "id": "665f8e37-8e80-48f8-b31b-f26aa81c9e5d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            },
+            "description": "Create a new project"
+          },
+          "response": [
+            {
+              "id": "6e01e8e4-376c-4b93-8e67-e27ddf3dafdb",
+              "name": "Project created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"displayName\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"platformId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:05.000Z",
+              "updatedAt": "2026-07-28T00:28:05.000Z",
+              "uid": "35240-6e01e8e4-376c-4b93-8e67-e27ddf3dafdb"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:05.000Z",
+          "updatedAt": "2026-07-28T00:28:05.000Z",
+          "uid": "35240-665f8e37-8e80-48f8-b31b-f26aa81c9e5d"
+        }
+      ],
+      "id": "65fb7a28-0527-4d1f-bd1f-0570d1f0c033",
+      "createdAt": "2026-07-28T00:28:05.000Z",
+      "updatedAt": "2026-07-28T00:28:05.000Z",
+      "uid": "35240-65fb7a28-0527-4d1f-bd1f-0570d1f0c033"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.activepieces.com/api/v1"
+    }
+  ]
+}

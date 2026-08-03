@@ -1,0 +1,740 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Activepieces API",
+    "version": "1.0.0",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.",
+    "contact": {
+      "name": "Activepieces Support",
+      "url": "https://www.activepieces.com/docs/"
+    },
+    "x-generated-from": "documentation"
+  },
+  "servers": [
+    {
+      "url": "https://cloud.activepieces.com/api/v1",
+      "description": "Activepieces Cloud API"
+    },
+    {
+      "url": "https://{yourDomain}/api/v1",
+      "description": "Self-hosted Activepieces instance",
+      "variables": {
+        "yourDomain": {
+          "default": "localhost:3000"
+        }
+      }
+    }
+  ],
+  "security": [
+    { "BearerAuth": [] }
+  ],
+  "tags": [
+    { "name": "Flows", "description": "Manage automation workflows" },
+    { "name": "Flow Runs", "description": "Access execution history and run details" },
+    { "name": "Connections", "description": "Manage third-party app connections" },
+    { "name": "Projects", "description": "Project management" },
+    { "name": "Users", "description": "User management" },
+    { "name": "Folders", "description": "Organize flows with folders" },
+    { "name": "Pieces", "description": "Manage integration pieces" },
+    { "name": "Templates", "description": "Flow templates" },
+    { "name": "Project Releases", "description": "Project deployment releases" },
+    { "name": "Global Connections", "description": "System-wide connections" },
+    { "name": "Git Sync", "description": "Repository synchronization" },
+    { "name": "Worker Machines", "description": "Worker queue metrics" }
+  ],
+  "paths": {
+    "/flows": {
+      "get": {
+        "operationId": "listFlows",
+        "summary": "Activepieces List Flows",
+        "description": "List automation flows with optional filtering",
+        "tags": ["Flows"],
+        "parameters": [
+          { "name": "projectId", "in": "query", "required": true, "schema": { "type": "string" }, "description": "Project ID to filter flows" },
+          { "name": "folderId", "in": "query", "schema": { "type": "string" }, "description": "Folder ID to filter flows" },
+          { "name": "status", "in": "query", "schema": { "type": "string", "enum": ["ENABLED", "DISABLED"] }, "description": "Filter by flow status" },
+          { "name": "name", "in": "query", "schema": { "type": "string" }, "description": "Filter by flow name" },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 10 }, "description": "Number of results to return" },
+          { "name": "cursor", "in": "query", "schema": { "type": "string" }, "description": "Pagination cursor" }
+        ],
+        "responses": {
+          "200": { "description": "Paginated list of flows", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FlowList" } } } },
+          "401": { "description": "Unauthorized" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "post": {
+        "operationId": "createFlow",
+        "summary": "Activepieces Create Flow",
+        "description": "Create a new automation flow",
+        "tags": ["Flows"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateFlowRequest" } } }
+        },
+        "responses": {
+          "201": { "description": "Flow created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Flow" } } } },
+          "400": { "description": "Bad request" },
+          "401": { "description": "Unauthorized" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/flows/{id}": {
+      "get": {
+        "operationId": "getFlow",
+        "summary": "Activepieces Get Flow",
+        "description": "Retrieve a specific flow by ID",
+        "tags": ["Flows"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Flow ID" }
+        ],
+        "responses": {
+          "200": { "description": "Flow details", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Flow" } } } },
+          "404": { "description": "Flow not found" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "post": {
+        "operationId": "updateFlow",
+        "summary": "Activepieces Update Flow",
+        "description": "Update a flow's configuration",
+        "tags": ["Flows"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Flow ID" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateFlowRequest" } } }
+        },
+        "responses": {
+          "200": { "description": "Flow updated", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Flow" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "delete": {
+        "operationId": "deleteFlow",
+        "summary": "Activepieces Delete Flow",
+        "description": "Delete a flow permanently",
+        "tags": ["Flows"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Flow ID" }
+        ],
+        "responses": {
+          "204": { "description": "Flow deleted" },
+          "404": { "description": "Flow not found" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/flow-runs": {
+      "get": {
+        "operationId": "listFlowRuns",
+        "summary": "Activepieces List Flow Runs",
+        "description": "List execution history for flows",
+        "tags": ["Flow Runs"],
+        "parameters": [
+          { "name": "projectId", "in": "query", "required": true, "schema": { "type": "string" }, "description": "Project ID" },
+          { "name": "flowId", "in": "query", "schema": { "type": "string" }, "description": "Filter by flow ID" },
+          { "name": "status", "in": "query", "schema": { "type": "string", "enum": ["RUNNING", "SUCCEEDED", "FAILED", "TIMEOUT", "STOPPED"] }, "description": "Filter by run status" },
+          { "name": "limit", "in": "query", "schema": { "type": "integer" }, "description": "Number of results" },
+          { "name": "cursor", "in": "query", "schema": { "type": "string" }, "description": "Pagination cursor" }
+        ],
+        "responses": {
+          "200": { "description": "Paginated list of flow runs", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FlowRunList" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/flow-runs/{id}": {
+      "get": {
+        "operationId": "getFlowRun",
+        "summary": "Activepieces Get Flow Run",
+        "description": "Retrieve details of a specific flow execution run",
+        "tags": ["Flow Runs"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Flow run ID" }
+        ],
+        "responses": {
+          "200": { "description": "Flow run details", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FlowRun" } } } },
+          "404": { "description": "Flow run not found" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/connections": {
+      "get": {
+        "operationId": "listConnections",
+        "summary": "Activepieces List Connections",
+        "description": "List all app connections in a project",
+        "tags": ["Connections"],
+        "parameters": [
+          { "name": "projectId", "in": "query", "required": true, "schema": { "type": "string" }, "description": "Project ID" },
+          { "name": "pieceName", "in": "query", "schema": { "type": "string" }, "description": "Filter by piece name" },
+          { "name": "limit", "in": "query", "schema": { "type": "integer" }, "description": "Number of results" },
+          { "name": "cursor", "in": "query", "schema": { "type": "string" }, "description": "Pagination cursor" }
+        ],
+        "responses": {
+          "200": { "description": "Paginated list of connections", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ConnectionList" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "post": {
+        "operationId": "upsertConnection",
+        "summary": "Activepieces Upsert Connection",
+        "description": "Create or update an app connection",
+        "tags": ["Connections"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpsertConnectionRequest" } } }
+        },
+        "responses": {
+          "201": { "description": "Connection created or updated", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Connection" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/connections/{id}": {
+      "delete": {
+        "operationId": "deleteConnection",
+        "summary": "Activepieces Delete Connection",
+        "description": "Delete an app connection",
+        "tags": ["Connections"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Connection ID" }
+        ],
+        "responses": {
+          "204": { "description": "Connection deleted" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/projects": {
+      "get": {
+        "operationId": "listProjects",
+        "summary": "Activepieces List Projects",
+        "description": "List all projects accessible to the current user",
+        "tags": ["Projects"],
+        "parameters": [
+          { "name": "limit", "in": "query", "schema": { "type": "integer" }, "description": "Number of results" },
+          { "name": "cursor", "in": "query", "schema": { "type": "string" }, "description": "Pagination cursor" }
+        ],
+        "responses": {
+          "200": { "description": "List of projects", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProjectList" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "post": {
+        "operationId": "createProject",
+        "summary": "Activepieces Create Project",
+        "description": "Create a new project",
+        "tags": ["Projects"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateProjectRequest" } } }
+        },
+        "responses": {
+          "201": { "description": "Project created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Project" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/projects/{id}": {
+      "get": {
+        "operationId": "getProject",
+        "summary": "Activepieces Get Project",
+        "description": "Retrieve a project by ID",
+        "tags": ["Projects"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Project ID" }
+        ],
+        "responses": {
+          "200": { "description": "Project details", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Project" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "post": {
+        "operationId": "updateProject",
+        "summary": "Activepieces Update Project",
+        "description": "Update a project's settings",
+        "tags": ["Projects"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Project ID" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateProjectRequest" } } }
+        },
+        "responses": {
+          "200": { "description": "Project updated", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Project" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "delete": {
+        "operationId": "deleteProject",
+        "summary": "Activepieces Delete Project",
+        "description": "Delete a project",
+        "tags": ["Projects"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Project ID" }
+        ],
+        "responses": {
+          "204": { "description": "Project deleted" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/users": {
+      "get": {
+        "operationId": "listUsers",
+        "summary": "Activepieces List Users",
+        "description": "List all users in the platform",
+        "tags": ["Users"],
+        "parameters": [
+          { "name": "limit", "in": "query", "schema": { "type": "integer" }, "description": "Number of results" },
+          { "name": "cursor", "in": "query", "schema": { "type": "string" }, "description": "Pagination cursor" }
+        ],
+        "responses": {
+          "200": { "description": "List of users", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UserList" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/users/{id}": {
+      "post": {
+        "operationId": "updateUser",
+        "summary": "Activepieces Update User",
+        "description": "Update a user's information",
+        "tags": ["Users"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "User ID" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateUserRequest" } } }
+        },
+        "responses": {
+          "200": { "description": "User updated", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "delete": {
+        "operationId": "deleteUser",
+        "summary": "Activepieces Delete User",
+        "description": "Delete a user from the platform",
+        "tags": ["Users"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "User ID" }
+        ],
+        "responses": {
+          "204": { "description": "User deleted" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/folders": {
+      "get": {
+        "operationId": "listFolders",
+        "summary": "Activepieces List Folders",
+        "description": "List folders for organizing flows",
+        "tags": ["Folders"],
+        "parameters": [
+          { "name": "projectId", "in": "query", "required": true, "schema": { "type": "string" }, "description": "Project ID" },
+          { "name": "limit", "in": "query", "schema": { "type": "integer" }, "description": "Number of results" },
+          { "name": "cursor", "in": "query", "schema": { "type": "string" }, "description": "Pagination cursor" }
+        ],
+        "responses": {
+          "200": { "description": "List of folders", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FolderList" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "post": {
+        "operationId": "createFolder",
+        "summary": "Activepieces Create Folder",
+        "description": "Create a new folder for organizing flows",
+        "tags": ["Folders"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateFolderRequest" } } }
+        },
+        "responses": {
+          "201": { "description": "Folder created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Folder" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/folders/{id}": {
+      "get": {
+        "operationId": "getFolder",
+        "summary": "Activepieces Get Folder",
+        "description": "Retrieve a folder by ID",
+        "tags": ["Folders"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Folder ID" }
+        ],
+        "responses": {
+          "200": { "description": "Folder details", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Folder" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "post": {
+        "operationId": "updateFolder",
+        "summary": "Activepieces Update Folder",
+        "description": "Update a folder's name",
+        "tags": ["Folders"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Folder ID" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateFolderRequest" } } }
+        },
+        "responses": {
+          "200": { "description": "Folder updated", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Folder" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "delete": {
+        "operationId": "deleteFolder",
+        "summary": "Activepieces Delete Folder",
+        "description": "Delete a folder",
+        "tags": ["Folders"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Folder ID" }
+        ],
+        "responses": {
+          "204": { "description": "Folder deleted" }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/pieces": {
+      "get": {
+        "operationId": "listPieces",
+        "summary": "Activepieces List Pieces",
+        "description": "List available integration pieces",
+        "tags": ["Pieces"],
+        "parameters": [
+          { "name": "edition", "in": "query", "schema": { "type": "string", "enum": ["ce", "ee", "cloud"] }, "description": "Filter by edition" },
+          { "name": "includeHidden", "in": "query", "schema": { "type": "boolean" }, "description": "Include hidden pieces" }
+        ],
+        "responses": {
+          "200": { "description": "List of pieces", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Piece" } } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/templates": {
+      "get": {
+        "operationId": "listTemplates",
+        "summary": "Activepieces List Templates",
+        "description": "List flow templates",
+        "tags": ["Templates"],
+        "parameters": [
+          { "name": "limit", "in": "query", "schema": { "type": "integer" }, "description": "Number of results" },
+          { "name": "cursor", "in": "query", "schema": { "type": "string" }, "description": "Pagination cursor" }
+        ],
+        "responses": {
+          "200": { "description": "List of templates", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TemplateList" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      },
+      "post": {
+        "operationId": "createTemplate",
+        "summary": "Activepieces Create Template",
+        "description": "Create a flow template",
+        "tags": ["Templates"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateTemplateRequest" } } }
+        },
+        "responses": {
+          "201": { "description": "Template created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Template" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    },
+    "/worker/queues": {
+      "get": {
+        "operationId": "getWorkerQueueMetrics",
+        "summary": "Activepieces Get Worker Queue Metrics",
+        "description": "Retrieve queue metrics for worker machines",
+        "tags": ["Worker Machines"],
+        "responses": {
+          "200": { "description": "Queue metrics", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/QueueMetrics" } } } }
+        },
+        "x-microcks-operation": { "delay": 0, "dispatcher": "FALLBACK" }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "API key from the Activepieces admin console, passed as a Bearer token"
+      }
+    },
+    "schemas": {
+      "Flow": {
+        "type": "object",
+        "description": "An Activepieces automation flow",
+        "properties": {
+          "id": { "type": "string", "description": "Unique flow identifier", "example": "flow-abc123" },
+          "created": { "type": "string", "format": "date-time", "description": "Creation timestamp", "example": "2025-03-15T14:30:00Z" },
+          "updated": { "type": "string", "format": "date-time", "description": "Last updated timestamp", "example": "2025-03-15T14:30:00Z" },
+          "projectId": { "type": "string", "description": "Associated project ID", "example": "project-xyz789" },
+          "externalId": { "type": "string", "description": "External ID for the flow" },
+          "displayName": { "type": "string", "description": "Human-readable flow name", "example": "Send Welcome Email" },
+          "status": { "type": "string", "enum": ["ENABLED", "DISABLED"], "description": "Flow status", "example": "ENABLED" },
+          "folderId": { "type": "string", "description": "Folder ID if organized in a folder" },
+          "publishedVersionId": { "type": "string", "description": "ID of the published version" }
+        }
+      },
+      "CreateFlowRequest": {
+        "type": "object",
+        "required": ["displayName", "projectId"],
+        "description": "Request body for creating a flow",
+        "properties": {
+          "displayName": { "type": "string", "description": "Flow display name", "example": "My New Flow" },
+          "projectId": { "type": "string", "description": "Project ID to create flow in", "example": "project-xyz789" },
+          "folderId": { "type": "string", "description": "Optional folder ID" },
+          "templateId": { "type": "string", "description": "Optional template to base the flow on" },
+          "metadata": { "type": "object", "description": "Custom metadata" }
+        }
+      },
+      "UpdateFlowRequest": {
+        "type": "object",
+        "description": "Request body for updating a flow",
+        "properties": {
+          "displayName": { "type": "string", "description": "New flow name" },
+          "status": { "type": "string", "enum": ["ENABLED", "DISABLED"], "description": "Flow status" },
+          "folderId": { "type": "string", "description": "Move to this folder" }
+        }
+      },
+      "FlowList": {
+        "type": "object",
+        "description": "Paginated list of flows",
+        "properties": {
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/Flow" }, "description": "Array of flows" },
+          "next": { "type": "string", "nullable": true, "description": "Cursor to next page" },
+          "previous": { "type": "string", "nullable": true, "description": "Cursor to previous page" }
+        }
+      },
+      "FlowRun": {
+        "type": "object",
+        "description": "A flow execution run",
+        "properties": {
+          "id": { "type": "string", "description": "Flow run ID", "example": "run-abc123" },
+          "created": { "type": "string", "format": "date-time", "description": "Run creation timestamp" },
+          "updated": { "type": "string", "format": "date-time", "description": "Last update timestamp" },
+          "projectId": { "type": "string", "description": "Project ID" },
+          "flowId": { "type": "string", "description": "Flow ID" },
+          "status": { "type": "string", "enum": ["RUNNING", "SUCCEEDED", "FAILED", "TIMEOUT", "STOPPED"], "description": "Run status", "example": "SUCCEEDED" },
+          "startTime": { "type": "string", "format": "date-time", "description": "Run start time" },
+          "finishTime": { "type": "string", "format": "date-time", "description": "Run finish time" },
+          "duration": { "type": "integer", "description": "Execution duration in milliseconds", "example": 1234 }
+        }
+      },
+      "FlowRunList": {
+        "type": "object",
+        "description": "Paginated list of flow runs",
+        "properties": {
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/FlowRun" } },
+          "next": { "type": "string", "nullable": true },
+          "previous": { "type": "string", "nullable": true }
+        }
+      },
+      "Connection": {
+        "type": "object",
+        "description": "An app connection (credentials for a third-party service)",
+        "properties": {
+          "id": { "type": "string", "description": "Connection ID", "example": "conn-abc123" },
+          "created": { "type": "string", "format": "date-time" },
+          "updated": { "type": "string", "format": "date-time" },
+          "name": { "type": "string", "description": "Connection name", "example": "My Gmail Account" },
+          "pieceName": { "type": "string", "description": "Integration piece name", "example": "@activepieces/piece-gmail" },
+          "projectId": { "type": "string", "description": "Project ID" },
+          "status": { "type": "string", "enum": ["ACTIVE", "ERROR", "EXPIRED"], "description": "Connection status", "example": "ACTIVE" },
+          "type": { "type": "string", "enum": ["OAUTH2", "API_KEY", "BASIC_AUTH", "CUSTOM_AUTH"], "description": "Authentication type" }
+        }
+      },
+      "UpsertConnectionRequest": {
+        "type": "object",
+        "required": ["name", "pieceName", "projectId", "type", "value"],
+        "description": "Request body for creating or updating a connection",
+        "properties": {
+          "name": { "type": "string", "description": "Connection name", "example": "My GitHub Connection" },
+          "pieceName": { "type": "string", "description": "Piece package name", "example": "@activepieces/piece-github" },
+          "projectId": { "type": "string", "description": "Project ID" },
+          "type": { "type": "string", "enum": ["OAUTH2", "API_KEY", "BASIC_AUTH", "CUSTOM_AUTH"] },
+          "value": { "type": "object", "description": "Authentication credentials" }
+        }
+      },
+      "ConnectionList": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/Connection" } },
+          "next": { "type": "string", "nullable": true },
+          "previous": { "type": "string", "nullable": true }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "description": "An Activepieces project",
+        "properties": {
+          "id": { "type": "string", "description": "Project ID", "example": "project-abc123" },
+          "created": { "type": "string", "format": "date-time" },
+          "updated": { "type": "string", "format": "date-time" },
+          "displayName": { "type": "string", "description": "Project display name", "example": "My Project" },
+          "ownerId": { "type": "string", "description": "Owner user ID" },
+          "platformId": { "type": "string", "description": "Platform ID" }
+        }
+      },
+      "CreateProjectRequest": {
+        "type": "object",
+        "required": ["displayName"],
+        "properties": {
+          "displayName": { "type": "string", "description": "Project name", "example": "New Project" }
+        }
+      },
+      "UpdateProjectRequest": {
+        "type": "object",
+        "properties": {
+          "displayName": { "type": "string", "description": "New project name" },
+          "notifyStatus": { "type": "string", "enum": ["ALWAYS", "NEVER", "NEW_ISSUE"], "description": "Notification settings" }
+        }
+      },
+      "ProjectList": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/Project" } },
+          "next": { "type": "string", "nullable": true },
+          "previous": { "type": "string", "nullable": true }
+        }
+      },
+      "User": {
+        "type": "object",
+        "description": "An Activepieces platform user",
+        "properties": {
+          "id": { "type": "string", "description": "User ID", "example": "user-abc123" },
+          "created": { "type": "string", "format": "date-time" },
+          "updated": { "type": "string", "format": "date-time" },
+          "email": { "type": "string", "format": "email", "description": "User email", "example": "user@example.com" },
+          "firstName": { "type": "string", "description": "First name", "example": "Jane" },
+          "lastName": { "type": "string", "description": "Last name", "example": "Smith" },
+          "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE", "SHADOW"], "description": "User status" },
+          "platformRole": { "type": "string", "enum": ["ADMIN", "MEMBER"], "description": "Platform role" }
+        }
+      },
+      "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "platformRole": { "type": "string", "enum": ["ADMIN", "MEMBER"] }
+        }
+      },
+      "UserList": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/User" } },
+          "next": { "type": "string", "nullable": true },
+          "previous": { "type": "string", "nullable": true }
+        }
+      },
+      "Folder": {
+        "type": "object",
+        "description": "A folder for organizing flows",
+        "properties": {
+          "id": { "type": "string", "description": "Folder ID", "example": "folder-abc123" },
+          "created": { "type": "string", "format": "date-time" },
+          "updated": { "type": "string", "format": "date-time" },
+          "displayName": { "type": "string", "description": "Folder display name", "example": "Production Flows" },
+          "projectId": { "type": "string", "description": "Project ID" }
+        }
+      },
+      "CreateFolderRequest": {
+        "type": "object",
+        "required": ["displayName", "projectId"],
+        "properties": {
+          "displayName": { "type": "string", "description": "Folder name", "example": "My Folder" },
+          "projectId": { "type": "string", "description": "Project ID" }
+        }
+      },
+      "UpdateFolderRequest": {
+        "type": "object",
+        "properties": {
+          "displayName": { "type": "string", "description": "New folder name" }
+        }
+      },
+      "FolderList": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/Folder" } },
+          "next": { "type": "string", "nullable": true },
+          "previous": { "type": "string", "nullable": true }
+        }
+      },
+      "Piece": {
+        "type": "object",
+        "description": "An Activepieces integration piece",
+        "properties": {
+          "name": { "type": "string", "description": "Piece package name", "example": "@activepieces/piece-github" },
+          "displayName": { "type": "string", "description": "Human-readable name", "example": "GitHub" },
+          "description": { "type": "string", "description": "Piece description" },
+          "version": { "type": "string", "description": "Piece version", "example": "0.5.0" },
+          "iconUrl": { "type": "string", "format": "uri", "description": "Piece icon URL" },
+          "categories": { "type": "array", "items": { "type": "string" }, "description": "Piece categories" }
+        }
+      },
+      "Template": {
+        "type": "object",
+        "description": "A flow template for reuse",
+        "properties": {
+          "id": { "type": "string", "description": "Template ID", "example": "template-abc123" },
+          "created": { "type": "string", "format": "date-time" },
+          "name": { "type": "string", "description": "Template name", "example": "Lead Notification Template" },
+          "description": { "type": "string", "description": "Template description" },
+          "tags": { "type": "array", "items": { "type": "string" }, "description": "Template tags" }
+        }
+      },
+      "CreateTemplateRequest": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "description": "Template name" },
+          "description": { "type": "string", "description": "Template description" },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "TemplateList": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/Template" } },
+          "next": { "type": "string", "nullable": true },
+          "previous": { "type": "string", "nullable": true }
+        }
+      },
+      "QueueMetrics": {
+        "type": "object",
+        "description": "Worker queue metrics",
+        "properties": {
+          "queues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "description": "Queue name", "example": "one-time" },
+                "waiting": { "type": "integer", "description": "Jobs waiting", "example": 5 },
+                "active": { "type": "integer", "description": "Jobs active", "example": 2 },
+                "completed": { "type": "integer", "description": "Jobs completed", "example": 1000 },
+                "failed": { "type": "integer", "description": "Jobs failed", "example": 3 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

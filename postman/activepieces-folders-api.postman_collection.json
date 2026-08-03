@@ -1,0 +1,534 @@
+{
+  "info": {
+    "_postman_id": "bcce7cf3-dca5-433f-a431-1bbe8439d0b0",
+    "name": "Activepieces Connections Folders API",
+    "description": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:02.000Z",
+    "updatedAt": "2026-07-28T00:28:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bcce7cf3-dca5-433f-a431-1bbe8439d0b0"
+  },
+  "item": [
+    {
+      "name": "folders",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Activepieces Get Folder",
+              "id": "8517d9d2-632a-4792-ab8b-4ada22902ae3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/folders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "folders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "16db664b-718b-4762-a9b4-ad9c063d9bab",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Folder ID"
+                    }
+                  ]
+                },
+                "description": "Retrieve a folder by ID"
+              },
+              "response": [
+                {
+                  "id": "987cf302-59cb-4195-8459-0e80da5a82d0",
+                  "name": "Folder details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/folders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "folders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:03.000Z",
+                  "updatedAt": "2026-07-28T00:28:03.000Z",
+                  "uid": "35240-987cf302-59cb-4195-8459-0e80da5a82d0"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:03.000Z",
+              "updatedAt": "2026-07-28T00:28:03.000Z",
+              "uid": "35240-8517d9d2-632a-4792-ab8b-4ada22902ae3"
+            },
+            {
+              "name": "Activepieces Update Folder",
+              "id": "444b5c2a-66e9-410e-8d64-22ddf25e44c3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/folders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "folders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8ea19de7-4b16-405d-a988-1fb51130d1fe",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Folder ID"
+                    }
+                  ]
+                },
+                "description": "Update a folder's name"
+              },
+              "response": [
+                {
+                  "id": "5357d25e-b4d3-4b78-a55d-a3e99dbf739c",
+                  "name": "Folder updated",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/folders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "folders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:03.000Z",
+                  "updatedAt": "2026-07-28T00:28:03.000Z",
+                  "uid": "35240-5357d25e-b4d3-4b78-a55d-a3e99dbf739c"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:03.000Z",
+              "updatedAt": "2026-07-28T00:28:03.000Z",
+              "uid": "35240-444b5c2a-66e9-410e-8d64-22ddf25e44c3"
+            },
+            {
+              "name": "Activepieces Delete Folder",
+              "id": "f4cb3a51-dafb-47ad-8e1c-39ad5568b945",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/folders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "folders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2402ee12-9a34-4039-b4b4-61761c5ae7cc",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Folder ID"
+                    }
+                  ]
+                },
+                "description": "Delete a folder"
+              },
+              "response": [
+                {
+                  "id": "c924d74d-c8e1-468e-bb7e-6008c6c45db4",
+                  "name": "Folder deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/folders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "folders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:28:03.000Z",
+                  "updatedAt": "2026-07-28T00:28:03.000Z",
+                  "uid": "35240-c924d74d-c8e1-468e-bb7e-6008c6c45db4"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:03.000Z",
+              "updatedAt": "2026-07-28T00:28:03.000Z",
+              "uid": "35240-f4cb3a51-dafb-47ad-8e1c-39ad5568b945"
+            }
+          ],
+          "id": "86816d19-b3db-4ef5-9a1c-bda72b03ef49",
+          "createdAt": "2026-07-28T00:28:03.000Z",
+          "updatedAt": "2026-07-28T00:28:03.000Z",
+          "uid": "35240-86816d19-b3db-4ef5-9a1c-bda72b03ef49"
+        },
+        {
+          "name": "Activepieces List Folders",
+          "id": "3c58f4ac-7b44-482b-8c0d-5cd57a96e7a2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/folders?projectId=<string>&limit=<integer>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "folders"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Project ID",
+                  "key": "projectId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of results",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination cursor",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List folders for organizing flows"
+          },
+          "response": [
+            {
+              "id": "6ee1a75b-7f60-4a90-856e-ce6867cd2af2",
+              "name": "List of folders",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/folders?projectId=<string>&limit=<integer>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "folders"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID",
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination cursor",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"displayName\": \"<string>\",\n      \"projectId\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\",\n      \"displayName\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  ],\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:03.000Z",
+              "updatedAt": "2026-07-28T00:28:03.000Z",
+              "uid": "35240-6ee1a75b-7f60-4a90-856e-ce6867cd2af2"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:03.000Z",
+          "updatedAt": "2026-07-28T00:28:03.000Z",
+          "uid": "35240-3c58f4ac-7b44-482b-8c0d-5cd57a96e7a2"
+        },
+        {
+          "name": "Activepieces Create Folder",
+          "id": "d0bdadf7-c418-4bdd-9e41-74626ecea246",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/folders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "folders"
+              ]
+            },
+            "description": "Create a new folder for organizing flows"
+          },
+          "response": [
+            {
+              "id": "7be1e2c9-0acd-47ee-a868-9894bb37b01d",
+              "name": "Folder created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/folders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "folders"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"displayName\": \"<string>\",\n  \"projectId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:28:03.000Z",
+              "updatedAt": "2026-07-28T00:28:03.000Z",
+              "uid": "35240-7be1e2c9-0acd-47ee-a868-9894bb37b01d"
+            }
+          ],
+          "createdAt": "2026-07-28T00:28:03.000Z",
+          "updatedAt": "2026-07-28T00:28:03.000Z",
+          "uid": "35240-d0bdadf7-c418-4bdd-9e41-74626ecea246"
+        }
+      ],
+      "id": "d5426bf0-4952-40f8-8129-0c290db8729c",
+      "createdAt": "2026-07-28T00:28:03.000Z",
+      "updatedAt": "2026-07-28T00:28:03.000Z",
+      "uid": "35240-d5426bf0-4952-40f8-8129-0c290db8729c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.activepieces.com/api/v1"
+    }
+  ]
+}
