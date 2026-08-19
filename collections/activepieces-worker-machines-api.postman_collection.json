@@ -1,0 +1,121 @@
+{
+  "item": [
+    {
+      "id": "a7ce7c56-61d6-40a4-a5b6-8068bedd7243",
+      "name": "Worker Machines",
+      "description": {
+        "content": "Worker queue metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7acb76fd-643c-4617-b257-e5e407a06723",
+          "name": "Activepieces Get Worker Queue Metrics",
+          "request": {
+            "name": "Activepieces Get Worker Queue Metrics",
+            "description": {
+              "content": "Retrieve queue metrics for worker machines",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worker",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cc73020-9a9f-4ecf-bcd5-ff4feab94745",
+              "name": "Queue metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worker",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queues\": [\n    {\n      \"name\": \"one-time\",\n      \"waiting\": 5,\n      \"active\": 2,\n      \"completed\": 1000,\n      \"failed\": 3\n    },\n    {\n      \"name\": \"one-time\",\n      \"waiting\": 5,\n      \"active\": 2,\n      \"completed\": 1000,\n      \"failed\": 3\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.activepieces.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fd0c3f05-5802-46e8-8269-15799319b1fa",
+    "name": "Activepieces Connections Worker Machines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+      "type": "text/plain"
+    }
+  }
+}

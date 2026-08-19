@@ -1,0 +1,141 @@
+{
+  "item": [
+    {
+      "id": "3fe98527-5f5b-4bf3-b6c2-68e26f563119",
+      "name": "Pieces",
+      "description": {
+        "content": "Manage integration pieces",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1256b207-1d2b-47e4-92a3-ec0a28f50614",
+          "name": "Activepieces List Pieces",
+          "request": {
+            "name": "Activepieces List Pieces",
+            "description": {
+              "content": "List available integration pieces",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pieces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "edition",
+                  "value": "<string>",
+                  "description": "Filter by edition"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeHidden",
+                  "value": "<boolean>",
+                  "description": "Include hidden pieces"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db2a113f-998e-4bd2-a415-9ff523d0146c",
+              "name": "List of pieces",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pieces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "edition",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeHidden",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"@activepieces/piece-github\",\n    \"displayName\": \"GitHub\",\n    \"description\": \"string\",\n    \"version\": \"0.5.0\",\n    \"iconUrl\": \"http://sNhFzBFqdEZwICfdaHiUKFqcIXwGf.vnCECwqVCxy5WQlmvh.5stm+VUkldjau,NxIR.KqAmZ9I5z,i8h.OVzHW8efk0\",\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"name\": \"@activepieces/piece-github\",\n    \"displayName\": \"GitHub\",\n    \"description\": \"string\",\n    \"version\": \"0.5.0\",\n    \"iconUrl\": \"http://AZwXFjGoFaFyKljEqxQhtoxBXXPWd.ssyhwsAgKc,s0TOpoCxL+ZVOGzaBn-Vi0nf\",\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.activepieces.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8aefef52-ee8c-451a-a886-5872831a9b96",
+    "name": "Activepieces Connections Pieces API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+      "type": "text/plain"
+    }
+  }
+}

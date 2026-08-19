@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "8437826d-ac9e-4ef1-af31-54db1b31a7ac",
+      "name": "Connections",
+      "description": {
+        "content": "Manage third-party app connections",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "426bea71-d73a-44eb-83f4-25b15b8cdd59",
+          "name": "Activepieces List Connections",
+          "request": {
+            "name": "Activepieces List Connections",
+            "description": {
+              "content": "List all app connections in a project",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectId",
+                  "value": "<string>",
+                  "description": "(Required) Project ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "pieceName",
+                  "value": "<string>",
+                  "description": "Filter by piece name"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b5831df-2e25-4109-9b24-e9ea9353164e",
+              "name": "Paginated list of connections",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pieceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"conn-abc123\",\n      \"created\": \"1993-09-06T18:17:48.913Z\",\n      \"updated\": \"1990-06-06T23:34:17.556Z\",\n      \"name\": \"My Gmail Account\",\n      \"pieceName\": \"@activepieces/piece-gmail\",\n      \"projectId\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"type\": \"CUSTOM_AUTH\"\n    },\n    {\n      \"id\": \"conn-abc123\",\n      \"created\": \"1976-04-26T23:10:03.175Z\",\n      \"updated\": \"1994-05-17T08:52:42.009Z\",\n      \"name\": \"My Gmail Account\",\n      \"pieceName\": \"@activepieces/piece-gmail\",\n      \"projectId\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"type\": \"BASIC_AUTH\"\n    }\n  ],\n  \"next\": \"string\",\n  \"previous\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "966852f1-ac73-4c0e-bcf5-9cd606360653",
+          "name": "Activepieces Upsert Connection",
+          "request": {
+            "name": "Activepieces Upsert Connection",
+            "description": {
+              "content": "Create or update an app connection",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"pieceName\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"value\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4dc23f5b-fe30-4494-8776-924285f4afa2",
+              "name": "Connection created or updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"My GitHub Connection\",\n  \"pieceName\": \"@activepieces/piece-github\",\n  \"projectId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"value\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"conn-abc123\",\n  \"created\": \"1954-11-13T14:19:56.599Z\",\n  \"updated\": \"1951-02-23T12:00:50.806Z\",\n  \"name\": \"My Gmail Account\",\n  \"pieceName\": \"@activepieces/piece-gmail\",\n  \"projectId\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"type\": \"API_KEY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba51fb3c-cd6f-4c59-9c3b-fbfb439199bb",
+          "name": "Activepieces Delete Connection",
+          "request": {
+            "name": "Activepieces Delete Connection",
+            "description": {
+              "content": "Delete an app connection",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connections",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Connection ID"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f481fc6-5111-4a0b-b4b5-2c6a59f1f75d",
+              "name": "Connection deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Connection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.activepieces.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0a79439c-663d-4b42-8238-afbc2b71aded",
+    "name": "Activepieces Connections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+      "type": "text/plain"
+    }
+  }
+}

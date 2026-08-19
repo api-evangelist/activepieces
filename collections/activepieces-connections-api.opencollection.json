@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activepieces Connections API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/connections",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID"
+              },
+              {
+                "name": "pieceName",
+                "value": "",
+                "type": "query",
+                "description": "Filter by piece name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List all app connections in a project"
+        },
+        {
+          "info": {
+            "name": "Activepieces Upsert Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update an app connection"
+        },
+        {
+          "info": {
+            "name": "Activepieces Delete Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.activepieces.com/api/v1/connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Connection ID"
+              }
+            ]
+          },
+          "docs": "Delete an app connection"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

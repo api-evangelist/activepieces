@@ -1,0 +1,315 @@
+{
+  "item": [
+    {
+      "id": "dbcabce9-8208-400b-8431-317a13f1b785",
+      "name": "Flow Runs",
+      "description": {
+        "content": "Access execution history and run details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca81b0fe-2b87-49de-9d08-f9fcfa48a9df",
+          "name": "Activepieces List Flow Runs",
+          "request": {
+            "name": "Activepieces List Flow Runs",
+            "description": {
+              "content": "List execution history for flows",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flow-runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectId",
+                  "value": "<string>",
+                  "description": "(Required) Project ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "flowId",
+                  "value": "<string>",
+                  "description": "Filter by flow ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by run status"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4703538-1115-4e8c-9442-003fe4f2a3b7",
+              "name": "Paginated list of flow runs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flow-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flowId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"run-abc123\",\n      \"created\": \"2008-01-22T04:45:40.668Z\",\n      \"updated\": \"2022-08-03T05:10:42.964Z\",\n      \"projectId\": \"string\",\n      \"flowId\": \"string\",\n      \"status\": \"SUCCEEDED\",\n      \"startTime\": \"1960-11-30T06:51:46.872Z\",\n      \"finishTime\": \"2009-12-12T18:16:12.625Z\",\n      \"duration\": 1234\n    },\n    {\n      \"id\": \"run-abc123\",\n      \"created\": \"2021-04-16T13:04:40.237Z\",\n      \"updated\": \"1972-02-14T01:35:30.048Z\",\n      \"projectId\": \"string\",\n      \"flowId\": \"string\",\n      \"status\": \"SUCCEEDED\",\n      \"startTime\": \"1952-05-08T13:35:44.700Z\",\n      \"finishTime\": \"1978-11-01T19:59:10.301Z\",\n      \"duration\": 1234\n    }\n  ],\n  \"next\": \"string\",\n  \"previous\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "913ab179-98df-414a-be36-3d33e11ac1e5",
+          "name": "Activepieces Get Flow Run",
+          "request": {
+            "name": "Activepieces Get Flow Run",
+            "description": {
+              "content": "Retrieve details of a specific flow execution run",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flow-runs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Flow run ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab4d93d0-af46-46c5-ac12-44ec1f924259",
+              "name": "Flow run details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flow-runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Flow run ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"run-abc123\",\n  \"created\": \"1974-10-07T13:42:58.037Z\",\n  \"updated\": \"1962-07-02T02:55:24.101Z\",\n  \"projectId\": \"string\",\n  \"flowId\": \"string\",\n  \"status\": \"SUCCEEDED\",\n  \"startTime\": \"1957-04-23T18:25:56.977Z\",\n  \"finishTime\": \"1962-01-11T06:55:47.240Z\",\n  \"duration\": 1234\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56c5ffb0-4808-4545-b188-a16d7440f9ef",
+              "name": "Flow run not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flow-runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Flow run ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.activepieces.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8679b268-b82f-44d8-8bdb-fac18f4018f9",
+    "name": "Activepieces Connections Flow Runs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.\n\nContact Support:\n Name: Activepieces Support",
+      "type": "text/plain"
+    }
+  }
+}

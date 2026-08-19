@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activepieces Connections Templates API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/templates",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List flow templates"
+        },
+        {
+          "info": {
+            "name": "Activepieces Create Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a flow template"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

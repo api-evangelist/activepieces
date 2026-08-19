@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activepieces Connections Flows API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Flows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/flows",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID to filter flows"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "query",
+                "description": "Folder ID to filter flows"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by flow status"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by flow name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "List automation flows with optional filtering"
+        },
+        {
+          "info": {
+            "name": "Activepieces Create Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/flows",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new automation flow"
+        },
+        {
+          "info": {
+            "name": "Activepieces Get Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/flows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Flow ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific flow by ID"
+        },
+        {
+          "info": {
+            "name": "Activepieces Update Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.activepieces.com/api/v1/flows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Flow ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a flow's configuration"
+        },
+        {
+          "info": {
+            "name": "Activepieces Delete Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.activepieces.com/api/v1/flows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Flow ID"
+              }
+            ]
+          },
+          "docs": "Delete a flow permanently"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

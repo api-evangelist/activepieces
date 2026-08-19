@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activepieces Connections Pieces API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pieces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activepieces List Pieces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.activepieces.com/api/v1/pieces",
+            "params": [
+              {
+                "name": "edition",
+                "value": "",
+                "type": "query",
+                "description": "Filter by edition"
+              },
+              {
+                "name": "includeHidden",
+                "value": "",
+                "type": "query",
+                "description": "Include hidden pieces"
+              }
+            ]
+          },
+          "docs": "List available integration pieces"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
