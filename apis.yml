@@ -23,6 +23,13 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/activepiec
 tags:
   - Automation
   - No-Code
+  - Open-Source
+  - Workflows
+  - AI Agents
+  - MCP
+tags_raw:
+  - Automation
+  - No-Code
   - Open Source
   - Workflow
   - AI Agents
@@ -188,6 +195,8 @@ apis:
   humanURL: https://www.activepieces.com/docs/endpoints/overview
   baseURL: https://cloud.activepieces.com/api/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -248,6 +257,8 @@ apis:
   humanURL: https://www.activepieces.com/docs/endpoints/overview
   baseURL: https://cloud.activepieces.com/api/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
