@@ -119,6 +119,8 @@ apis:
   humanURL: https://www.activepieces.com/docs/endpoints/overview
   baseURL: https://cloud.activepieces.com/api/v1
   tags:
+  - Flow
+  tags_raw:
   - Flows
   properties:
   - type: OpenAPI
