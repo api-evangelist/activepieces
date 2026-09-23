@@ -1,15 +1,7 @@
 {
   "provider": "activepieces",
   "sources": [
-    "activepieces-connections-api-openapi.yml",
-    "activepieces-flow-runs-api-openapi.yml",
-    "activepieces-flows-api-openapi.yml",
-    "activepieces-folders-api-openapi.yml",
-    "activepieces-pieces-api-openapi.yml",
-    "activepieces-projects-api-openapi.yml",
-    "activepieces-templates-api-openapi.yml",
-    "activepieces-users-api-openapi.yml",
-    "activepieces-worker-machines-api-openapi.yml"
+    "_original/activepieces.json"
   ],
   "outputs": [
     "activepieces-connections-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "activepieces.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "activepieces-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "activepieces-flow-runs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "activepieces-flows-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "activepieces-folders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "activepieces-pieces-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "activepieces-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "activepieces-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "activepieces-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "activepieces-worker-machines-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

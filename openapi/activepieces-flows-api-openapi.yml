@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Activepieces Connections Flows API
+  title: Activepieces Flows API
   version: 1.0.0
   description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
   contact:
@@ -180,6 +180,48 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Flow:
+      type: object
+      description: An Activepieces automation flow
+      properties:
+        id:
+          type: string
+          description: Unique flow identifier
+          example: flow-abc123
+        created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+          example: '2025-03-15T14:30:00Z'
+        updated:
+          type: string
+          format: date-time
+          description: Last updated timestamp
+          example: '2025-03-15T14:30:00Z'
+        projectId:
+          type: string
+          description: Associated project ID
+          example: project-xyz789
+        externalId:
+          type: string
+          description: External ID for the flow
+        displayName:
+          type: string
+          description: Human-readable flow name
+          example: Send Welcome Email
+        status:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+          description: Flow status
+          example: ENABLED
+        folderId:
+          type: string
+          description: Folder ID if organized in a folder
+        publishedVersionId:
+          type: string
+          description: ID of the published version
     UpdateFlowRequest:
       type: object
       description: Request body for updating a flow
@@ -237,48 +279,6 @@ components:
         metadata:
           type: object
           description: Custom metadata
-    Flow:
-      type: object
-      description: An Activepieces automation flow
-      properties:
-        id:
-          type: string
-          description: Unique flow identifier
-          example: flow-abc123
-        created:
-          type: string
-          format: date-time
-          description: Creation timestamp
-          example: '2025-03-15T14:30:00Z'
-        updated:
-          type: string
-          format: date-time
-          description: Last updated timestamp
-          example: '2025-03-15T14:30:00Z'
-        projectId:
-          type: string
-          description: Associated project ID
-          example: project-xyz789
-        externalId:
-          type: string
-          description: External ID for the flow
-        displayName:
-          type: string
-          description: Human-readable flow name
-          example: Send Welcome Email
-        status:
-          type: string
-          enum:
-          - ENABLED
-          - DISABLED
-          description: Flow status
-          example: ENABLED
-        folderId:
-          type: string
-          description: Folder ID if organized in a folder
-        publishedVersionId:
-          type: string
-          description: ID of the published version
   securitySchemes:
     BearerAuth:
       type: http

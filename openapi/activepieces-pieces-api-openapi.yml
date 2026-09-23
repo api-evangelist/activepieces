@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Activepieces Connections Pieces API
+  title: Activepieces Pieces API
   version: 1.0.0
   description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
   contact:

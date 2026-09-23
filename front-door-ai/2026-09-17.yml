@@ -1,0 +1,32 @@
+# Front Door AI Index — activepieces — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: activepieces
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.activepieces.com
+  final_host: www.activepieces.com
+  ownership: own
+  owner: activepieces
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 23
+  host_score: 23
+  density: 17.04
+  words: 1350
+  tiers:
+    agentic: 6
+    core: 13
+    model: 4
+  ambiguous: 19
+  top_terms:
+    agent: 15
+    AI: 13
+    MCP: 4
+    automation: 4
+    Claude: 3
+    AI agent: 1
+    OpenAI: 1
+    prompts: 1

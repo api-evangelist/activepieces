@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Activepieces Connections Folders API
+  title: Activepieces Folders API
   version: 1.0.0
   description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
   contact:
@@ -164,6 +164,25 @@ components:
         projectId:
           type: string
           description: Project ID
+    UpdateFolderRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New folder name
+    FolderList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
     Folder:
       type: object
       description: A folder for organizing flows
@@ -185,25 +204,6 @@ components:
         projectId:
           type: string
           description: Project ID
-    UpdateFolderRequest:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: New folder name
-    FolderList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Folder'
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
   securitySchemes:
     BearerAuth:
       type: http

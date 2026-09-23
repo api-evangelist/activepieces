@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Activepieces Connections Projects API
+  title: Activepieces Projects API
   version: 1.0.0
   description: REST API for Activepieces, the open-source no-code automation platform. Manage flows, connections, projects, users, and workflow executions programmatically.
   contact:
@@ -145,6 +145,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ProjectList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
     CreateProjectRequest:
       type: object
       required:
@@ -178,19 +191,6 @@ components:
         platformId:
           type: string
           description: Platform ID
-    ProjectList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
     UpdateProjectRequest:
       type: object
       properties:
