@@ -96,19 +96,6 @@ components:
           items:
             type: string
           description: Template tags
-    TemplateList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Template'
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
     CreateTemplateRequest:
       type: object
       required:
@@ -124,6 +111,19 @@ components:
           type: array
           items:
             type: string
+    TemplateList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
   securitySchemes:
     BearerAuth:
       type: http

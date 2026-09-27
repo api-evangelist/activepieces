@@ -8,6 +8,10 @@ description: >-
 type: Index
 deliveryModel:
   model: unknown
+  license_evidence:
+    repo: activepieces/activepieces
+    spdx: NOASSERTION
+    stars: 24727
   open_source: unknown
   commercial: true
   callable_host: true
@@ -17,7 +21,7 @@ deliveryModel:
   - openapi
   - pricing
   - repository-unlicensed
-  generated: '2026-08-28'
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -37,10 +41,11 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/activepiec
 tags:
   - Automation
   - No-Code
-  - Open-Source
+  - Open Source
   - Workflows
   - AI Agents
   - MCP
+  - Workflow Automation
 tags_raw:
   - Automation
   - No-Code
@@ -48,6 +53,8 @@ tags_raw:
   - Workflow
   - AI Agents
   - MCP
+  - Open-Source
+  - Workflow-Automation
 url: https://raw.githubusercontent.com/api-evangelist/activepieces/refs/heads/main/apis.yml
 created: '2026-03-16'
 modified: '2026-05-19'

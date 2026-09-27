@@ -180,6 +180,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    FlowList:
+      type: object
+      description: Paginated list of flows
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+          description: Array of flows
+        next:
+          type: string
+          nullable: true
+          description: Cursor to next page
+        previous:
+          type: string
+          nullable: true
+          description: Cursor to previous page
     Flow:
       type: object
       description: An Activepieces automation flow
@@ -238,23 +255,6 @@ components:
         folderId:
           type: string
           description: Move to this folder
-    FlowList:
-      type: object
-      description: Paginated list of flows
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Flow'
-          description: Array of flows
-        next:
-          type: string
-          nullable: true
-          description: Cursor to next page
-        previous:
-          type: string
-          nullable: true
-          description: Cursor to previous page
     CreateFlowRequest:
       type: object
       required:

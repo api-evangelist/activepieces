@@ -104,6 +104,47 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Connection:
+      type: object
+      description: An app connection (credentials for a third-party service)
+      properties:
+        id:
+          type: string
+          description: Connection ID
+          example: conn-abc123
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Connection name
+          example: My Gmail Account
+        pieceName:
+          type: string
+          description: Integration piece name
+          example: '@activepieces/piece-gmail'
+        projectId:
+          type: string
+          description: Project ID
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - ERROR
+          - EXPIRED
+          description: Connection status
+          example: ACTIVE
+        type:
+          type: string
+          enum:
+          - OAUTH2
+          - API_KEY
+          - BASIC_AUTH
+          - CUSTOM_AUTH
+          description: Authentication type
     ConnectionList:
       type: object
       properties:
@@ -148,47 +189,6 @@ components:
         value:
           type: object
           description: Authentication credentials
-    Connection:
-      type: object
-      description: An app connection (credentials for a third-party service)
-      properties:
-        id:
-          type: string
-          description: Connection ID
-          example: conn-abc123
-        created:
-          type: string
-          format: date-time
-        updated:
-          type: string
-          format: date-time
-        name:
-          type: string
-          description: Connection name
-          example: My Gmail Account
-        pieceName:
-          type: string
-          description: Integration piece name
-          example: '@activepieces/piece-gmail'
-        projectId:
-          type: string
-          description: Project ID
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - ERROR
-          - EXPIRED
-          description: Connection status
-          example: ACTIVE
-        type:
-          type: string
-          enum:
-          - OAUTH2
-          - API_KEY
-          - BASIC_AUTH
-          - CUSTOM_AUTH
-          description: Authentication type
   securitySchemes:
     BearerAuth:
       type: http
