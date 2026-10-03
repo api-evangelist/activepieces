@@ -112,6 +112,19 @@ components:
           enum:
           - ADMIN
           - MEMBER
+    UserList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
     User:
       type: object
       description: An Activepieces platform user
@@ -152,19 +165,6 @@ components:
           - ADMIN
           - MEMBER
           description: Platform role
-    UserList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
   securitySchemes:
     BearerAuth:
       type: http

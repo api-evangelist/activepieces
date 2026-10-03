@@ -73,6 +73,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateTemplateRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Template name
+        description:
+          type: string
+          description: Template description
+        tags:
+          type: array
+          items:
+            type: string
     Template:
       type: object
       description: A flow template for reuse
@@ -96,21 +111,6 @@ components:
           items:
             type: string
           description: Template tags
-    CreateTemplateRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Template name
-        description:
-          type: string
-          description: Template description
-        tags:
-          type: array
-          items:
-            type: string
     TemplateList:
       type: object
       properties:

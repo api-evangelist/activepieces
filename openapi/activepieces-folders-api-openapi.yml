@@ -170,6 +170,19 @@ components:
         previous:
           type: string
           nullable: true
+    CreateFolderRequest:
+      type: object
+      required:
+      - displayName
+      - projectId
+      properties:
+        displayName:
+          type: string
+          description: Folder name
+          example: My Folder
+        projectId:
+          type: string
+          description: Project ID
     Folder:
       type: object
       description: A folder for organizing flows
@@ -188,19 +201,6 @@ components:
           type: string
           description: Folder display name
           example: Production Flows
-        projectId:
-          type: string
-          description: Project ID
-    CreateFolderRequest:
-      type: object
-      required:
-      - displayName
-      - projectId
-      properties:
-        displayName:
-          type: string
-          description: Folder name
-          example: My Folder
         projectId:
           type: string
           description: Project ID

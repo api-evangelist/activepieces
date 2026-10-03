@@ -180,6 +180,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UpdateFlowRequest:
+      type: object
+      description: Request body for updating a flow
+      properties:
+        displayName:
+          type: string
+          description: New flow name
+        status:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+          description: Flow status
+        folderId:
+          type: string
+          description: Move to this folder
     FlowList:
       type: object
       description: Paginated list of flows
@@ -239,22 +255,6 @@ components:
         publishedVersionId:
           type: string
           description: ID of the published version
-    UpdateFlowRequest:
-      type: object
-      description: Request body for updating a flow
-      properties:
-        displayName:
-          type: string
-          description: New flow name
-        status:
-          type: string
-          enum:
-          - ENABLED
-          - DISABLED
-          description: Flow status
-        folderId:
-          type: string
-          description: Move to this folder
     CreateFlowRequest:
       type: object
       required:
