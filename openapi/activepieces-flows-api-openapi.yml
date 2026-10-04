@@ -180,22 +180,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UpdateFlowRequest:
-      type: object
-      description: Request body for updating a flow
-      properties:
-        displayName:
-          type: string
-          description: New flow name
-        status:
-          type: string
-          enum:
-          - ENABLED
-          - DISABLED
-          description: Flow status
-        folderId:
-          type: string
-          description: Move to this folder
     FlowList:
       type: object
       description: Paginated list of flows
@@ -213,6 +197,46 @@ components:
           type: string
           nullable: true
           description: Cursor to previous page
+    CreateFlowRequest:
+      type: object
+      required:
+      - displayName
+      - projectId
+      description: Request body for creating a flow
+      properties:
+        displayName:
+          type: string
+          description: Flow display name
+          example: My New Flow
+        projectId:
+          type: string
+          description: Project ID to create flow in
+          example: project-xyz789
+        folderId:
+          type: string
+          description: Optional folder ID
+        templateId:
+          type: string
+          description: Optional template to base the flow on
+        metadata:
+          type: object
+          description: Custom metadata
+    UpdateFlowRequest:
+      type: object
+      description: Request body for updating a flow
+      properties:
+        displayName:
+          type: string
+          description: New flow name
+        status:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+          description: Flow status
+        folderId:
+          type: string
+          description: Move to this folder
     Flow:
       type: object
       description: An Activepieces automation flow
@@ -255,30 +279,6 @@ components:
         publishedVersionId:
           type: string
           description: ID of the published version
-    CreateFlowRequest:
-      type: object
-      required:
-      - displayName
-      - projectId
-      description: Request body for creating a flow
-      properties:
-        displayName:
-          type: string
-          description: Flow display name
-          example: My New Flow
-        projectId:
-          type: string
-          description: Project ID to create flow in
-          example: project-xyz789
-        folderId:
-          type: string
-          description: Optional folder ID
-        templateId:
-          type: string
-          description: Optional template to base the flow on
-        metadata:
-          type: object
-          description: Custom metadata
   securitySchemes:
     BearerAuth:
       type: http

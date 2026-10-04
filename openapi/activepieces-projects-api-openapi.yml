@@ -145,19 +145,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UpdateProjectRequest:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: New project name
-        notifyStatus:
-          type: string
-          enum:
-          - ALWAYS
-          - NEVER
-          - NEW_ISSUE
-          description: Notification settings
     ProjectList:
       type: object
       properties:
@@ -171,6 +158,28 @@ components:
         previous:
           type: string
           nullable: true
+    UpdateProjectRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New project name
+        notifyStatus:
+          type: string
+          enum:
+          - ALWAYS
+          - NEVER
+          - NEW_ISSUE
+          description: Notification settings
+    CreateProjectRequest:
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          type: string
+          description: Project name
+          example: New Project
     Project:
       type: object
       description: An Activepieces project
@@ -195,15 +204,6 @@ components:
         platformId:
           type: string
           description: Platform ID
-    CreateProjectRequest:
-      type: object
-      required:
-      - displayName
-      properties:
-        displayName:
-          type: string
-          description: Project name
-          example: New Project
   securitySchemes:
     BearerAuth:
       type: http
