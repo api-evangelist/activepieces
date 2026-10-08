@@ -337,6 +337,12 @@ apis:
   - type: Examples
     url: examples/activepieces-flow-run-example.json
 common:
+  - type: Plans
+    url: plans/activepieces-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/activepieces-rate-limits.yml
+  - type: FinOps
+    url: finops/activepieces-finops.yml
   - url: https://www.activepieces.com/solutions/engineering
     type: Blog
   - type: Website
