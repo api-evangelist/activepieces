@@ -73,21 +73,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateTemplateRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Template name
-        description:
-          type: string
-          description: Template description
-        tags:
-          type: array
-          items:
-            type: string
     Template:
       type: object
       description: A flow template for reuse
@@ -124,6 +109,21 @@ components:
         previous:
           type: string
           nullable: true
+    CreateTemplateRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Template name
+        description:
+          type: string
+          description: Template description
+        tags:
+          type: array
+          items:
+            type: string
   securitySchemes:
     BearerAuth:
       type: http

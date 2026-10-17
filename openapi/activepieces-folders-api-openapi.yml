@@ -151,38 +151,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UpdateFolderRequest:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: New folder name
-    FolderList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Folder'
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
-    CreateFolderRequest:
-      type: object
-      required:
-      - displayName
-      - projectId
-      properties:
-        displayName:
-          type: string
-          description: Folder name
-          example: My Folder
-        projectId:
-          type: string
-          description: Project ID
     Folder:
       type: object
       description: A folder for organizing flows
@@ -204,6 +172,38 @@ components:
         projectId:
           type: string
           description: Project ID
+    UpdateFolderRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New folder name
+    CreateFolderRequest:
+      type: object
+      required:
+      - displayName
+      - projectId
+      properties:
+        displayName:
+          type: string
+          description: Folder name
+          example: My Folder
+        projectId:
+          type: string
+          description: Project ID
+    FolderList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
   securitySchemes:
     BearerAuth:
       type: http

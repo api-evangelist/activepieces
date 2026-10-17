@@ -100,18 +100,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UpdateUserRequest:
+    UserList:
       type: object
       properties:
-        firstName:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        next:
           type: string
-        lastName:
+          nullable: true
+        previous:
           type: string
-        platformRole:
-          type: string
-          enum:
-          - ADMIN
-          - MEMBER
+          nullable: true
     User:
       type: object
       description: An Activepieces platform user
@@ -152,19 +153,18 @@ components:
           - ADMIN
           - MEMBER
           description: Platform role
-    UserList:
+    UpdateUserRequest:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        next:
+        firstName:
           type: string
-          nullable: true
-        previous:
+        lastName:
           type: string
-          nullable: true
+        platformRole:
+          type: string
+          enum:
+          - ADMIN
+          - MEMBER
   securitySchemes:
     BearerAuth:
       type: http

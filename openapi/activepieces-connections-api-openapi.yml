@@ -104,19 +104,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ConnectionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Connection'
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
     Connection:
       type: object
       description: An app connection (credentials for a third-party service)
@@ -189,6 +176,19 @@ components:
         value:
           type: object
           description: Authentication credentials
+    ConnectionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
   securitySchemes:
     BearerAuth:
       type: http
