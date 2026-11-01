@@ -1,0 +1,175 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Event Destinations API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: event-destinations
+paths:
+  /v1/event-destinations:
+    get:
+      tags:
+      - event-destinations
+      description: List event destinations
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        required: false
+      - schema:
+          type: number
+        in: query
+        name: limit
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      oneOf:
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          created:
+                            type: string
+                          updated:
+                            type: string
+                          platformId:
+                            type: string
+                          events:
+                            type: array
+                            items:
+                              type: string
+                              enum:
+                              - flow.created
+                              - flow.deleted
+                              - flow.updated
+                              - flow.published
+                              - flow.activated
+                              - flow.deactivated
+                              - flow.run.resumed
+                              - flow.run.started
+                              - flow.run.finished
+                              - flow.run.retried
+                              - folder.created
+                              - folder.updated
+                              - folder.deleted
+                              - connection.upserted
+                              - connection.deleted
+                              - user.signed.up
+                              - user.signed.in
+                              - user.password.reset
+                              - user.email.verified
+                              - signing.key.created
+                              - project.role.created
+                              - project.role.deleted
+                              - project.role.updated
+                              - project.release.created
+                          url:
+                            type: string
+                            format: uri
+                          scope:
+                            type: string
+                            enum:
+                            - PLATFORM
+                        required:
+                        - id
+                        - created
+                        - updated
+                        - platformId
+                        - events
+                        - url
+                        - scope
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          created:
+                            type: string
+                          updated:
+                            type: string
+                          platformId:
+                            type: string
+                          events:
+                            type: array
+                            items:
+                              type: string
+                              enum:
+                              - flow.created
+                              - flow.deleted
+                              - flow.updated
+                              - flow.published
+                              - flow.activated
+                              - flow.deactivated
+                              - flow.run.resumed
+                              - flow.run.started
+                              - flow.run.finished
+                              - flow.run.retried
+                              - folder.created
+                              - folder.updated
+                              - folder.deleted
+                              - connection.upserted
+                              - connection.deleted
+                              - user.signed.up
+                              - user.signed.in
+                              - user.password.reset
+                              - user.email.verified
+                              - signing.key.created
+                              - project.role.created
+                              - project.role.deleted
+                              - project.role.updated
+                              - project.release.created
+                          url:
+                            type: string
+                            format: uri
+                          scope:
+                            type: string
+                            enum:
+                            - PROJECT
+                          projectId:
+                            type: string
+                        required:
+                        - id
+                        - created
+                        - updated
+                        - platformId
+                        - events
+                        - url
+                        - scope
+                        - projectId
+                        additionalProperties: false
+                  next:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  previous:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                required:
+                - data
+                additionalProperties: false
+      summary: Get event destinations
+      x-summary-source: derived
+      operationId: getV1EventDestinations
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

@@ -1,0 +1,66 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Embedding API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: embedding
+paths:
+  /v1/embed-subdomain/allowed-embed-origins:
+    post:
+      tags:
+      - embedding
+      description: Add origins to the list allowed to embed this platform in an iframe. Existing origins are preserved; duplicates are ignored.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/embeddingInput'
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  allowedEmbedOrigins:
+                    type: array
+                    items:
+                      type: string
+                required:
+                - allowedEmbedOrigins
+                additionalProperties: false
+      summary: Create embed subdomain allowed embed origins
+      x-summary-source: derived
+      operationId: postV1EmbedSubdomainAllowedEmbedOrigins
+      x-operation-id-source: derived
+components:
+  schemas:
+    embeddingInput:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/embeddingInput'
+      type: object
+      properties:
+        allowedEmbedOrigins:
+          minItems: 1
+          maxItems: 50
+          type: array
+          items:
+            type: string
+            maxLength: 300
+            format: uri
+      required:
+      - allowedEmbedOrigins
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

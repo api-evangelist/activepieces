@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation MCP API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: MCP
+paths:
+  /v1/projects/{projectId}/mcp-server:
+    get:
+      tags:
+      - MCP
+      description: Get an MCP server by ID
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: path
+        name: projectId
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get projects by project id mcp server
+      x-summary-source: derived
+      operationId: getV1ProjectsByProjectIdMcpServer
+      x-operation-id-source: derived
+    post:
+      tags:
+      - MCP
+      description: Update the project MCP server configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                disabledTools:
+                  type: array
+                  items:
+                    type: string
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: path
+        name: projectId
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create projects by project id mcp server
+      x-summary-source: derived
+      operationId: postV1ProjectsByProjectIdMcpServer
+      x-operation-id-source: derived
+  /v1/projects/{projectId}/mcp-server/rotate:
+    post:
+      tags:
+      - MCP
+      description: Rotate the MCP server token
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+      summary: Create projects by project id mcp server rotate
+      x-summary-source: derived
+      operationId: postV1ProjectsByProjectIdMcpServerRotate
+      x-operation-id-source: derived
+  /v1/mcp-server:
+    get:
+      tags:
+      - MCP
+      description: Get the platform MCP server configuration
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get mcp server
+      x-summary-source: derived
+      operationId: getV1McpServer
+      x-operation-id-source: derived
+    post:
+      tags:
+      - MCP
+      description: Update the platform MCP server configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                disabledTools:
+                  type: array
+                  items:
+                    type: string
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create mcp server
+      x-summary-source: derived
+      operationId: postV1McpServer
+      x-operation-id-source: derived
+  /v1/mcp-server/rotate:
+    post:
+      tags:
+      - MCP
+      description: Rotate the platform MCP server token
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create mcp server rotate
+      x-summary-source: derived
+      operationId: postV1McpServerRotate
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

@@ -1,0 +1,216 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Project Releases API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: project-releases
+paths:
+  /v1/project-releases:
+    post:
+      tags:
+      - project-releases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - ROLLBACK
+                  name:
+                    type: string
+                  description:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  selectedFlowsIds:
+                    anyOf:
+                    - type: array
+                      items:
+                        type: string
+                    - type: 'null'
+                  projectId:
+                    type: string
+                  projectReleaseId:
+                    type: string
+                required:
+                - type
+                - name
+                - projectId
+                - projectReleaseId
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - PROJECT
+                  name:
+                    type: string
+                  description:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  selectedFlowsIds:
+                    anyOf:
+                    - type: array
+                      items:
+                        type: string
+                    - type: 'null'
+                  projectId:
+                    type: string
+                  targetProjectId:
+                    type: string
+                required:
+                - type
+                - name
+                - projectId
+                - targetProjectId
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - GIT
+                  name:
+                    type: string
+                  description:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  selectedFlowsIds:
+                    anyOf:
+                    - type: array
+                      items:
+                        type: string
+                    - type: 'null'
+                  projectId:
+                    type: string
+                required:
+                - type
+                - name
+                - projectId
+      security:
+      - apiKey: []
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/project-release'
+      summary: Create project releases
+      x-summary-source: derived
+      operationId: postV1ProjectReleases
+      x-operation-id-source: derived
+components:
+  schemas:
+    user:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/user'
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+        externalId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        platformId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        platformRole:
+          type: string
+          enum:
+          - ADMIN
+          - MEMBER
+          - OPERATOR
+        lastName:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        lastActiveDate:
+          anyOf:
+          - type: string
+          - type: 'null'
+        imageUrl:
+          anyOf:
+          - type: string
+          - type: 'null'
+      required:
+      - id
+      - email
+      - firstName
+      - status
+      - platformRole
+      - lastName
+      - created
+      - updated
+      additionalProperties: false
+    project-release:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/project-release'
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        projectId:
+          type: string
+        name:
+          type: string
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+        importedBy:
+          anyOf:
+          - type: string
+          - type: 'null'
+        fileId:
+          type: string
+        type:
+          type: string
+          enum:
+          - GIT
+          - PROJECT
+          - ROLLBACK
+        importedByUser:
+          $ref: '#/components/schemas/user'
+      required:
+      - id
+      - created
+      - updated
+      - projectId
+      - name
+      - fileId
+      - type
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

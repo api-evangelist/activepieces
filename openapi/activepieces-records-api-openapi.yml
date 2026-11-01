@@ -1,0 +1,398 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Records API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: Records
+paths:
+  /v1/records/{id}:
+    post:
+      tags:
+      - Records
+      description: Update a record
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cells:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      fieldId:
+                        type: string
+                      value:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                    required:
+                    - fieldId
+                    - value
+                tableId:
+                  type: string
+                agentUpdate:
+                  type: boolean
+              required:
+              - tableId
+        required: true
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  created:
+                    type: string
+                  updated:
+                    type: string
+                  tableId:
+                    type: string
+                  projectId:
+                    type: string
+                  cells:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties:
+                      type: object
+                      properties:
+                        updated:
+                          type: string
+                        created:
+                          type: string
+                        value: {}
+                        fieldName:
+                          type: string
+                      required:
+                      - updated
+                      - created
+                      - value
+                      - fieldName
+                      additionalProperties: false
+                required:
+                - id
+                - created
+                - updated
+                - tableId
+                - projectId
+                - cells
+                additionalProperties: false
+      summary: Create records by id
+      x-summary-source: derived
+      operationId: postV1RecordsById
+      x-operation-id-source: derived
+  /v1/records:
+    delete:
+      tags:
+      - Records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tableId:
+                  type: string
+                ids:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - tableId
+              - ids
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    created:
+                      type: string
+                    updated:
+                      type: string
+                    tableId:
+                      type: string
+                    projectId:
+                      type: string
+                    cells:
+                      type: object
+                      propertyNames:
+                        type: string
+                      additionalProperties:
+                        type: object
+                        properties:
+                          updated:
+                            type: string
+                          created:
+                            type: string
+                          value: {}
+                          fieldName:
+                            type: string
+                        required:
+                        - updated
+                        - created
+                        - value
+                        - fieldName
+                        additionalProperties: false
+                  required:
+                  - id
+                  - created
+                  - updated
+                  - tableId
+                  - projectId
+                  - cells
+                  additionalProperties: false
+      summary: Delete records
+      x-summary-source: derived
+      operationId: deleteV1Records
+      x-operation-id-source: derived
+    get:
+      tags:
+      - Records
+      description: List records
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: tableId
+        required: true
+      - schema:
+          type: number
+        in: query
+        name: limit
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        required: false
+      - schema:
+          type: array
+          items:
+            oneOf:
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - eq
+                value:
+                  type: string
+              required:
+              - fieldId
+              - operator
+              - value
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - neq
+                value:
+                  type: string
+              required:
+              - fieldId
+              - operator
+              - value
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - gt
+                value:
+                  type: string
+              required:
+              - fieldId
+              - operator
+              - value
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - gte
+                value:
+                  type: string
+              required:
+              - fieldId
+              - operator
+              - value
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - lt
+                value:
+                  type: string
+              required:
+              - fieldId
+              - operator
+              - value
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - lte
+                value:
+                  type: string
+              required:
+              - fieldId
+              - operator
+              - value
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - co
+                value:
+                  type: string
+              required:
+              - fieldId
+              - operator
+              - value
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - exists
+              required:
+              - fieldId
+              - operator
+            - type: object
+              properties:
+                fieldId:
+                  type: string
+                operator:
+                  type: string
+                  enum:
+                  - not_exists
+              required:
+              - fieldId
+              - operator
+        in: query
+        name: filters
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        created:
+                          type: string
+                        updated:
+                          type: string
+                        tableId:
+                          type: string
+                        projectId:
+                          type: string
+                        cells:
+                          type: object
+                          propertyNames:
+                            type: string
+                          additionalProperties:
+                            type: object
+                            properties:
+                              updated:
+                                type: string
+                              created:
+                                type: string
+                              value: {}
+                              fieldName:
+                                type: string
+                            required:
+                            - updated
+                            - created
+                            - value
+                            - fieldName
+                            additionalProperties: false
+                      required:
+                      - id
+                      - created
+                      - updated
+                      - tableId
+                      - projectId
+                      - cells
+                      additionalProperties: false
+                  next:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  previous:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                required:
+                - data
+                additionalProperties: false
+      summary: Get records
+      x-summary-source: derived
+      operationId: getV1Records
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

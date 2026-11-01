@@ -1,0 +1,91 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Sample Data API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: sample-data
+paths:
+  /v1/sample-data/test-step:
+    post:
+      tags:
+      - sample-data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                flowVersionId:
+                  type: string
+                stepName:
+                  type: string
+              required:
+              - projectId
+              - flowVersionId
+              - stepName
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create sample data test step
+      x-summary-source: derived
+      operationId: postV1SampleDataTestStep
+      x-operation-id-source: derived
+  /v1/sample-data:
+    get:
+      tags:
+      - sample-data
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: flowId
+        required: true
+      - schema:
+          type: string
+        in: query
+        name: flowVersionId
+        required: true
+      - schema:
+          type: string
+        in: query
+        name: stepName
+        required: true
+      - schema:
+          type: string
+        in: query
+        name: projectId
+        required: true
+      - schema:
+          type: string
+          enum:
+          - INPUT
+          - OUTPUT
+        in: query
+        name: type
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get sample data
+      x-summary-source: derived
+      operationId: getV1SampleData
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

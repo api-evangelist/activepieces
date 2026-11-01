@@ -1,0 +1,331 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation User Invitations API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: user-invitations
+paths:
+  /v1/user-invitations:
+    post:
+      tags:
+      - user-invitations
+      description: Send a user invitation to a user. If the user already has an invitation, the invitation will be updated.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - PROJECT
+                  email:
+                    type: string
+                  projectId:
+                    type: string
+                  projectRole:
+                    type: string
+                required:
+                - type
+                - email
+                - projectId
+                - projectRole
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - PLATFORM
+                  email:
+                    type: string
+                  platformRole:
+                    type: string
+                    enum:
+                    - ADMIN
+                    - MEMBER
+                    - OPERATOR
+                required:
+                - type
+                - email
+                - platformRole
+      security:
+      - apiKey: []
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  created:
+                    type: string
+                  updated:
+                    type: string
+                  email:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                    - PENDING
+                    - ACCEPTED
+                  type:
+                    type: string
+                    enum:
+                    - PLATFORM
+                    - PROJECT
+                  platformId:
+                    type: string
+                  platformRole:
+                    anyOf:
+                    - type: string
+                      enum:
+                      - ADMIN
+                      - MEMBER
+                      - OPERATOR
+                    - type: 'null'
+                  projectId:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  projectRoleId:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  projectRole:
+                    anyOf:
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                        created:
+                          type: string
+                        updated:
+                          type: string
+                        name:
+                          type: string
+                        permissions:
+                          type: array
+                          items:
+                            type: string
+                        platformId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        type:
+                          type: string
+                        userCount:
+                          type: number
+                      required:
+                      - id
+                      - created
+                      - updated
+                      - name
+                      - permissions
+                      - type
+                      additionalProperties: false
+                    - type: 'null'
+                  link:
+                    type: string
+                required:
+                - id
+                - created
+                - updated
+                - email
+                - status
+                - type
+                - platformId
+                additionalProperties: false
+      summary: Create user invitations
+      x-summary-source: derived
+      operationId: postV1UserInvitations
+      x-operation-id-source: derived
+    get:
+      tags:
+      - user-invitations
+      parameters:
+      - schema:
+          type: number
+        in: query
+        name: limit
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        required: false
+      - schema:
+          type: string
+          enum:
+          - PLATFORM
+          - PROJECT
+        in: query
+        name: type
+        required: true
+      - schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+        in: query
+        name: projectId
+        required: false
+      - schema:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+        in: query
+        name: status
+        required: false
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/user-invitation'
+                  next:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  previous:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                required:
+                - data
+                additionalProperties: false
+      summary: Get user invitations
+      x-summary-source: derived
+      operationId: getV1UserInvitations
+      x-operation-id-source: derived
+  /v1/user-invitations/{id}:
+    delete:
+      tags:
+      - user-invitations
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '204':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                not: {}
+      summary: Delete user invitations by id
+      x-summary-source: derived
+      operationId: deleteV1UserInvitationsById
+      x-operation-id-source: derived
+components:
+  schemas:
+    user-invitation:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/user-invitation'
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        email:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+        type:
+          type: string
+          enum:
+          - PLATFORM
+          - PROJECT
+        platformId:
+          type: string
+        platformRole:
+          anyOf:
+          - type: string
+            enum:
+            - ADMIN
+            - MEMBER
+            - OPERATOR
+          - type: 'null'
+        projectId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        projectRoleId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        projectRole:
+          anyOf:
+          - type: object
+            properties:
+              id:
+                type: string
+              created:
+                type: string
+              updated:
+                type: string
+              name:
+                type: string
+              permissions:
+                type: array
+                items:
+                  type: string
+              platformId:
+                anyOf:
+                - type: string
+                - type: 'null'
+              type:
+                type: string
+              userCount:
+                type: number
+            required:
+            - id
+            - created
+            - updated
+            - name
+            - permissions
+            - type
+            additionalProperties: false
+          - type: 'null'
+      required:
+      - id
+      - created
+      - updated
+      - email
+      - status
+      - type
+      - platformId
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

@@ -1,0 +1,344 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Platforms API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: Platforms
+paths:
+  /v1/platforms/{id}:
+    get:
+      tags:
+      - Platforms
+      description: Get a platform by id
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  federatedAuthProviders:
+                    anyOf:
+                    - type: object
+                      properties:
+                        saml:
+                          anyOf:
+                          - type: object
+                            properties: {}
+                            additionalProperties: false
+                          - type: 'null'
+                      additionalProperties: false
+                    - type: 'null'
+                  plan:
+                    type: object
+                    properties:
+                      plan:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      includedAiCredits:
+                        type: number
+                      lastFreeAiCreditsRenewalDate:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      tablesEnabled:
+                        type: boolean
+                      eventStreamingEnabled:
+                        type: boolean
+                      aiCreditsAutoTopUpState:
+                        type: string
+                        enum:
+                        - enabled
+                        - disabled
+                      aiCreditsAutoTopUpThreshold:
+                        anyOf:
+                        - type: number
+                        - type: 'null'
+                      aiCreditsAutoTopUpCreditsToAdd:
+                        anyOf:
+                        - type: number
+                        - type: 'null'
+                      maxAutoTopUpCreditsMonthly:
+                        anyOf:
+                        - type: number
+                        - type: 'null'
+                      environmentsEnabled:
+                        type: boolean
+                      analyticsEnabled:
+                        type: boolean
+                      showPoweredBy:
+                        type: boolean
+                      auditLogEnabled:
+                        type: boolean
+                      embeddingEnabled:
+                        type: boolean
+                      agentsEnabled:
+                        type: boolean
+                      aiProvidersEnabled:
+                        type: boolean
+                      chatEnabled:
+                        type: boolean
+                      managePiecesEnabled:
+                        type: boolean
+                      manageTemplatesEnabled:
+                        type: boolean
+                      customAppearanceEnabled:
+                        type: boolean
+                      teamProjectsLimit:
+                        type: string
+                        enum:
+                        - NONE
+                        - ONE
+                        - UNLIMITED
+                      projectRolesEnabled:
+                        type: boolean
+                      globalConnectionsEnabled:
+                        type: boolean
+                      customRolesEnabled:
+                        type: boolean
+                      apiKeysEnabled:
+                        type: boolean
+                      ssoEnabled:
+                        type: boolean
+                      secretManagersEnabled:
+                        type: boolean
+                      scimEnabled:
+                        type: boolean
+                      licenseKey:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      licenseExpiresAt:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      stripeCustomerId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      stripeSubscriptionId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      stripeSubscriptionStatus:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      stripeSubscriptionStartDate:
+                        anyOf:
+                        - type: number
+                        - type: 'null'
+                      stripeSubscriptionEndDate:
+                        anyOf:
+                        - type: number
+                        - type: 'null'
+                      stripeSubscriptionCancelDate:
+                        anyOf:
+                        - type: number
+                        - type: 'null'
+                      projectsLimit:
+                        anyOf:
+                        - type: number
+                        - type: 'null'
+                      activeFlowsLimit:
+                        anyOf:
+                        - type: number
+                        - type: 'null'
+                      dedicatedWorkers:
+                        anyOf:
+                        - type: object
+                          properties:
+                            trustedEnvironment:
+                              type: boolean
+                          required:
+                          - trustedEnvironment
+                          additionalProperties: false
+                        - type: 'null'
+                      canary:
+                        type: boolean
+                      customDomainsEnabled:
+                        type: boolean
+                      workerGroupId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                    required:
+                    - includedAiCredits
+                    - tablesEnabled
+                    - eventStreamingEnabled
+                    - aiCreditsAutoTopUpState
+                    - environmentsEnabled
+                    - analyticsEnabled
+                    - showPoweredBy
+                    - auditLogEnabled
+                    - embeddingEnabled
+                    - agentsEnabled
+                    - aiProvidersEnabled
+                    - chatEnabled
+                    - managePiecesEnabled
+                    - manageTemplatesEnabled
+                    - customAppearanceEnabled
+                    - teamProjectsLimit
+                    - projectRolesEnabled
+                    - globalConnectionsEnabled
+                    - customRolesEnabled
+                    - apiKeysEnabled
+                    - ssoEnabled
+                    - secretManagersEnabled
+                    - scimEnabled
+                    - canary
+                    - customDomainsEnabled
+                    additionalProperties: false
+                  usage:
+                    type: object
+                    properties:
+                      totalAiCreditsUsed:
+                        type: number
+                      totalAiCreditsUsedThisMonth:
+                        type: number
+                      aiCreditsRemaining:
+                        type: number
+                      aiCreditsLimit:
+                        type: number
+                      activeFlows:
+                        type: number
+                    required:
+                    - totalAiCreditsUsed
+                    - totalAiCreditsUsedThisMonth
+                    - aiCreditsRemaining
+                    - aiCreditsLimit
+                    - activeFlows
+                    additionalProperties: false
+                  id:
+                    type: string
+                  created:
+                    type: string
+                  updated:
+                    type: string
+                  ownerId:
+                    type: string
+                    pattern: ^[0-9a-zA-Z]{21}$
+                  name:
+                    type: string
+                  primaryColor:
+                    type: string
+                  logoIconUrl:
+                    type: string
+                  fullLogoUrl:
+                    type: string
+                  favIconUrl:
+                    type: string
+                  filteredPieceNames:
+                    type: array
+                    items:
+                      type: string
+                  filteredPieceBehavior:
+                    type: string
+                    enum:
+                    - ALLOWED
+                    - BLOCKED
+                  cloudAuthEnabled:
+                    type: boolean
+                  googleAuthEnabled:
+                    type: boolean
+                  enforceAllowedAuthDomains:
+                    type: boolean
+                  allowedAuthDomains:
+                    type: array
+                    items:
+                      type: string
+                  allowedEmbedOrigins:
+                    type: array
+                    items:
+                      type: string
+                  ssoDomain:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  ssoDomainVerification:
+                    anyOf:
+                    - type: object
+                      properties:
+                        status:
+                          type: string
+                          enum:
+                          - PENDING_VERIFICATION
+                          - VERIFIED
+                        record:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - TXT
+                            name:
+                              type: string
+                            value:
+                              type: string
+                          required:
+                          - type
+                          - name
+                          - value
+                          additionalProperties: false
+                        createdAt:
+                          type: string
+                      required:
+                      - status
+                      - record
+                      - createdAt
+                      additionalProperties: false
+                    - type: 'null'
+                  emailAuthEnabled:
+                    type: boolean
+                  pinnedPieces:
+                    type: array
+                    items:
+                      type: string
+                required:
+                - plan
+                - id
+                - created
+                - updated
+                - ownerId
+                - name
+                - primaryColor
+                - logoIconUrl
+                - fullLogoUrl
+                - favIconUrl
+                - filteredPieceNames
+                - filteredPieceBehavior
+                - cloudAuthEnabled
+                - googleAuthEnabled
+                - enforceAllowedAuthDomains
+                - allowedAuthDomains
+                - allowedEmbedOrigins
+                - emailAuthEnabled
+                - pinnedPieces
+                additionalProperties: false
+      summary: Get platforms by id
+      x-summary-source: derived
+      operationId: getV1PlatformsById
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

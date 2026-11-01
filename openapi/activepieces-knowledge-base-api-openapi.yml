@@ -1,0 +1,311 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Knowledge Base API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: Knowledge Base
+paths:
+  /v1/knowledge-base/files:
+    post:
+      tags:
+      - Knowledge Base
+      description: Register a file for knowledge base ingestion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fileId:
+                  type: string
+                displayName:
+                  type: string
+              required:
+              - fileId
+              - displayName
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                required:
+                - id
+                additionalProperties: false
+      summary: Create knowledge base files
+      x-summary-source: derived
+      operationId: postV1KnowledgeBaseFiles
+      x-operation-id-source: derived
+    get:
+      tags:
+      - Knowledge Base
+      description: List knowledge base files for the project
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: projectId
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get knowledge base files
+      x-summary-source: derived
+      operationId: getV1KnowledgeBaseFiles
+      x-operation-id-source: derived
+  /v1/knowledge-base/files/upload:
+    post:
+      tags:
+      - Knowledge Base
+      description: Upload a file and create a knowledge base file record
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: object
+                  properties:
+                    filename:
+                      type: string
+                    data: {}
+                    type:
+                      type: string
+                      enum:
+                      - file
+                    mimetype:
+                      type: string
+                  required:
+                  - filename
+                  - data
+                  - type
+                displayName:
+                  type: string
+              required:
+              - file
+              - displayName
+        required: true
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: projectId
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create knowledge base files upload
+      x-summary-source: derived
+      operationId: postV1KnowledgeBaseFilesUpload
+      x-operation-id-source: derived
+  /v1/knowledge-base/files/{id}:
+    delete:
+      tags:
+      - Knowledge Base
+      description: Delete a knowledge base file and all its chunks
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: projectId
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Delete knowledge base files by id
+      x-summary-source: derived
+      operationId: deleteV1KnowledgeBaseFilesById
+      x-operation-id-source: derived
+  /v1/knowledge-base/files/{id}/chunks/count:
+    get:
+      tags:
+      - Knowledge Base
+      description: Get the number of chunks for a knowledge base file
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get knowledge base files by id chunks count
+      x-summary-source: derived
+      operationId: getV1KnowledgeBaseFilesByIdChunksCount
+      x-operation-id-source: derived
+  /v1/knowledge-base/files/{id}/extract-chunks:
+    post:
+      tags:
+      - Knowledge Base
+      description: Extract text chunks from a knowledge base file
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create knowledge base files by id extract chunks
+      x-summary-source: derived
+      operationId: postV1KnowledgeBaseFilesByIdExtractChunks
+      x-operation-id-source: derived
+  /v1/knowledge-base/files/{id}/store-chunks:
+    post:
+      tags:
+      - Knowledge Base
+      description: Store or update chunks for a knowledge base file. Provide id to update existing chunks, or content to create new ones.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chunks:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      content:
+                        type: string
+                      embedding:
+                        minItems: 768
+                        maxItems: 768
+                        type: array
+                        items:
+                          type: number
+                      chunkIndex:
+                        type: number
+                      metadata:
+                        type: object
+                        propertyNames:
+                          type: string
+                        additionalProperties: {}
+              required:
+              - chunks
+        required: true
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create knowledge base files by id store chunks
+      x-summary-source: derived
+      operationId: postV1KnowledgeBaseFilesByIdStoreChunks
+      x-operation-id-source: derived
+  /v1/knowledge-base/files/{id}/chunks:
+    get:
+      tags:
+      - Knowledge Base
+      description: List chunks for a knowledge base file, optionally filtered by embedding status
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+        in: query
+        name: embedded
+        required: false
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get knowledge base files by id chunks
+      x-summary-source: derived
+      operationId: getV1KnowledgeBaseFilesByIdChunks
+      x-operation-id-source: derived
+  /v1/knowledge-base/files/search:
+    post:
+      tags:
+      - Knowledge Base
+      description: Search knowledge base using vector similarity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                knowledgeBaseFileIds:
+                  type: array
+                  items:
+                    type: string
+                queryEmbedding:
+                  minItems: 768
+                  maxItems: 768
+                  type: array
+                  items:
+                    type: number
+                limit:
+                  default: 5
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                similarityThreshold:
+                  type: number
+                  minimum: 0
+                  maximum: 1
+              required:
+              - knowledgeBaseFileIds
+              - queryEmbedding
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create knowledge base files search
+      x-summary-source: derived
+      operationId: postV1KnowledgeBaseFilesSearch
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

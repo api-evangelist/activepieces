@@ -1,0 +1,115 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://www.activepieces.com/pricing
+sources:
+- https://www.activepieces.com/pricing
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T161713
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+delivery:
+  delivery: open-core
+  method: page
+  read: '2026-10-28'
+  evidence: Community Edition is the automation core on its own.
+  free_edition: Community Edition
+  managed_tier: Plus
+published: true
+note: 'Credits: a run is one credit; AI steps cost more (fast model 2, smart 10, frontier 20 credits).
+  Free self-hosted Community Edition referenced alongside paid tiers.'
+plan_count: 6
+currency: USD
+plans:
+- name: Free
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  included_quota: 1,000 credits a month, Unlimited flows, Up to 5 users
+  overage: Waits for tomorrow
+- name: Plus
+  price_text: $20 flat per month
+  price: 20
+  currency: USD
+  period: month
+  included_quota: 10,000 credits a month, Up to 5 users
+  overage: $0.007/credit
+- name: Team
+  price_text: $200 flat per month
+  price: 200
+  currency: USD
+  period: month
+  included_quota: 50,000 credits a month, 25 users included, Unlimited projects
+  overage: $0.007/credit
+- name: Ultimate
+  price_text: Custom
+  period: none
+  included_quota: Credits sized to you, yearly
+  overage: Volume rates
+- name: Embed
+  price_text: From $36k a year
+  price: 36000
+  currency: USD
+  period: year
+  included_quota: White-label builder, One SDK, your pieces and templates
+- name: Enterprise control
+  price_text: Custom
+  period: none
+  included_quota: Self-hosted/air-gapped, SSO and SCIM, Custom RBAC, Audit logs
+rate_limit_statements:
+- On Free, your flows stay switched on but any runs past your quota do not go through until credits refresh
+  the next day.
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  - subscription
+  units: []
+  plans:
+  - name: Free
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Plus
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Team
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Ultimate
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Embed
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: Enterprise control
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none

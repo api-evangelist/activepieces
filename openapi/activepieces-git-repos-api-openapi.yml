@@ -1,0 +1,104 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Git Repos API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: git-repos
+paths:
+  /v1/git-repos:
+    post:
+      tags:
+      - git-repos
+      description: Upsert a git repository information for a project.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  minLength: 1
+                remoteUrl:
+                  type: string
+                  pattern: ^git@[A-Za-z0-9.-]+:[A-Za-z0-9._/-]+(\.git)?$
+                branch:
+                  type: string
+                  pattern: ^(?!-)[A-Za-z0-9._/-]{1,255}$
+                branchType:
+                  type: string
+                  enum:
+                  - PRODUCTION
+                  - DEVELOPMENT
+                sshPrivateKey:
+                  type: string
+                  minLength: 1
+                slug:
+                  type: string
+                  pattern: ^(?!\.{1,2}$)[A-Za-z0-9._-]{1,128}$
+              required:
+              - projectId
+              - remoteUrl
+              - branch
+              - branchType
+              - sshPrivateKey
+              - slug
+        required: true
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/git-repo'
+      summary: Create git repos
+      x-summary-source: derived
+      operationId: postV1GitRepos
+      x-operation-id-source: derived
+components:
+  schemas:
+    git-repo:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/git-repo'
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        remoteUrl:
+          type: string
+        branch:
+          type: string
+        branchType:
+          type: string
+          enum:
+          - PRODUCTION
+          - DEVELOPMENT
+        projectId:
+          type: string
+        slug:
+          type: string
+      required:
+      - id
+      - created
+      - updated
+      - remoteUrl
+      - branch
+      - branchType
+      - projectId
+      - slug
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here

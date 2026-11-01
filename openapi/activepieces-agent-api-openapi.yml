@@ -1,0 +1,347 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Documentation Agent API
+  version: 0.0.0
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+tags:
+- name: Agent
+paths:
+  /v1/projects/{projectId}/agent-tools/mcp/validate:
+    post:
+      tags:
+      - Agent
+      description: Probe an external MCP server configured as an agent tool and return its tool names. The outbound call is routed through the SSRF-filtered safeHttp axios; all failure modes collapse to a single generic error so the response cannot be used for port or network reconnaissance.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - MCP
+                toolName:
+                  type: string
+                  minLength: 1
+                serverUrl:
+                  type: string
+                  format: uri
+                protocol:
+                  type: string
+                  enum:
+                  - sse
+                  - streamable-http
+                  - http
+                auth:
+                  oneOf:
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - none
+                    required:
+                    - type
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - access_token
+                      accessToken:
+                        type: string
+                    required:
+                    - type
+                    - accessToken
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - api_key
+                      apiKey:
+                        type: string
+                      apiKeyHeader:
+                        type: string
+                    required:
+                    - type
+                    - apiKey
+                    - apiKeyHeader
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - headers
+                      headers:
+                        type: object
+                        propertyNames:
+                          type: string
+                        additionalProperties:
+                          type: string
+                    required:
+                    - type
+                    - headers
+              required:
+              - type
+              - toolName
+              - serverUrl
+              - protocol
+              - auth
+        required: true
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: path
+        name: projectId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+      summary: Create projects by project id agent tools mcp validate
+      x-summary-source: derived
+      operationId: postV1ProjectsByProjectIdAgentToolsMcpValidate
+      x-operation-id-source: derived
+  /v1/agents/conversations:
+    post:
+      tags:
+      - Agent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  anyOf:
+                  - type: string
+                  - type: 'null'
+                modelName:
+                  anyOf:
+                  - type: string
+                  - type: 'null'
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create agents conversations
+      x-summary-source: derived
+      operationId: postV1AgentsConversations
+      x-operation-id-source: derived
+    get:
+      tags:
+      - Agent
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        required: false
+      - schema:
+          default: 20
+          type: integer
+          minimum: 1
+          maximum: 100
+        in: query
+        name: limit
+        required: false
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get agents conversations
+      x-summary-source: derived
+      operationId: getV1AgentsConversations
+      x-operation-id-source: derived
+  /v1/agents/conversations/{id}:
+    get:
+      tags:
+      - Agent
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get agents conversations by id
+      x-summary-source: derived
+      operationId: getV1AgentsConversationsById
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Agent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  anyOf:
+                  - type: string
+                  - type: 'null'
+                modelName:
+                  anyOf:
+                  - type: string
+                  - type: 'null'
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create agents conversations by id
+      x-summary-source: derived
+      operationId: postV1AgentsConversationsById
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Agent
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Delete agents conversations by id
+      x-summary-source: derived
+      operationId: deleteV1AgentsConversationsById
+      x-operation-id-source: derived
+  /v1/agents/conversations/{id}/messages:
+    get:
+      tags:
+      - Agent
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get agents conversations by id messages
+      x-summary-source: derived
+      operationId: getV1AgentsConversationsByIdMessages
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Agent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  maxLength: 51200
+                files:
+                  maxItems: 10
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                        maxLength: 255
+                      mimeType:
+                        type: string
+                        enum:
+                        - image/png
+                        - image/jpeg
+                        - image/gif
+                        - image/webp
+                        - text/plain
+                        - text/csv
+                        - text/markdown
+                        - application/json
+                        - application/pdf
+                      data:
+                        type: string
+                        maxLength: 13981014
+                    required:
+                    - name
+                    - mimeType
+                    - data
+              required:
+              - content
+        required: true
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create agents conversations by id messages
+      x-summary-source: derived
+      operationId: postV1AgentsConversationsByIdMessages
+      x-operation-id-source: derived
+  /v1/agents/tool-approvals/{gateId}:
+    post:
+      tags:
+      - Agent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                approved:
+                  type: boolean
+              required:
+              - approved
+        required: true
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: gateId
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create agents tool approvals by gate id
+      x-summary-source: derived
+      operationId: postV1AgentsToolApprovalsByGateId
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here
