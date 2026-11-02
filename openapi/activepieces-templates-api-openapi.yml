@@ -1,0 +1,729 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Templates API
+  x-refined-note:
+  - x-generated-from differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged templates across 2 of this provider''s published API definitions: activepieces-openapi.json, activepieces.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+tags:
+- name: Templates
+paths:
+  /v1/templates/{id}:
+    get:
+      tags:
+      - Templates
+      description: Get a template.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get templates by id
+      x-summary-source: derived
+      operationId: getV1TemplatesById
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Templates
+      description: Update a template.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                summary:
+                  type: string
+                description:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      color:
+                        type: string
+                        pattern: ^#[0-9A-Fa-f]{6}$
+                      icon:
+                        type: string
+                    required:
+                    - title
+                    - color
+                blogUrl:
+                  type: string
+                metadata:
+                  anyOf:
+                  - type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  - type: 'null'
+                status:
+                  type: string
+                  enum:
+                  - PUBLISHED
+                  - ARCHIVED
+                categories:
+                  type: array
+                  items:
+                    type: string
+                flows:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      displayName:
+                        type: string
+                      trigger:
+                        anyOf:
+                        - type: object
+                          properties:
+                            name:
+                              type: string
+                              pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$
+                            valid:
+                              type: boolean
+                            displayName:
+                              type: string
+                            nextAction: {}
+                            lastUpdatedDate:
+                              type: string
+                            type:
+                              type: string
+                              enum:
+                              - PIECE_TRIGGER
+                            settings:
+                              type: object
+                              properties:
+                                sampleData:
+                                  type: object
+                                  properties:
+                                    sampleDataFileId:
+                                      type: string
+                                    sampleDataInputFileId:
+                                      type: string
+                                    lastTestDate:
+                                      type: string
+                                propertySettings:
+                                  type: object
+                                  propertyNames:
+                                    type: string
+                                  additionalProperties:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                        enum:
+                                        - MANUAL
+                                        - DYNAMIC
+                                      schema: {}
+                                    required:
+                                    - type
+                                customLogoUrl:
+                                  type: string
+                                pieceName:
+                                  type: string
+                                pieceVersion:
+                                  type: string
+                                  pattern: ^([~^])?[0-9]+\.[0-9]+\.[0-9]+$
+                                triggerName:
+                                  type: string
+                                input:
+                                  type: object
+                                  propertyNames:
+                                    type: string
+                                  additionalProperties: {}
+                              required:
+                              - propertySettings
+                              - pieceName
+                              - pieceVersion
+                              - input
+                          required:
+                          - name
+                          - valid
+                          - displayName
+                          - lastUpdatedDate
+                          - type
+                          - settings
+                        - type: object
+                          properties:
+                            name:
+                              type: string
+                              pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$
+                            valid:
+                              type: boolean
+                            displayName:
+                              type: string
+                            nextAction: {}
+                            lastUpdatedDate:
+                              type: string
+                            type:
+                              type: string
+                              enum:
+                              - EMPTY
+                            settings: {}
+                          required:
+                          - name
+                          - valid
+                          - displayName
+                          - lastUpdatedDate
+                          - type
+                          - settings
+                      valid:
+                        type: boolean
+                      schemaVersion:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      description:
+                        type: string
+                      notes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            content:
+                              type: string
+                            ownerId:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            color:
+                              type: string
+                              enum:
+                              - orange
+                              - red
+                              - green
+                              - blue
+                              - purple
+                              - yellow
+                            position:
+                              type: object
+                              properties:
+                                x:
+                                  type: number
+                                y:
+                                  type: number
+                              required:
+                              - x
+                              - y
+                            size:
+                              type: object
+                              properties:
+                                width:
+                                  type: number
+                                height:
+                                  type: number
+                              required:
+                              - width
+                              - height
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                          required:
+                          - id
+                          - content
+                          - color
+                          - position
+                          - size
+                          - createdAt
+                          - updatedAt
+                    required:
+                    - displayName
+                    - trigger
+                    - valid
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create templates by id
+      x-summary-source: derived
+      operationId: postV1TemplatesById
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Templates
+      description: Delete a template.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Delete templates by id
+      x-summary-source: derived
+      operationId: deleteV1TemplatesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /v1/templates/categories:
+    get:
+      tags:
+      - Templates
+      description: Get categories of templates.
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get templates categories
+      x-summary-source: derived
+      operationId: getV1TemplatesCategories
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /v1/templates:
+    get:
+      tags:
+      - Templates
+      description: List templates.
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - OFFICIAL
+          - SHARED
+          - CUSTOM
+        in: query
+        name: type
+        required: false
+      - schema:
+          type: array
+          items:
+            type: string
+        in: query
+        name: pieces
+        required: true
+      - schema:
+          type: array
+          items:
+            type: string
+        in: query
+        name: tags
+        required: true
+      - schema:
+          type: string
+        in: query
+        name: search
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: category
+        required: false
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Get templates
+      x-summary-source: derived
+      operationId: getV1Templates
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Templates
+      description: Create a template.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                summary:
+                  type: string
+                description:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      color:
+                        type: string
+                        pattern: ^#[0-9A-Fa-f]{6}$
+                      icon:
+                        type: string
+                    required:
+                    - title
+                    - color
+                blogUrl:
+                  type: string
+                metadata:
+                  anyOf:
+                  - type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  - type: 'null'
+                author:
+                  type: string
+                categories:
+                  type: array
+                  items:
+                    type: string
+                type:
+                  type: string
+                  enum:
+                  - OFFICIAL
+                  - SHARED
+                  - CUSTOM
+                flows:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      displayName:
+                        type: string
+                      trigger:
+                        anyOf:
+                        - type: object
+                          properties:
+                            name:
+                              type: string
+                              pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$
+                            valid:
+                              type: boolean
+                            displayName:
+                              type: string
+                            nextAction: {}
+                            lastUpdatedDate:
+                              type: string
+                            type:
+                              type: string
+                              enum:
+                              - PIECE_TRIGGER
+                            settings:
+                              type: object
+                              properties:
+                                sampleData:
+                                  type: object
+                                  properties:
+                                    sampleDataFileId:
+                                      type: string
+                                    sampleDataInputFileId:
+                                      type: string
+                                    lastTestDate:
+                                      type: string
+                                propertySettings:
+                                  type: object
+                                  propertyNames:
+                                    type: string
+                                  additionalProperties:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                        enum:
+                                        - MANUAL
+                                        - DYNAMIC
+                                      schema: {}
+                                    required:
+                                    - type
+                                customLogoUrl:
+                                  type: string
+                                pieceName:
+                                  type: string
+                                pieceVersion:
+                                  type: string
+                                  pattern: ^([~^])?[0-9]+\.[0-9]+\.[0-9]+$
+                                triggerName:
+                                  type: string
+                                input:
+                                  type: object
+                                  propertyNames:
+                                    type: string
+                                  additionalProperties: {}
+                              required:
+                              - propertySettings
+                              - pieceName
+                              - pieceVersion
+                              - input
+                          required:
+                          - name
+                          - valid
+                          - displayName
+                          - lastUpdatedDate
+                          - type
+                          - settings
+                        - type: object
+                          properties:
+                            name:
+                              type: string
+                              pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$
+                            valid:
+                              type: boolean
+                            displayName:
+                              type: string
+                            nextAction: {}
+                            lastUpdatedDate:
+                              type: string
+                            type:
+                              type: string
+                              enum:
+                              - EMPTY
+                            settings: {}
+                          required:
+                          - name
+                          - valid
+                          - displayName
+                          - lastUpdatedDate
+                          - type
+                          - settings
+                      valid:
+                        type: boolean
+                      schemaVersion:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      description:
+                        type: string
+                      notes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            content:
+                              type: string
+                            ownerId:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            color:
+                              type: string
+                              enum:
+                              - orange
+                              - red
+                              - green
+                              - blue
+                              - purple
+                              - yellow
+                            position:
+                              type: object
+                              properties:
+                                x:
+                                  type: number
+                                y:
+                                  type: number
+                              required:
+                              - x
+                              - y
+                            size:
+                              type: object
+                              properties:
+                                width:
+                                  type: number
+                                height:
+                                  type: number
+                              required:
+                              - width
+                              - height
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                          required:
+                          - id
+                          - content
+                          - color
+                          - position
+                          - size
+                          - createdAt
+                          - updatedAt
+                    required:
+                    - displayName
+                    - trigger
+                    - valid
+              required:
+              - name
+              - summary
+              - description
+              - author
+              - categories
+              - type
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create templates
+      x-summary-source: derived
+      operationId: postV1Templates
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /templates:
+    get:
+      operationId: listTemplates
+      summary: Activepieces List Templates
+      description: List flow templates
+      tags:
+      - Templates
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of results
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: List of templates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateList'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    post:
+      operationId: createTemplate
+      summary: Activepieces Create Template
+      description: Create a flow template
+      tags:
+      - Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTemplateRequest'
+      responses:
+        '201':
+          description: Template created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://cloud.activepieces.com/api/v1
+      description: Activepieces Cloud API
+    - url: https://{yourDomain}/api/v1
+      description: Self-hosted Activepieces instance
+      variables:
+        yourDomain:
+          default: localhost:3000
+components:
+  schemas:
+    TemplateList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+    CreateTemplateRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Template name
+        description:
+          type: string
+          description: Template description
+        tags:
+          type: array
+          items:
+            type: string
+    Template:
+      type: object
+      description: A flow template for reuse
+      properties:
+        id:
+          type: string
+          description: Template ID
+          example: template-abc123
+        created:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Template name
+          example: Lead Notification Template
+        description:
+          type: string
+          description: Template description
+        tags:
+          type: array
+          items:
+            type: string
+          description: Template tags
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here
+x-refined-from:
+- activepieces-openapi.json
+- activepieces.json

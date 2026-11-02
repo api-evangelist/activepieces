@@ -1,0 +1,467 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Users API
+  x-refined-note:
+  - x-generated-from differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged users across 2 of this provider''s published API definitions: activepieces-openapi.json, activepieces.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+tags:
+- name: Users
+paths:
+  /v1/users:
+    get:
+      tags:
+      - Users
+      description: List users
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        required: false
+      - schema:
+          type: number
+        in: query
+        name: limit
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: externalId
+        required: false
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/user'
+                  next:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  previous:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                required:
+                - data
+                additionalProperties: false
+      summary: Get users
+      x-summary-source: derived
+      operationId: getV1Users
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /v1/users/{id}:
+    post:
+      tags:
+      - Users
+      description: Update user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - ACTIVE
+                  - INACTIVE
+                platformRole:
+                  type: string
+                  enum:
+                  - ADMIN
+                  - MEMBER
+                  - OPERATOR
+                externalId:
+                  type: string
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+      summary: Create users by id
+      x-summary-source: derived
+      operationId: postV1UsersById
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Users
+      description: Delete user
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '204':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                not: {}
+      summary: Delete users by id
+      x-summary-source: derived
+      operationId: deleteV1UsersById
+      x-operation-id-source: derived
+    get:
+      tags:
+      - Users
+      description: Get a user by id
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  email:
+                    type: string
+                  firstName:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                    - ACTIVE
+                    - INACTIVE
+                  externalId:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  platformId:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  platformRole:
+                    type: string
+                    enum:
+                    - ADMIN
+                    - MEMBER
+                    - OPERATOR
+                  lastName:
+                    type: string
+                  created:
+                    type: string
+                  updated:
+                    type: string
+                  lastActiveDate:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  imageUrl:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  badges:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        created:
+                          type: string
+                      required:
+                      - name
+                      - created
+                      additionalProperties: false
+                required:
+                - id
+                - email
+                - firstName
+                - status
+                - platformRole
+                - lastName
+                - created
+                - updated
+                - badges
+                additionalProperties: false
+      summary: Get users by id
+      x-summary-source: derived
+      operationId: getV1UsersById
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /users:
+    get:
+      operationId: listUsers
+      summary: Activepieces List Users
+      description: List all users in the platform
+      tags:
+      - Users
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of results
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://cloud.activepieces.com/api/v1
+      description: Activepieces Cloud API
+    - url: https://{yourDomain}/api/v1
+      description: Self-hosted Activepieces instance
+      variables:
+        yourDomain:
+          default: localhost:3000
+  /users/{id}:
+    post:
+      operationId: updateUser
+      summary: Activepieces Update User
+      description: Update a user's information
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    delete:
+      operationId: deleteUser
+      summary: Activepieces Delete User
+      description: Delete a user from the platform
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID
+      responses:
+        '204':
+          description: User deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://cloud.activepieces.com/api/v1
+      description: Activepieces Cloud API
+    - url: https://{yourDomain}/api/v1
+      description: Self-hosted Activepieces instance
+      variables:
+        yourDomain:
+          default: localhost:3000
+components:
+  schemas:
+    user:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/user'
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+        externalId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        platformId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        platformRole:
+          type: string
+          enum:
+          - ADMIN
+          - MEMBER
+          - OPERATOR
+        lastName:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        lastActiveDate:
+          anyOf:
+          - type: string
+          - type: 'null'
+        imageUrl:
+          anyOf:
+          - type: string
+          - type: 'null'
+      required:
+      - id
+      - email
+      - firstName
+      - status
+      - platformRole
+      - lastName
+      - created
+      - updated
+      additionalProperties: false
+    UserList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+    UpdateUserRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        platformRole:
+          type: string
+          enum:
+          - ADMIN
+          - MEMBER
+    User:
+      type: object
+      description: An Activepieces platform user
+      properties:
+        id:
+          type: string
+          description: User ID
+          example: user-abc123
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        email:
+          type: string
+          format: email
+          description: User email
+          example: user@example.com
+        firstName:
+          type: string
+          description: First name
+          example: Jane
+        lastName:
+          type: string
+          description: Last name
+          example: Smith
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - SHADOW
+          description: User status
+        platformRole:
+          type: string
+          enum:
+          - ADMIN
+          - MEMBER
+          description: Platform role
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here
+x-refined-from:
+- activepieces-openapi.json
+- activepieces.json

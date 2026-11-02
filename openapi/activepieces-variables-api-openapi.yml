@@ -170,6 +170,46 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    variable:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/variable'
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        name:
+          type: string
+        projectId:
+          type: string
+        platformId:
+          type: string
+        ownerId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        owner:
+          anyOf:
+          - $ref: '#/components/schemas/user'
+          - type: 'null'
+        metadata:
+          anyOf:
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties: {}
+          - type: 'null'
+      required:
+      - id
+      - created
+      - updated
+      - name
+      - projectId
+      - platformId
+      additionalProperties: false
     user:
       $schema: https://json-schema.org/draft/2020-12/schema
       $id: '#/components/schemas/user'
@@ -223,46 +263,6 @@ components:
       - lastName
       - created
       - updated
-      additionalProperties: false
-    variable:
-      $schema: https://json-schema.org/draft/2020-12/schema
-      $id: '#/components/schemas/variable'
-      type: object
-      properties:
-        id:
-          type: string
-        created:
-          type: string
-        updated:
-          type: string
-        name:
-          type: string
-        projectId:
-          type: string
-        platformId:
-          type: string
-        ownerId:
-          anyOf:
-          - type: string
-          - type: 'null'
-        owner:
-          anyOf:
-          - $ref: '#/components/schemas/user'
-          - type: 'null'
-        metadata:
-          anyOf:
-          - type: object
-            propertyNames:
-              type: string
-            additionalProperties: {}
-          - type: 'null'
-      required:
-      - id
-      - created
-      - updated
-      - name
-      - projectId
-      - platformId
       additionalProperties: false
   securitySchemes:
     apiKey:

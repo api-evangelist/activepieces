@@ -1,0 +1,604 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Projects API
+  x-refined-note:
+  - x-generated-from differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged projects across 2 of this provider''s published API definitions: activepieces-openapi.json, activepieces.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+tags:
+- name: Projects
+paths:
+  /v1/projects:
+    post:
+      tags:
+      - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                  pattern: ^[^./]+$
+                externalId:
+                  anyOf:
+                  - type: string
+                  - type: 'null'
+                metadata:
+                  anyOf:
+                  - type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  - type: 'null'
+                maxConcurrentJobs:
+                  anyOf:
+                  - type: number
+                  - type: 'null'
+                globalConnectionExternalIds:
+                  type: array
+                  items:
+                    type: string
+                alertReceiverEmail:
+                  anyOf:
+                  - type: string
+                    format: email
+                    pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                  - type: 'null'
+              required:
+              - displayName
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/project'
+      summary: Create projects
+      x-summary-source: derived
+      operationId: postV1Projects
+      x-operation-id-source: derived
+    get:
+      tags:
+      - Projects
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: externalId
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: externalUserId
+        required: false
+      - schema:
+          type: number
+        in: query
+        name: limit
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: displayName
+        required: false
+      - schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - TEAM
+            - PERSONAL
+        in: query
+        name: types
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/project'
+                  next:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  previous:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                required:
+                - data
+                additionalProperties: false
+      summary: Get projects
+      x-summary-source: derived
+      operationId: getV1Projects
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /v1/projects/{id}:
+    post:
+      tags:
+      - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                releasesEnabled:
+                  type: boolean
+                displayName:
+                  type: string
+                  pattern: ^[^./]+$
+                externalId:
+                  type: string
+                metadata:
+                  type: object
+                  propertyNames:
+                    type: string
+                  additionalProperties: {}
+                icon:
+                  type: object
+                  properties:
+                    color:
+                      type: string
+                      enum:
+                      - RED
+                      - BLUE
+                      - YELLOW
+                      - PURPLE
+                      - GREEN
+                      - PINK
+                      - VIOLET
+                      - ORANGE
+                      - DARK_GREEN
+                      - CYAN
+                      - LAVENDER
+                      - DEEP_ORANGE
+                  required:
+                  - color
+                plan:
+                  type: object
+                  properties:
+                    pieces:
+                      type: array
+                      items:
+                        type: string
+                    piecesFilterType:
+                      type: string
+                      enum:
+                      - NONE
+                      - ALLOWED
+                globalConnectionExternalIds:
+                  type: array
+                  items:
+                    type: string
+                maxConcurrentJobs:
+                  anyOf:
+                  - type: integer
+                    exclusiveMinimum: 0
+                    maximum: 9007199254740991
+                  - type: 'null'
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/project'
+      summary: Create projects by id
+      x-summary-source: derived
+      operationId: postV1ProjectsById
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Projects
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Delete projects by id
+      x-summary-source: derived
+      operationId: deleteV1ProjectsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /projects:
+    get:
+      operationId: listProjects
+      summary: Activepieces List Projects
+      description: List all projects accessible to the current user
+      tags:
+      - Projects
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of results
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    post:
+      operationId: createProject
+      summary: Activepieces Create Project
+      description: Create a new project
+      tags:
+      - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+      responses:
+        '201':
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://cloud.activepieces.com/api/v1
+      description: Activepieces Cloud API
+    - url: https://{yourDomain}/api/v1
+      description: Self-hosted Activepieces instance
+      variables:
+        yourDomain:
+          default: localhost:3000
+  /projects/{id}:
+    get:
+      operationId: getProject
+      summary: Activepieces Get Project
+      description: Retrieve a project by ID
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      responses:
+        '200':
+          description: Project details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    post:
+      operationId: updateProject
+      summary: Activepieces Update Project
+      description: Update a project's settings
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+      responses:
+        '200':
+          description: Project updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    delete:
+      operationId: deleteProject
+      summary: Activepieces Delete Project
+      description: Delete a project
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      responses:
+        '204':
+          description: Project deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://cloud.activepieces.com/api/v1
+      description: Activepieces Cloud API
+    - url: https://{yourDomain}/api/v1
+      description: Self-hosted Activepieces instance
+      variables:
+        yourDomain:
+          default: localhost:3000
+components:
+  schemas:
+    project:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/project'
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        ownerId:
+          type: string
+        displayName:
+          type: string
+        platformId:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        maxConcurrentJobs:
+          anyOf:
+          - type: number
+          - type: 'null'
+        type:
+          type: string
+          enum:
+          - TEAM
+          - PERSONAL
+        icon:
+          type: object
+          properties:
+            color:
+              type: string
+              enum:
+              - RED
+              - BLUE
+              - YELLOW
+              - PURPLE
+              - GREEN
+              - PINK
+              - VIOLET
+              - ORANGE
+              - DARK_GREEN
+              - CYAN
+              - LAVENDER
+              - DEEP_ORANGE
+          required:
+          - color
+          additionalProperties: false
+        externalId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        releasesEnabled:
+          type: boolean
+        metadata:
+          anyOf:
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties: {}
+          - type: 'null'
+        poolId:
+          anyOf:
+          - type: string
+            pattern: ^[0-9a-zA-Z]{21}$
+          - type: 'null'
+        plan:
+          type: object
+          properties:
+            id:
+              type: string
+            created:
+              type: string
+            updated:
+              type: string
+            projectId:
+              type: string
+            locked:
+              default: false
+              type: boolean
+            name:
+              type: string
+            piecesFilterType:
+              type: string
+              enum:
+              - NONE
+              - ALLOWED
+            pieces:
+              type: array
+              items:
+                type: string
+          required:
+          - id
+          - created
+          - updated
+          - projectId
+          - locked
+          - name
+          - piecesFilterType
+          - pieces
+          additionalProperties: false
+        analytics:
+          type: object
+          properties:
+            totalUsers:
+              type: number
+            activeUsers:
+              type: number
+            totalFlows:
+              type: number
+            activeFlows:
+              type: number
+          required:
+          - totalUsers
+          - activeUsers
+          - totalFlows
+          - activeFlows
+          additionalProperties: false
+      required:
+      - id
+      - created
+      - updated
+      - ownerId
+      - displayName
+      - platformId
+      - type
+      - icon
+      - releasesEnabled
+      - plan
+      - analytics
+      additionalProperties: false
+    ProjectList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+    CreateProjectRequest:
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          type: string
+          description: Project name
+          example: New Project
+    Project:
+      type: object
+      description: An Activepieces project
+      properties:
+        id:
+          type: string
+          description: Project ID
+          example: project-abc123
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        displayName:
+          type: string
+          description: Project display name
+          example: My Project
+        ownerId:
+          type: string
+          description: Owner user ID
+        platformId:
+          type: string
+          description: Platform ID
+    UpdateProjectRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New project name
+        notifyStatus:
+          type: string
+          enum:
+          - ALWAYS
+          - NEVER
+          - NEW_ISSUE
+          description: Notification settings
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here
+x-refined-from:
+- activepieces-openapi.json
+- activepieces.json

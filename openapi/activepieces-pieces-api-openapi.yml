@@ -1,0 +1,196 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Pieces API
+  x-refined-note:
+  - x-generated-from differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged pieces across 2 of this provider''s published API definitions: activepieces-openapi.json, activepieces.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+tags:
+- name: pieces
+paths:
+  /v1/pieces:
+    post:
+      summary: Add a piece to a platform
+      tags:
+      - pieces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  packageType:
+                    type: string
+                    enum:
+                    - ARCHIVE
+                  scope:
+                    type: string
+                    enum:
+                    - PLATFORM
+                  pieceName:
+                    type: string
+                    minLength: 1
+                  pieceVersion:
+                    type: string
+                    pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
+                  pieceArchive:
+                    type: object
+                    properties:
+                      filename:
+                        type: string
+                      data: {}
+                      type:
+                        type: string
+                        enum:
+                        - file
+                      mimetype:
+                        type: string
+                    required:
+                    - filename
+                    - data
+                    - type
+                required:
+                - packageType
+                - scope
+                - pieceName
+                - pieceVersion
+                - pieceArchive
+                description: Private Piece
+              - type: object
+                properties:
+                  packageType:
+                    type: string
+                    enum:
+                    - REGISTRY
+                  scope:
+                    type: string
+                    enum:
+                    - PLATFORM
+                  pieceName:
+                    type: string
+                    minLength: 1
+                  pieceVersion:
+                    type: string
+                    pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
+                required:
+                - packageType
+                - scope
+                - pieceName
+                - pieceVersion
+                description: NPM Piece
+      security:
+      - apiKey: []
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                additionalProperties: false
+      operationId: postV1Pieces
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /pieces:
+    get:
+      operationId: listPieces
+      summary: Activepieces List Pieces
+      description: List available integration pieces
+      tags:
+      - pieces
+      parameters:
+      - name: edition
+        in: query
+        schema:
+          type: string
+          enum:
+          - ce
+          - ee
+          - cloud
+        description: Filter by edition
+      - name: includeHidden
+        in: query
+        schema:
+          type: boolean
+        description: Include hidden pieces
+      responses:
+        '200':
+          description: List of pieces
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Piece'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://cloud.activepieces.com/api/v1
+      description: Activepieces Cloud API
+    - url: https://{yourDomain}/api/v1
+      description: Self-hosted Activepieces instance
+      variables:
+        yourDomain:
+          default: localhost:3000
+components:
+  schemas:
+    Piece:
+      type: object
+      description: An Activepieces integration piece
+      properties:
+        name:
+          type: string
+          description: Piece package name
+          example: '@activepieces/piece-github'
+        displayName:
+          type: string
+          description: Human-readable name
+          example: GitHub
+        description:
+          type: string
+          description: Piece description
+        version:
+          type: string
+          description: Piece version
+          example: 0.5.0
+        iconUrl:
+          type: string
+          format: uri
+          description: Piece icon URL
+        categories:
+          type: array
+          items:
+            type: string
+          description: Piece categories
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here
+x-refined-from:
+- activepieces-openapi.json
+- activepieces.json

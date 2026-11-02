@@ -1,0 +1,651 @@
+openapi: 3.2.0
+info:
+  title: Activepieces Flow Runs API
+  x-refined-note:
+  - x-generated-from differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged flow-runs across 2 of this provider''s published API definitions: activepieces-openapi.json, activepieces.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cloud.activepieces.com/api
+  description: Production Server
+- url: https://cloud.activepieces.com/api/v1
+  description: Activepieces Cloud API
+- url: https://{yourDomain}/api/v1
+  description: Self-hosted Activepieces instance
+  variables:
+    yourDomain:
+      default: localhost:3000
+tags:
+- name: flow-runs
+paths:
+  /v1/flow-runs:
+    get:
+      tags:
+      - flow-runs
+      description: List Flow Runs
+      parameters:
+      - schema:
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9a-zA-Z]{21}$
+        in: query
+        name: flowId
+        required: true
+      - schema:
+          type: array
+          items:
+            type: string
+        in: query
+        name: tags
+        required: true
+      - schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - FAILED
+            - QUOTA_EXCEEDED
+            - INTERNAL_ERROR
+            - PAUSED
+            - QUEUED
+            - RUNNING
+            - SUCCEEDED
+            - MEMORY_LIMIT_EXCEEDED
+            - TIMEOUT
+            - CANCELED
+            - LOG_SIZE_EXCEEDED
+        in: query
+        name: status
+        required: true
+      - schema:
+          type: number
+        in: query
+        name: limit
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: createdAfter
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: createdBefore
+        required: false
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: query
+        name: projectId
+        required: true
+      - schema:
+          type: string
+        in: query
+        name: failedStepName
+        required: false
+      - schema:
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9a-zA-Z]{21}$
+        in: query
+        name: flowRunIds
+        required: true
+      - schema:
+          type: boolean
+        in: query
+        name: includeArchived
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        created:
+                          type: string
+                        updated:
+                          type: string
+                        projectId:
+                          type: string
+                        flowId:
+                          type: string
+                        parentRunId:
+                          type: string
+                        failParentOnFailure:
+                          type: boolean
+                        triggeredBy:
+                          type: string
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        flowVersionId:
+                          type: string
+                        flowVersion:
+                          type: object
+                          properties:
+                            displayName:
+                              type: string
+                          additionalProperties: false
+                        logsFileId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        status:
+                          type: string
+                          enum:
+                          - FAILED
+                          - QUOTA_EXCEEDED
+                          - INTERNAL_ERROR
+                          - PAUSED
+                          - QUEUED
+                          - RUNNING
+                          - SUCCEEDED
+                          - MEMORY_LIMIT_EXCEEDED
+                          - TIMEOUT
+                          - CANCELED
+                          - LOG_SIZE_EXCEEDED
+                        startTime:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        finishTime:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        environment:
+                          type: string
+                          enum:
+                          - PRODUCTION
+                          - TESTING
+                        failedStep:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            displayName:
+                              type: string
+                          required:
+                          - name
+                          - displayName
+                          additionalProperties: false
+                        stepNameToTest:
+                          type: string
+                        archivedAt:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        stepsCount:
+                          type: number
+                      required:
+                      - id
+                      - created
+                      - updated
+                      - projectId
+                      - flowId
+                      - failParentOnFailure
+                      - flowVersionId
+                      - status
+                      - environment
+                      additionalProperties: false
+                  next:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  previous:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                required:
+                - data
+                additionalProperties: false
+      summary: Get flow runs
+      x-summary-source: derived
+      operationId: getV1FlowRuns
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /v1/flow-runs/count-by-status:
+    get:
+      tags:
+      - flow-runs
+      description: Count Flow Runs by Status
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: query
+        name: projectId
+        required: true
+      - schema:
+          type: string
+        in: query
+        name: createdAfter
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: createdBefore
+        required: false
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          enum:
+                          - FAILED
+                          - QUOTA_EXCEEDED
+                          - INTERNAL_ERROR
+                          - PAUSED
+                          - QUEUED
+                          - RUNNING
+                          - SUCCEEDED
+                          - MEMORY_LIMIT_EXCEEDED
+                          - TIMEOUT
+                          - CANCELED
+                          - LOG_SIZE_EXCEEDED
+                        count:
+                          type: number
+                      required:
+                      - status
+                      - count
+                      additionalProperties: false
+                required:
+                - data
+                additionalProperties: false
+      summary: Get flow runs count by status
+      x-summary-source: derived
+      operationId: getV1FlowRunsCountByStatus
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /v1/flow-runs/{id}:
+    get:
+      tags:
+      - flow-runs
+      description: Get Flow Run
+      parameters:
+      - schema:
+          type: string
+          pattern: ^[0-9a-zA-Z]{21}$
+        in: path
+        name: id
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/flow-run'
+      summary: Get flow runs by id
+      x-summary-source: derived
+      operationId: getV1FlowRunsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /v1/flow-runs/cancel:
+    post:
+      tags:
+      - flow-runs
+      description: Cancel multiple paused/queued flow runs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  pattern: ^[0-9a-zA-Z]{21}$
+                flowRunIds:
+                  type: array
+                  items:
+                    type: string
+                    pattern: ^[0-9a-zA-Z]{21}$
+                excludeFlowRunIds:
+                  type: array
+                  items:
+                    type: string
+                    pattern: ^[0-9a-zA-Z]{21}$
+                status:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: string
+                      enum:
+                      - PAUSED
+                    - type: string
+                      enum:
+                      - QUEUED
+                flowId:
+                  type: array
+                  items:
+                    type: string
+                    pattern: ^[0-9a-zA-Z]{21}$
+                createdAfter:
+                  type: string
+                createdBefore:
+                  type: string
+              required:
+              - projectId
+        required: true
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+      summary: Create flow runs cancel
+      x-summary-source: derived
+      operationId: postV1FlowRunsCancel
+      x-operation-id-source: derived
+    servers:
+    - url: https://cloud.activepieces.com/api
+      description: Production Server
+  /flow-runs:
+    get:
+      operationId: listFlowRuns
+      summary: Activepieces List Flow Runs
+      description: List execution history for flows
+      tags:
+      - flow-runs
+      parameters:
+      - name: projectId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Project ID
+      - name: flowId
+        in: query
+        schema:
+          type: string
+        description: Filter by flow ID
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - TIMEOUT
+          - STOPPED
+        description: Filter by run status
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of results
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: Paginated list of flow runs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowRunList'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://cloud.activepieces.com/api/v1
+      description: Activepieces Cloud API
+    - url: https://{yourDomain}/api/v1
+      description: Self-hosted Activepieces instance
+      variables:
+        yourDomain:
+          default: localhost:3000
+  /flow-runs/{id}:
+    get:
+      operationId: getFlowRun
+      summary: Activepieces Get Flow Run
+      description: Retrieve details of a specific flow execution run
+      tags:
+      - flow-runs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Flow run ID
+      responses:
+        '200':
+          description: Flow run details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowRun'
+        '404':
+          description: Flow run not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://cloud.activepieces.com/api/v1
+      description: Activepieces Cloud API
+    - url: https://{yourDomain}/api/v1
+      description: Self-hosted Activepieces instance
+      variables:
+        yourDomain:
+          default: localhost:3000
+components:
+  schemas:
+    flow-run:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/flow-run'
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        projectId:
+          type: string
+        flowId:
+          type: string
+        parentRunId:
+          type: string
+        failParentOnFailure:
+          type: boolean
+        triggeredBy:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        flowVersionId:
+          type: string
+        flowVersion:
+          type: object
+          properties:
+            displayName:
+              type: string
+          additionalProperties: false
+        logsFileId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        status:
+          type: string
+          enum:
+          - FAILED
+          - QUOTA_EXCEEDED
+          - INTERNAL_ERROR
+          - PAUSED
+          - QUEUED
+          - RUNNING
+          - SUCCEEDED
+          - MEMORY_LIMIT_EXCEEDED
+          - TIMEOUT
+          - CANCELED
+          - LOG_SIZE_EXCEEDED
+        startTime:
+          anyOf:
+          - type: string
+          - type: 'null'
+        finishTime:
+          anyOf:
+          - type: string
+          - type: 'null'
+        environment:
+          type: string
+          enum:
+          - PRODUCTION
+          - TESTING
+        steps:
+          anyOf:
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties: {}
+          - type: 'null'
+        failedStep:
+          type: object
+          properties:
+            name:
+              type: string
+            displayName:
+              type: string
+          required:
+          - name
+          - displayName
+          additionalProperties: false
+        stepNameToTest:
+          type: string
+        archivedAt:
+          anyOf:
+          - type: string
+          - type: 'null'
+        stepsCount:
+          type: number
+      required:
+      - id
+      - created
+      - updated
+      - projectId
+      - flowId
+      - failParentOnFailure
+      - flowVersionId
+      - status
+      - environment
+      additionalProperties: false
+    FlowRun:
+      type: object
+      description: A flow execution run
+      properties:
+        id:
+          type: string
+          description: Flow run ID
+          example: run-abc123
+        created:
+          type: string
+          format: date-time
+          description: Run creation timestamp
+        updated:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        projectId:
+          type: string
+          description: Project ID
+        flowId:
+          type: string
+          description: Flow ID
+        status:
+          type: string
+          enum:
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - TIMEOUT
+          - STOPPED
+          description: Run status
+          example: SUCCEEDED
+        startTime:
+          type: string
+          format: date-time
+          description: Run start time
+        finishTime:
+          type: string
+          format: date-time
+          description: Run finish time
+        duration:
+          type: integer
+          description: Execution duration in milliseconds
+          example: 1234
+    FlowRunList:
+      type: object
+      description: Paginated list of flow runs
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowRun'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+  securitySchemes:
+    apiKey:
+      type: http
+      description: Use your api key generated from the admin console
+      scheme: bearer
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from the Activepieces admin console, passed as a Bearer token
+externalDocs:
+  url: https://www.activepieces.com/docs
+  description: Find more info here
+x-refined-from:
+- activepieces-openapi.json
+- activepieces.json

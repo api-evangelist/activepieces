@@ -110,6 +110,48 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    project-release:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/project-release'
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        projectId:
+          type: string
+        name:
+          type: string
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+        importedBy:
+          anyOf:
+          - type: string
+          - type: 'null'
+        fileId:
+          type: string
+        type:
+          type: string
+          enum:
+          - GIT
+          - PROJECT
+          - ROLLBACK
+        importedByUser:
+          $ref: '#/components/schemas/user'
+      required:
+      - id
+      - created
+      - updated
+      - projectId
+      - name
+      - fileId
+      - type
+      additionalProperties: false
     user:
       $schema: https://json-schema.org/draft/2020-12/schema
       $id: '#/components/schemas/user'
@@ -163,48 +205,6 @@ components:
       - lastName
       - created
       - updated
-      additionalProperties: false
-    project-release:
-      $schema: https://json-schema.org/draft/2020-12/schema
-      $id: '#/components/schemas/project-release'
-      type: object
-      properties:
-        id:
-          type: string
-        created:
-          type: string
-        updated:
-          type: string
-        projectId:
-          type: string
-        name:
-          type: string
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-        importedBy:
-          anyOf:
-          - type: string
-          - type: 'null'
-        fileId:
-          type: string
-        type:
-          type: string
-          enum:
-          - GIT
-          - PROJECT
-          - ROLLBACK
-        importedByUser:
-          $ref: '#/components/schemas/user'
-      required:
-      - id
-      - created
-      - updated
-      - projectId
-      - name
-      - fileId
-      - type
       additionalProperties: false
   securitySchemes:
     apiKey:
