@@ -576,6 +576,20 @@ components:
       - status
       - environment
       additionalProperties: false
+    FlowRunList:
+      type: object
+      description: Paginated list of flow runs
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowRun'
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
     FlowRun:
       type: object
       description: A flow execution run
@@ -620,20 +634,6 @@ components:
           type: integer
           description: Execution duration in milliseconds
           example: 1234
-    FlowRunList:
-      type: object
-      description: Paginated list of flow runs
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlowRun'
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
   securitySchemes:
     apiKey:
       type: http

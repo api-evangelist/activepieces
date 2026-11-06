@@ -306,12 +306,6 @@ paths:
           default: localhost:3000
 components:
   schemas:
-    UpdateFolderRequest:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: New folder name
     Folder:
       type: object
       description: A folder for organizing flows
@@ -333,6 +327,12 @@ components:
         projectId:
           type: string
           description: Project ID
+    UpdateFolderRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New folder name
     FolderList:
       type: object
       properties:

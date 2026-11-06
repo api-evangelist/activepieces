@@ -541,6 +541,19 @@ components:
         previous:
           type: string
           nullable: true
+    UpdateProjectRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: New project name
+        notifyStatus:
+          type: string
+          enum:
+          - ALWAYS
+          - NEVER
+          - NEW_ISSUE
+          description: Notification settings
     CreateProjectRequest:
       type: object
       required:
@@ -574,19 +587,6 @@ components:
         platformId:
           type: string
           description: Platform ID
-    UpdateProjectRequest:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: New project name
-        notifyStatus:
-          type: string
-          enum:
-          - ALWAYS
-          - NEVER
-          - NEW_ISSUE
-          description: Notification settings
   securitySchemes:
     apiKey:
       type: http

@@ -104,37 +104,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UpsertConnectionRequest:
+    ConnectionList:
       type: object
-      required:
-      - name
-      - pieceName
-      - projectId
-      - type
-      - value
-      description: Request body for creating or updating a connection
       properties:
-        name:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
+        next:
           type: string
-          description: Connection name
-          example: My GitHub Connection
-        pieceName:
+          nullable: true
+        previous:
           type: string
-          description: Piece package name
-          example: '@activepieces/piece-github'
-        projectId:
-          type: string
-          description: Project ID
-        type:
-          type: string
-          enum:
-          - OAUTH2
-          - API_KEY
-          - BASIC_AUTH
-          - CUSTOM_AUTH
-        value:
-          type: object
-          description: Authentication credentials
+          nullable: true
     Connection:
       type: object
       description: An app connection (credentials for a third-party service)
@@ -176,19 +158,37 @@ components:
           - BASIC_AUTH
           - CUSTOM_AUTH
           description: Authentication type
-    ConnectionList:
+    UpsertConnectionRequest:
       type: object
+      required:
+      - name
+      - pieceName
+      - projectId
+      - type
+      - value
+      description: Request body for creating or updating a connection
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Connection'
-        next:
+        name:
           type: string
-          nullable: true
-        previous:
+          description: Connection name
+          example: My GitHub Connection
+        pieceName:
           type: string
-          nullable: true
+          description: Piece package name
+          example: '@activepieces/piece-github'
+        projectId:
+          type: string
+          description: Project ID
+        type:
+          type: string
+          enum:
+          - OAUTH2
+          - API_KEY
+          - BASIC_AUTH
+          - CUSTOM_AUTH
+        value:
+          type: object
+          description: Authentication credentials
   securitySchemes:
     BearerAuth:
       type: http
