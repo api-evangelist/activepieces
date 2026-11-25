@@ -72,9 +72,8 @@ Activepieces is an open-source, no-code automation platform that enables users t
 
 Everything profiled for Activepieces is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/activepieces/](https://apis.io/providers/activepieces/)** — or go straight to one of the APIs or properties below.
 
-### APIs (9)
+### APIs (25)
 
-- [Activepieces Connections API](https://apis.io/apis/activepieces/activepieces-connections-api/) — Manage third-party app connections
 - [Activepieces Flow Runs API](https://apis.io/apis/activepieces/activepieces-flow-runs-api/) — Access execution history and run details
 - [Activepieces Flows API](https://apis.io/apis/activepieces/activepieces-flows-api/) — Manage automation workflows
 - [Activepieces Folders API](https://apis.io/apis/activepieces/activepieces-folders-api/) — Organize flows with folders
@@ -83,6 +82,23 @@ Everything profiled for Activepieces is published on APIs.io rather than in this
 - [Activepieces Templates API](https://apis.io/apis/activepieces/activepieces-templates-api/) — Flow templates
 - [Activepieces Users API](https://apis.io/apis/activepieces/activepieces-users-api/) — User management
 - [Activepieces Worker Machines API](https://apis.io/apis/activepieces/activepieces-worker-machines-api/) — Worker queue metrics
+- [Activepieces Agent API](https://apis.io/apis/activepieces/activepieces-agent-api/) — The agent API from Activepieces — 5 operation(s) for agent.
+- [Activepieces App Connections API](https://apis.io/apis/activepieces/activepieces-app-connections-api/) — The app-connections API from Activepieces — 5 operation(s) for app-connections.
+- [Activepieces Embedding API](https://apis.io/apis/activepieces/activepieces-embedding-api/) — The embedding API from Activepieces — 1 operation(s) for embedding.
+- [Activepieces Event Destinations API](https://apis.io/apis/activepieces/activepieces-event-destinations-api/) — The event-destinations API from Activepieces — 1 operation(s) for event-destinations.
+- [Activepieces Git Repos API](https://apis.io/apis/activepieces/activepieces-git-repos-api/) — The git-repos API from Activepieces — 1 operation(s) for git-repos.
+- [Activepieces Global Connections API](https://apis.io/apis/activepieces/activepieces-global-connections-api/) — The global-connections API from Activepieces — 2 operation(s) for global-connections.
+- [Activepieces Knowledge Base API](https://apis.io/apis/activepieces/activepieces-knowledge-base-api/) — The knowledge-base API from Activepieces — 8 operation(s) for knowledge-base.
+- [Activepieces MCP API](https://apis.io/apis/activepieces/activepieces-mcp-api/) — The mcp API from Activepieces — 4 operation(s) for mcp.
+- [Activepieces MCP OAUTH API](https://apis.io/apis/activepieces/activepieces-mcp-oauth-api/) — The mcp-oauth API from Activepieces — 1 operation(s) for mcp-oauth.
+- [Activepieces Platforms API](https://apis.io/apis/activepieces/activepieces-platforms-api/) — The platforms API from Activepieces — 1 operation(s) for platforms.
+- [Activepieces Project Members API](https://apis.io/apis/activepieces/activepieces-project-members-api/) — The project-members API from Activepieces — 3 operation(s) for project-members.
+- [Activepieces Project Releases API](https://apis.io/apis/activepieces/activepieces-project-releases-api/) — The project-releases API from Activepieces — 1 operation(s) for project-releases.
+- [Activepieces Records API](https://apis.io/apis/activepieces/activepieces-records-api/) — The records API from Activepieces — 2 operation(s) for records.
+- [Activepieces Sample Data API](https://apis.io/apis/activepieces/activepieces-sample-data-api/) — The sample-data API from Activepieces — 2 operation(s) for sample-data.
+- [Activepieces Tables API](https://apis.io/apis/activepieces/activepieces-tables-api/) — The tables API from Activepieces — 8 operation(s) for tables.
+- [Activepieces User Invitations API](https://apis.io/apis/activepieces/activepieces-user-invitations-api/) — The user-invitations API from Activepieces — 2 operation(s) for user-invitations.
+- [Activepieces Variables API](https://apis.io/apis/activepieces/activepieces-variables-api/) — The variables API from Activepieces — 2 operation(s) for variables.
 
 ### Published properties
 
@@ -226,6 +242,12 @@ Postman and Open Collection request collections.
 - [Activepieces Connections Users API](https://apis.io/collections/activepieces/postman-activepieces-users-api/)
 - [Activepieces Connections Worker Machines API](https://apis.io/collections/activepieces/postman-activepieces-worker-machines-api/)
 
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Activepieces Event Destinations Api Certification Overlay](https://apis.io/overlays/activepieces/activepieces-event-destinations-api-certification-overlay/)
+
 #### Governance rules (2)
 
 Spectral rulesets for the provider's contracts.
@@ -240,11 +262,12 @@ Authentication, trust centre, and vulnerability disclosure.
 - [Activepieces Authentication](https://apis.io/security/activepieces/activepieces-authentication/)
 - [Activepieces Domain Security](https://apis.io/security/activepieces/activepieces-domain-security/)
 
-#### Plans and pricing (1)
+#### Plans and pricing (2)
 
 Published plans, tiers and prices.
 
 - [Activepieces Plans Pricing](https://apis.io/plans/activepieces/activepieces-plans-pricing/)
+- [Activepieces Price Estimates](https://apis.io/plans/activepieces/activepieces-price-estimates/)
 
 #### Rate limits (1)
 
@@ -272,24 +295,24 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 40.5** — developing · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 56.5** — strong · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
-| Discoverability | 68.3 |
-| Contract quality | 33.7 |
+| Discoverability | 75.0 |
+| Contract quality | 60.2 |
 | Contract governance | 27.3 |
-| Operational transparency | 44.7 |
+| Operational transparency | 47.6 |
 | Developer ergonomics | 53.6 |
-| Access clarity | 18.4 |
+| Access clarity | 40.4 |
 
-**Agent readiness 33.4** — agent-ready
+**Agent readiness 32.4** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
 | Spec Presence | yes |
 | Agentic Access | derived (partial credit) |
-| Reversibility Documented | — |
+| Reversibility Documented | documented (partial credit) |
 | MCP Server | verified |
 | Auth Clarity | bearer (partial credit) |
 | Idempotency | — |
@@ -307,7 +330,11 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Dynamic Client Registration | — |
 | Agentic Commerce | — |
 | Pagination Ratio | partial |
-| Operation Distinctiveness | distinct |
+| Operation Distinctiveness | — |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
 **Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
 
